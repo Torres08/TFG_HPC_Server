@@ -1,2 +1,14 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introducción a OpenShift}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Características Principales de OpenShift}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Consola Web y Catálogo}{3}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Automatización}{3}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Desarrollo e Integración Continua (CI/CD)}{3}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Monitoreo y Seguridad}{3}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Soporte de Múltiples Lenguajes}{3}{subsection.1.2.5}%
+\contentsline {section}{\numberline {1.3}Comparación entre Proxmox y OpenShift}{4}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Escalabilidad}{4}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Rendimiento}{4}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Facilidad de Uso}{5}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Conclusión}{5}{subsection.1.3.4}%

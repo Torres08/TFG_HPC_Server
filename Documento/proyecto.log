@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.9.19)  15 OCT 2024 21:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.9.19)  21 OCT 2024 20:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -71,7 +71,11 @@ Package babel Info: Making > an active character on input line 722.
 )) (/usr/share/texlive/texmf-dist/tex/generic/babel/locale/es/babel-spanish.tex
 Package babel Info: Importing font and identification data for spanish
 (babel)             from babel-es.ini. Reported on input line 11.
-) (/usr/share/texlive/texmf-dist/tex/latex/tools/dcolumn.sty
+) (./commands.sty
+Package: commands 
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)) (/usr/share/texlive/texmf-dist/tex/latex/tools/dcolumn.sty
 Package: dcolumn 2014/10/28 v1.06 decimal alignment package (DPC)
  (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
@@ -191,11 +195,6 @@ File: puenc.def 2022-11-13 v7.00u Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-
-Package hyperref Warning: Invalid value `000'
-(hyperref)                for option `pdfborder'.
-(hyperref)                Option setting is ignored on input line 4045.
-
 Package hyperref Info: Hyper figures OFF on input line 4162.
 Package hyperref Info: Link nesting OFF on input line 4167.
 Package hyperref Info: Hyper index ON on input line 4170.
@@ -204,7 +203,7 @@ Package hyperref Info: Backreferencing OFF on input line 4182.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4410.
 \c@Hy@tempcnt=\count280
-(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
@@ -253,15 +252,15 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 55.
+(hyperref)                removing `subscript' on input line 44.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 55.
+(hyperref)                removing `subscript' on input line 44.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 55.
+(hyperref)                removing `subscript' on input line 44.
 
 (/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
@@ -287,10 +286,15 @@ Package footmisc Info: Declaring symbol style lamport-robust on input line 723.
 Package footmisc Info: Declaring symbol style lamport* on input line 743.
 Package footmisc Info: Declaring symbol style lamport*-robust on input line 764.
 )
+\@indexfile=\write3
+\openout3 = `proyecto.idx'.
+
+
+Writing index file proyecto.idx
 \c@teorema=\count288
 \c@ejemplo=\count289
 \c@definicion=\count290
- (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2022/12/19 v0.5x Insert pages of external PDF documents (AM)
  (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
@@ -335,27 +339,27 @@ LaTeX Info: Redefining \% on input line 22.
 )
 \openout1 = `proyecto.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 168.
-LaTeX Font Info:    ... okay on input line 168.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 157.
+LaTeX Font Info:    ... okay on input line 157.
 \c@lstlisting=\count298
-LaTeX Info: Redefining \. on input line 168.
-LaTeX Info: Redefining \% on input line 168.
+LaTeX Info: Redefining \. on input line 157.
+LaTeX Info: Redefining \% on input line 157.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count299
@@ -375,10 +379,10 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 168.
+Package hyperref Info: Link coloring OFF on input line 157.
  (./proyecto.out) (./proyecto.out)
-\@outlinefile=\write3
-\openout3 = `proyecto.out'.
+\@outlinefile=\write4
+\openout4 = `proyecto.out'.
 
  (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
@@ -390,29 +394,29 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )) (./portada/portada.tex
 \centeroffset=\skip70
-<imagenes/logo_ugr.jpg, id=8, 777.90625pt x 231.86626pt>
+<imagenes/logo_ugr.jpg, id=56, 777.90625pt x 231.86626pt>
 File: imagenes/logo_ugr.jpg Graphic file (type jpg)
 <use imagenes/logo_ugr.jpg>
-Package pdftex.def Info: imagenes/logo_ugr.jpg  used on input line 12.
+Package pdftex.def Info: imagenes/logo_ugr.jpg  used on input line 11.
 (pdftex.def)             Requested size: 323.9978pt x 96.57295pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 23.
+(Font)              <10.95> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 23.
+(Font)              <8> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 23.
+(Font)              <6> on input line 22.
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 9--24
+Overfull \hbox (24.0pt too wide) in paragraph at lines 8--23
 | $[]$ 
  []
 
-<imagenes/etsiit_logo.png, id=9, 110.814pt x 40.4712pt>
+<imagenes/etsiit_logo.png, id=57, 110.814pt x 40.4712pt>
 File: imagenes/etsiit_logo.png Graphic file (type png)
 <use imagenes/etsiit_logo.png>
-Package pdftex.def Info: imagenes/etsiit_logo.png  used on input line 33.
+Package pdftex.def Info: imagenes/etsiit_logo.png  used on input line 31.
 (pdftex.def)             Requested size: 108.0011pt x 39.44412pt.
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 26--40
+Overfull \hbox (24.0pt too wide) in paragraph at lines 25--36
 | $[]$ 
  []
 
@@ -420,36 +424,6 @@ Overfull \hbox (24.0pt too wide) in paragraph at lines 26--40
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./imagenes/logo_ugr.jpg> <./imagenes/etsiit_logo.png>]) (./prefacios/prefacio.tex [2
-
-] (./portada/portada_2.tex [3] [4
-
-]
-<imagenes/logo.png, id=34, 123.46124pt x 45.92157pt>
-File: imagenes/logo.png Graphic file (type png)
-<use imagenes/logo.png>
-Package pdftex.def Info: imagenes/logo.png  used on input line 21.
-(pdftex.def)             Requested size: 123.46092pt x 45.92145pt.
-
-Overfull \hbox (24.0pt too wide) in paragraph at lines 8--31
-| $[]$ 
- []
-
-
-Overfull \hbox (24.0pt too wide) in paragraph at lines 33--47
-| $[]$
- []
-
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.49 \end{titlepage}
-                     [1 <./imagenes/logo.png>])
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.11 \cleardoublepage
-                      [2
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 22--23
@@ -461,17 +435,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 25--26
 
  []
 
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.28 \cleardoublepage
-                      [3]
-pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.28 \cleardoublepage
-                      [4
+[3] [4
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 42--43
@@ -505,8 +469,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 73--74
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
-\tf@toc=\write4
-\openout4 = `proyecto.toc'.
+\tf@toc=\write5
+\openout5 = `proyecto.toc'.
 
  [1
 
@@ -516,8 +480,8 @@ LaTeX Info: Redefining \% on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
-\tf@lof=\write5
-\openout5 = `proyecto.lof'.
+\tf@lof=\write6
+\openout6 = `proyecto.lof'.
 
  [3] [4
 
@@ -525,52 +489,104 @@ LaTeX Info: Redefining \% on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
-\tf@lot=\write6
-\openout6 = `proyecto.lot'.
+\tf@lot=\write7
+\openout7 = `proyecto.lot'.
 
  [5] [6
 
 ] (./capitulos/01_Introduccion.tex
 Cap\'{\i }tulo 1.
-)
+
+Underfull \vbox (badness 1558) has occurred while \output is active []
+
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.219 \chapter
-              *{} [1
+l.11 
+      [1
 
 ]
+<imagenes/openshift.png, id=171, 647.41875pt x 627.09282pt>
+File: imagenes/openshift.png Graphic file (type png)
+<use imagenes/openshift.png>
+Package pdftex.def Info: imagenes/openshift.png  used on input line 14.
+(pdftex.def)             Requested size: 288.0011pt x 278.95496pt.
+LaTeX Info: Redefining \. on input line 19.
+LaTeX Info: Redefining \% on input line 19.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.219 \chapter
-              *{} [2
+l.19 \newpage
+              [2 <./imagenes/openshift.png (PNG copy)>]
+Overfull \hbox (2.9292pt too wide) in paragraph at lines 33--34
+[]\OT1/cmr/m/n/10.95 OpenShift cons-tru-ye sus fun-cio-nes pa-ra mo-ni-to-rear los re-cur-sos del cl^^Suster
+ []
 
-]
+LaTeX Info: Redefining \. on input line 38.
+LaTeX Info: Redefining \% on input line 38.
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.222 \end{document}
-                     [3] (./proyecto.aux
+l.38 \newpage
+              [3]
+Overfull \hbox (146.00798pt too wide) in paragraph at lines 47--54
+ [] 
+ []
+
+LaTeX Info: Redefining \. on input line 72.
+LaTeX Info: Redefining \% on input line 72.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.72 
+      [4])
+Overfull \hbox (3.84459pt too wide) in paragraph at lines 77--180
+\OT1/cmr/m/n/10.95 ren-tes ne-ce-si-da-des den-tro del ^^Sambi-to del soft-wa-re de vir-tua-li-za-ci^^Son. OpenShift
+ []
+
+LaTeX Info: Redefining \. on input line 208.
+LaTeX Info: Redefining \% on input line 208.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.208 \chapter
+              *{} [5]
+pdfTeX warning (ext4): destination with the same identifier (name{page.6}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.208 \chapter
+              *{} [6
+
+]
+pdfTeX warning (ext4): destination with the same identifier (name{page.7}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.211 \end{document}
+                     [7] (./proyecto.aux
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
 Package rerunfilecheck Info: File `proyecto.out' has not changed.
-(rerunfilecheck)             Checksum: 1A505E85FB7BE3736A75981AB8224BBC;106.
+(rerunfilecheck)             Checksum: B1A83913AAC3FC31EF0957A26D8179D3;2315.
  ) 
 Here is how much of TeX's memory you used:
- 12691 strings out of 476201
- 203407 string characters out of 5797039
- 1854330 words of memory out of 5000000
- 32834 multiletter control sequences out of 15000+600000
- 518458 words of font info for 52 fonts, out of 8000000 for 9000
+ 12783 strings out of 476201
+ 205374 string characters out of 5797039
+ 1862330 words of memory out of 5000000
+ 32908 multiletter control sequences out of 15000+600000
+ 519063 words of font info for 54 fonts, out of 8000000 for 9000
  1086 hyphenation exceptions out of 8191
- 75i,6n,76p,278b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on proyecto.pdf (25 pages, 189213 bytes).
+ 75i,12n,76p,1137b,490s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on proyecto.pdf (25 pages, 358757 bytes).
 PDF statistics:
- 157 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 24 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 231 PDF objects out of 1000 (max. 8388607)
+ 186 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 120 words of extra memory for PDF output out of 10000 (max. 10000000)
 
