@@ -1,0 +1,56 @@
+\glsdefs@newdocentry{latex}%
+{%
+name={LaTeX},%
+sort={LaTeX},%
+type={main},%
+first={LaTeX},%
+firstplural={LaTeXs},%
+text={LaTeX},%
+plural={LaTeXs},%
+description={A document preparation system for high-quality typesetting},%
+descriptionplural={A document preparation system for high-quality typesetting},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{hpc}%
+{%
+name={High-Performance Computing (HPC)},%
+sort={High-Performance Computing (HPC)},%
+type={main},%
+first={High-Performance Computing (HPC)},%
+firstplural={High-Performance Computing (HPC)s},%
+text={High-Performance Computing (HPC)},%
+plural={High-Performance Computing (HPC)s},%
+description={Área de la informática en la que el rendimiento es el principal criterio de optimización, enfocándose en la capacidad de procesar grandes volúmenes de datos y realizar cálculos complejos},%
+descriptionplural={Área de la informática en la que el rendimiento es el principal criterio de optimización, enfocándose en la capacidad de procesar grandes volúmenes de datos y realizar cálculos complejos},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+

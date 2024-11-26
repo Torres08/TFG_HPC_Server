@@ -3,15 +3,18 @@
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
+\usepackage{csquotes} % Añadir csquotes
+
 
 \usepackage{commands}
+
+\usepackage{multicol}
 
 %\usepackage[style=list, number=none]{glossary} %
 %\usepackage{titlesec}
 %\usepackage{pailatino}
 
-\decimalpoint
-\usepackage{dcolumn}
+\decimalpoint\usepackage{dcolumn}
 \newcolumntype{.}{D{.}{\esperiod}{-1}}
 \makeatletter
 \addto\shorthandsspanish{\let\esperiod\es@period@code}
@@ -32,14 +35,27 @@
 % Re-usable information
 % ********************************************************************
 
+% \documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{changepage}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\usepackage{url} % Este paquete ayuda a formatear correctamente las URLs
+\usepackage[backend=bibtex,style=numeric,url=true]{biblatex}
+\addbibresource{bibliografia/bibliografia.bib}
+
+
 
 
 \hypersetup{
-pdfauthor = {\myName (g20596044@correo.ugr.es)},
+pdfauthor = {\myName(g20596044@correo.ugr.es)},
 pdftitle = {\myTitle},
 pdfsubject = {},
-pdfkeywords = {palabra_clave1, palabra_clave2, palabra_clave3, ...},
-pdfcreator = {LaTeX con el paquete ....},
+pdfkeywords = {palabra_clave1, palabra_clave2, palabra_clave3},
+pdfcreator = {LaTeX con el paquete},
 pdfproducer = {pdflatex}
 }
 
@@ -53,8 +69,10 @@ pdfproducer = {pdflatex}
 %\usepackage{index}
 
 \makeindex
+
 %\usepackage[style=long,cols=2,border=plain,toc=true,number=none]{glossaries}
-%\makeglossaries
+\usepackage{glossaries}
+\makeglossaries
 
 % Definición de comandos que me son tiles:
 %\renewcommand{\indexname}{Índice alfabético}
@@ -157,7 +175,9 @@ pdfproducer = {pdflatex}
 \begin{document}
 
 % Aquí se incluye la portada del documento
-\input{portada/portada}
+\newgeometry{top=2.3cm, bottom=2.3cm, left=2.3cm, right=2.3cm}
+\input{portada/portada_2.tex}
+\restoregeometry
 
 % Aquí se incluye el prefacio del documento
 \input{prefacios/prefacio}
@@ -176,7 +196,9 @@ pdfproducer = {pdflatex}
 \mainmatter\setlength{\parskip}{5pt}
 
 % Aquí se incluye el capítulo de introducción
-\input{capitulos/01_Introduccion}
+\begin{multicols}{2}
+   \input{capitulos/01_Introduccion}
+\end{multicols}
 
 % Aquí se pueden incluir otros capítulos comentados
 %\input{capitulos/02_EspecificacionRequisitos}
@@ -189,9 +211,12 @@ pdfproducer = {pdflatex}
 
 %\chapter{Conclusiones y Trabajos Futuros}
 
-%\nocite{*}
-%\bibliography{bibliografia/bibliografia}\addcontentsline{toc}{chapter}{Bibliografía}
+\nocite{*}
+\printbibliography[heading=bibintoc,title={Bibliografía}]
 %\bibliographystyle{miunsrturl}
+%\bibliographystyle{unsrt}
+%\bibliographystyle{plainnat}
+
 
 %\appendix
 % Aquí se incluye el manual de usuario en los apéndices
@@ -201,9 +226,9 @@ pdfproducer = {pdflatex}
 %\input{apendices/paper/paper}
 
 % Aquí se incluye el glosario
-%\input{glosario/entradas_glosario}
-% \addcontentsline{toc}{chapter}{Glosario}
-% \printglossary
+\input{glosario/entradas_glosario}
+\addcontentsline{toc}{chapter}{Glosario}
+\printglossary
 
 \chapter*{}
 \thispagestyle{empty}
