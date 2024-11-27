@@ -42,6 +42,9 @@
 \usepackage{changepage}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{float} % Añadir este paquete para usar la opción 'H'
+
 %\usepackage{natbib}
 \usepackage{url} % Este paquete ayuda a formatear correctamente las URLs
 \usepackage[backend=bibtex,style=numeric,url=true]{biblatex}
@@ -196,9 +199,8 @@ pdfproducer = {pdflatex}
 \mainmatter\setlength{\parskip}{5pt}
 
 % Aquí se incluye el capítulo de introducción
-\begin{multicols}{2}
-   \input{capitulos/01_Introduccion}
-\end{multicols}
+   
+\input{capitulos/01_Introduccion}
 
 % Aquí se pueden incluir otros capítulos comentados
 %\input{capitulos/02_EspecificacionRequisitos}
