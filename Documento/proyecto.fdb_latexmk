@@ -1,22 +1,22 @@
 # Fdb version 4
-["bibtex proyecto"] 1732728879 "proyecto.aux" "proyecto.bbl" "proyecto" 1732728880 0
+["bibtex proyecto"] 1736675400 "proyecto.aux" "proyecto.bbl" "proyecto" 1736675401 0
   "./bibliografia/bibliografia.bib" 1732649587 228 e33682bbc5b6c7e7c643032f3b056aac ""
-  "./proyecto-blx.bib" 1732728880 340 25674e554aa25e98ea59ec40797d70f1 ""
+  "./proyecto-blx.bib" 1736675401 340 25674e554aa25e98ea59ec40797d70f1 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/biblatex/biblatex.bst" 1656017808 65483 3b5a53ada692a06ce416d088de6a391b ""
-  "proyecto.aux" 1732728880 2521 7090e810feb4b405369699e96b01e958 "pdflatex"
+  "proyecto.aux" 1736675401 3694 c2657c47029547603220421c42d0ebd4 "pdflatex"
   (generated)
   "proyecto.bbl"
   "proyecto.blg"
   (rewritten before read)
-["makeindex proyecto.idx"] 1732728292 "proyecto.idx" "proyecto.ind" "proyecto" 1732728880 0
-  "proyecto.idx" 1732728879 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex proyecto.idx"] 1732728292 "proyecto.idx" "proyecto.ind" "proyecto" 1736675401 0
+  "proyecto.idx" 1736675400 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "proyecto.ilg"
   "proyecto.ind"
   (rewritten before read)
-["pdflatex"] 1732728879 "/home/torres/Documents/Github/TFG/Documento/proyecto.tex" "proyecto.pdf" "proyecto" 1732728880 0
+["pdflatex"] 1736675400 "/home/torres/Documents/Github/TFG/Documento/proyecto.tex" "proyecto.pdf" "proyecto" 1736675401 0
   "/etc/texmf/web2c/texmf.cnf" 1712165043 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/torres/Documents/Github/TFG/Documento/proyecto.tex" 1732727869 5596 84b86bc6e07306e8eec57e282868fc18 ""
+  "/home/torres/Documents/Github/TFG/Documento/proyecto.tex" 1736675398 5852 75ebebf242465e3d6676ae88aa631028 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -183,6 +183,12 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1726746008 226652 eab69c28722240ab9230d9dc016cc6db ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1726746061 7829122 4dbe739586442424075de0faed9d8cec ""
   "capitulos/01_Introduccion.tex" 1732728877 19893 a3706614967c1a4c4edb9ef0c581c0d1 ""
+  "capitulos/02_Estado_del_Arte.tex" 1736675240 26 60c67e35eaeda1ad0680f71da2ad143a ""
+  "capitulos/03_Propuesta.tex" 1736675214 19 71a529e8f67702b112c6ed96ca110b40 ""
+  "capitulos/04_Implementacion_y_Evaluacion.tex" 1736675205 39 b4c71978a023e930a1d47abbb90f2a32 ""
+  "capitulos/05_Gestion_en_Produccion.tex" 1736675193 33 1eacc588a61450b43aa47e6ddf1b3c8a ""
+  "capitulos/06_Resultado_y_Analisis.tex" 1736675178 32 5c8597ff7359f43cea5b594e23612b56 ""
+  "capitulos/07_Conclusiones_y_Trabajos_Futuros.tex" 1736675168 42 74257b335ed87b51550b17ab74f14b8e ""
   "commands.sty" 1729523429 961 a9e2e7921195dbacb256735902930400 ""
   "glosario/entradas_glosario.tex" 1732649752 393 0cb3b646758f168168f9e80aa7913ea9 ""
   "imagenes/etsiit_logo_3.png" 1732641665 18887 db25e321d6eb0337a5fee5a02f007abf ""
@@ -190,17 +196,17 @@
   "imagenes/server.jpeg" 1732725775 1185051 755f0d6eca4b3d69f0f4352bc6d98262 ""
   "portada/portada_2.tex" 1732642468 857 fa11c9f02a0694c4850dad906e4e1405 ""
   "prefacios/prefacio.tex" 1732647654 3189 c23ddb8c21d4e7c0d4770a74bff795dc ""
-  "proyecto.aux" 1732728880 2521 7090e810feb4b405369699e96b01e958 "pdflatex"
-  "proyecto.bbl" 1732728879 1144 1a854cdf4b695feb6e9cf0544fa4cc70 "bibtex proyecto"
+  "proyecto.aux" 1736675401 3694 c2657c47029547603220421c42d0ebd4 "pdflatex"
+  "proyecto.bbl" 1736675400 1144 1a854cdf4b695feb6e9cf0544fa4cc70 "bibtex proyecto"
   "proyecto.gls" 1732650027 6 9f404503043ec80c08484be9f659189e ""
-  "proyecto.glsdefs" 1732728880 1434 871b42f100676bc8a6a2f23de6437511 "pdflatex"
+  "proyecto.glsdefs" 1736675401 1434 871b42f100676bc8a6a2f23de6437511 "pdflatex"
   "proyecto.ind" 1732728292 0 d41d8cd98f00b204e9800998ecf8427e "makeindex proyecto.idx"
-  "proyecto.lof" 1732728880 191 246b3ed27562004e87a56934800f8fd4 "pdflatex"
-  "proyecto.lot" 1732728880 50 b5b0960c1d5a4ac8296175b3639a9ba8 "pdflatex"
-  "proyecto.out" 1732728880 782 6bcc4cc17a31bc79d38d5780bd1398b5 "pdflatex"
-  "proyecto.run.xml" 1732728880 2573 655151d8ded7cf47fda2ea10d0d9c20d "pdflatex"
-  "proyecto.tex" 1732727869 5596 84b86bc6e07306e8eec57e282868fc18 ""
-  "proyecto.toc" 1732728880 500 cdbd94162dddc1803ffbe5601eb08601 "pdflatex"
+  "proyecto.lof" 1736675401 311 36ec83de30173569870fb46f62eb45da "pdflatex"
+  "proyecto.lot" 1736675401 170 ac5b3f75184f0315fba1c6fbf15825fc "pdflatex"
+  "proyecto.out" 1736675401 1712 f21d11f07564b10d86448c87957918c3 "pdflatex"
+  "proyecto.run.xml" 1736675401 2573 655151d8ded7cf47fda2ea10d0d9c20d "pdflatex"
+  "proyecto.tex" 1736675398 5852 75ebebf242465e3d6676ae88aa631028 ""
+  "proyecto.toc" 1736675401 971 0fbac6f4d0c6feab30283ebc3dff4963 "pdflatex"
   (generated)
   "proyecto-blx.bib"
   "proyecto.aux"

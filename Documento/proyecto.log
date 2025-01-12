@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.9.19)  27 NOV 2024 18:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.9.19)  12 JAN 2025 10:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1037,12 +1037,12 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
  (./portada/portada_2.tex
-<imagenes/logo_2.png, id=31, 647.2983pt x 180.1932pt>
+<imagenes/logo_2.png, id=55, 647.2983pt x 180.1932pt>
 File: imagenes/logo_2.png Graphic file (type png)
 <use imagenes/logo_2.png>
 Package pdftex.def Info: imagenes/logo_2.png  used on input line 25.
 (pdftex.def)             Requested size: 233.31252pt x 64.94923pt.
-<imagenes/etsiit_logo_3.png, id=33, 108.8868pt x 104.7915pt>
+<imagenes/etsiit_logo_3.png, id=57, 108.8868pt x 104.7915pt>
 File: imagenes/etsiit_logo_3.png Graphic file (type png)
 <use imagenes/etsiit_logo_3.png>
 Package pdftex.def Info: imagenes/etsiit_logo_3.png  used on input line 27.
@@ -1131,7 +1131,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
                    \relax 
 l.19 
       [1]
-<imagenes/server.jpeg, id=139, 3011.25pt x 2007.5pt>
+<imagenes/server.jpeg, id=170, 3011.25pt x 2007.5pt>
 File: imagenes/server.jpeg Graphic file (type jpg)
 <use imagenes/server.jpeg>
 Package pdftex.def Info: imagenes/server.jpeg  used on input line 24.
@@ -1200,61 +1200,85 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.8}) has b
 <to be read again> 
                    \relax 
 l.196     \item \textbf
-                       {Automatización y monitorización}: Pipelines de CI/... [8])
-LaTeX Info: Redefining \. on input line 217.
-LaTeX Info: Redefining \% on input line 217.
+                       {Automatización y monitorización}: Pipelines de CI/... [8]) (./capitulos/02_Estado_del_Arte.tex
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.217 ...y[heading=bibintoc,title={Bibliografía}]
-                                                   [9]
+l.1 \chapter
+            {Estado del Arte} [9]
 pdfTeX warning (ext4): destination with the same identifier (name{page.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.217 ...y[heading=bibintoc,title={Bibliografía}]
-                                                   [10
+l.1 \chapter
+            {Estado del Arte} [10
+
+]
+Cap\'{\i }tulo 2.
+) (./capitulos/03_Propuesta.tex
+pdfTeX warning (ext4): destination with the same identifier (name{page.11}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 \chapter
+            {Propuesta} [11]
+pdfTeX warning (ext4): destination with the same identifier (name{page.12}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 \chapter
+            {Propuesta} [12
+
+]
+Cap\'{\i }tulo 3.
+) (./capitulos/04_Implementacion_y_Evaluacion.tex [13] [14
+
+]
+Cap\'{\i }tulo 4.
+) (./capitulos/05_Gestion_en_Produccion.tex [15] [16
+
+]
+Cap\'{\i }tulo 5.
+) (./capitulos/06_Resultado_y_Analisis.tex [17] [18
+
+]
+Cap\'{\i }tulo 6.
+) (./capitulos/07_Conclusiones_y_Trabajos_Futuros.tex [19] [20
+
+]
+Cap\'{\i }tulo 7.
+) [21] [22
 
 ] (./glosario/entradas_glosario.tex
 \@gls@deffile=\write11
 \openout11 = `proyecto.glsdefs'.
 
-) (./proyecto.gls)
-pdfTeX warning (ext4): destination with the same identifier (name{page.11}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.235 \chapter
-              *{} [11]
-pdfTeX warning (ext4): destination with the same identifier (name{page.12}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.235 \chapter
-              *{} [12
+) (./proyecto.gls) [23] [24
 
-] [13] (./proyecto.aux
+] [25] (./proyecto.aux
 LaTeX Info: Redefining \sptext on input line 32.
 LaTeX Info: Redefining \. on input line 32.
 LaTeX Info: Redefining \% on input line 32.
 )
 Package rerunfilecheck Info: File `proyecto.out' has not changed.
-(rerunfilecheck)             Checksum: 6BCC4CC17A31BC79D38D5780BD1398B5;782.
+(rerunfilecheck)             Checksum: F21D11F07564B10D86448C87957918C3;1712.
 Package logreq Info: Writing requests to 'proyecto.run.xml'.
 \openout1 = `proyecto.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28654 strings out of 476201
- 512777 string characters out of 5797039
+ 28714 strings out of 476201
+ 514379 string characters out of 5797039
  1866330 words of memory out of 5000000
- 48534 multiletter control sequences out of 15000+600000
+ 48558 multiletter control sequences out of 15000+600000
  519604 words of font info for 57 fonts, out of 8000000 for 9000
  1086 hyphenation exceptions out of 8191
  94i,12n,90p,2296b,1914s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on proyecto.pdf (31 pages, 1441123 bytes).
+Output written on proyecto.pdf (43 pages, 1444918 bytes).
 PDF statistics:
- 258 PDF objects out of 1000 (max. 8388607)
- 201 compressed objects within 3 object streams
- 57 named destinations out of 1000 (max. 500000)
- 72 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 275 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 120 words of extra memory for PDF output out of 10000 (max. 10000000)
 
