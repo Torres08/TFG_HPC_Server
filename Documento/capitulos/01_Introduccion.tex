@@ -1,74 +1,66 @@
 \begin{multicols*}{2}
-\chapter{Introducción}
+    \chapter{Introducción}
 
-%
-%   Contexto
-%
-\section{Contexto}
+    %
+    %   Contexto
+    %
+    \section{Contexto}
+
+    Nunca antes en la historia hemos tenido acceso a tantos datos. Cada minuto, millones de dispositivos generan información que, al ser correctamente procesada, pueden revelar patrones complejos, predecir comportamientos e incluso ayudar a salvar vidas. Para aprovechar este potencial, necesitamos sistemas capaces de procesar estos datos de manera rápida, precisa, confiable y segura. Es aquí donde la computación de alto rendimiento (High-Performance Computing, HPC) desempeña un papel crucial.
+
+    La HPC, también conocida como supercomputación, es un área de la informática en la que el rendimiento constituye el principal criterio de optimización.Consiste en utilizar múltiples ordenadores  o procesadores potentes trabajando en paralelo para procesar grandes volúmenes de datos con el objetivo de realizar cálculos complejos y procesar grandes cantidades de información. Esta disciplina ha evolucionado significativamente a lo largo de la historia, desde los primeros métodos de enumeración y registro, pasando por los cálculos mecánicos detallados y los dispositivos de cómputo automáticos de la Revolución Industrial, hasta la era moderna de la computación digital, que abarca desde los tubos de vacío hasta los chips de integración multi núcleo a gran escala.
+
+    En la actualidad, la HPC conforma un ecosistema con mucho potencial. Este mercado, valorado en 54,32 mil millones de dólares en el año base, se proyecta como uno de los sectores tecnológicos de más rápido crecimiento, con una tasa compuesta anual del 11,18%, alcanzando los 96,76 mil millones de dólares en los próximos cinco años. Este impresionante crecimiento está impulsado por la creciente demanda de los usuarios finales en diversos dominios de aplicaciones, incluidos los servicios financieros, la industria del petróleo y gas, la manufactura, las ciencias de la tierra, las ciencias de la vida, los laboratorios nacionales y el ocio. Todas estas cifras que he mencionado provienen de Mordor Intelligence, una firma reconocida de análisis de mercado que proporciona estudios sectoriales detallados basados en datos verificados y fuentes confiables. 
+
+    Dentro de estos dominios, las ciencias biológicas destacan como un sector que se beneficia de las tecnologías HPC. Investigadores y empresas utilizan la supercomputación para tareas como la secuenciación del genoma y el descubrimiento de nuevos fármacos. Por ejemplo, las compañías farmacéuticas emplean simulaciones de dinámica molecular en supercomputadoras para acelerar los procesos de investigación y desarrollo. Esta metodología permite diseñar medicamentos de manera virtual, mejorando su eficacia y seguridad antes de llegar a la fase experimental. Además, la HPC hace posible la creación de modelos computacionales detallados de órganos humanos, como el corazón o el cerebro, lo cual facilita la comprensión de enfermedades complejas y la propuesta de nuevos tratamientos. 
+
+    Más allá de los campos tradicionales, el auge de los chatbots avanzados como ChatGPT y DeepSeek está transformando diversos sectores industriales. Estas herramientas, basadas en modelos de lenguaje de gran escala (LLMs), permiten automatizar tareas complejas, mejorar la atención al cliente y optimizar procesos empresariales. Por ejemplo, ChatGPT ha sido adoptado por numerosas empresas para interactuar con información empresarial en lenguaje natural, facilitando la toma de decisiones y aumentando la eficiencia operativa. Por su parte, DeepSeek, desarrollado en China, ha emergido como un competidor destacado al ofrecer un rendimiento comparable al de modelos líderes, pero con una eficiencia de recursos significativamente mayor a menor costo. 
+
+    Estas tecnologías reflejan no solo un elevado potencial de innovación, sino también una creciente dependencia tecnológica tanto a nivel personal como empresarial. El desarrollo y la adopción de estos modelos han originado una nueva competencia geopolítica entre potencias tecnológicas. Así como en el siglo XX la carrera espacial representaba el liderazgo científico entre Estados Unidos y la Unión Soviética, en la actualidad la carrera por la supremacía en inteligencia artificial entre Estados Unidos y China constituye el eje estratégico global. Esta rivalidad ha impulsado significativas inversiones en infraestructura computacional, investigación avanzada y formación de talento especializado, marcando el rumbo de la próxima revolución industrial.
 
 
-Nunca antes en la historia hemos tenido acceso a tantos datos. Cada minuto, millones de dispositivos generan información que pueden revelar patrones complejos, predecir comportamientos e incluso salvar vidas. Pero para aprovechar este potencial, necesitamos sistemas capaces de procesar estos datos de manera rápida, precisa, confiable y segura. Es aquí donde la computación de alto rendimiento (High-Performance Computing, HPC) desempeña un papel crucial.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/grafica_modelos.png}
+        \caption{Evolución comparativa del rendimiento de los modelos de IA de EE. UU. y China en LMSYS Chatbot Arena (2024–2025)}
+        \label{fig:server}
+    \end{figure}
 
-High Performance Computing, también conocida como supercomputación, es un área de la informática en la que el rendimiento es el principal criterio de optimización, enfocándose en la capacidad de procesar grandes volúmenes de datos y realizar cálculos complejos. Esta disciplina ha evolucionado significativamente a lo largo de la historia, desde los primeros métodos de enumeración y registro, pasando por los cálculos mecánicos detallados y los dispositivos de cómputo automáticos de la Revolución Industrial, hasta la era moderna de la computación digital, que abarca desde los tubos de vacío hasta los chips de integración multinúcleo a gran escala.
+    A medida que la HPC continúa expandiéndose hacia nuevos dominios, es necesario garantizar que los sistemas no solo sean rápidos y escalables, sino que también sean seguros y confiables.  Estas propiedades, fundamentales para el éxito a largo plazo,  suelen ser sacrificadas durante las fases iniciales de desarrollo o producción para priorizar la velocidad o la escalabilidad. Sin embargo, su incorporación desde las primeras etapas resulta esencial, especialmente en aplicaciones que requieren un rendimiento sostenido y una alta disponibilidad.
 
-En la actualidad, esta evolución tecnológica ha dado lugar a un ecosistema HPC próspero y en constante expansión. Este mercado, valorado en 54,32 mil millones de dólares en el año base \cite{mordorintelligence2023}, se proyecta como uno de los sectores tecnológicos de más rápido crecimiento, con una tasa compuesta anual del 11,18\%, alcanzando los 96,76 mil millones de dólares en los próximos cinco años. Este impresionante crecimiento está impulsado por la creciente demanda de los usuarios finales en diversos dominios de aplicaciones, incluidos los servicios financieros, la industria del petróleo y gas, la manufactura, las ciencias de la tierra, las ciencias de la vida, los laboratorios nacionales y las agencias de inteligencia gubernamental.
+    En este contexto, la disciplina de Site Reliability Engineering (SRE)adquiere una relevancia particular. Esta área aplica principios de ingeniería de software con el objetivo de diseñar y mantener sistemas robustos, resilientes y seguros. En entornos HPC dinámicos y de alta demanda, donde se gestionan grandes volúmenes de datos sensibles en tiempo real, el enfoque SRE permite optimizar el rendimiento mientras se asegura la disponibilidad y la protección de los sistemas. 
 
-Dentro de estos dominios, las ciencias biológicas destacan como un sector clave que se beneficia enormemente de las tecnologías HPC. Investigadores y empresas utilizan la supercomputación para tareas como la secuenciación del genoma y el descubrimiento de fármacos. Las empresas farmacéuticas, por ejemplo, emplean supercomputadoras para acelerar el proceso de descubrimiento mediante simulaciones de dinámica molecular. Gracias a estas simulaciones, los investigadores pueden diseñar nuevos fármacos y probar virtualmente su eficacia, optimizando así el proceso de investigación y logrando medicamentos más seguros y eficaces. Además, la HPC permite el desarrollo de modelos virtuales detallados de órganos humanos, como el corazón o el cerebro, lo que ayuda a los científicos a comprender mejor diversas dolencias y a proponer tratamientos innovadores.
+    La automatización de tareas repetitivas, el monitoreo continuo y la gestión eficiente de incidentes constituyen pilares fundamentales de esta disciplina. Estas prácticas minimizan los errores y la intervención humana, garantizando la operatividad del sistema incluso ante fallos imprevistos. Gracias a este enfoque, es posible alcanzar niveles elevados de robustez, escalabilidad y seguridad, que resultan imprescindibles para afrontar la creciente complejidad de los entornos HPC actuales.
 
-Cada vez más, los investigadores y las empresas de ciencias biológicas están diseñando nuevas metodologías que combinan la secuenciación del genoma y el descubrimiento de fármacos, permitiendo formas nuevas y más efectivas de medicina personalizada, que podrían curar algunas de las enfermedades más desafiantes.
+    En el campo de Site Reliability Engineering para supercomputadoras, las tendencias actuales apuntan a la integración de tecnología de contenedores, además de  la adopción de enfoques como de Infrastructure as Code (IaC) y prácticas de integración y entrega continuas (CI/CD).
 
-Más allá de los campos tradicionales, la supercomputación también ha influido considerablemente en áreas como el entretenimiento, las redes sociales y otros aspectos del ocio digital. La capacidad de procesar grandes volúmenes de datos en tiempo real ha transformado la forma en que las plataformas de redes sociales gestionan y analizan el comportamiento de los usuarios, con el objetivo de mejorar la experiencia del servicio. En la industria del entretenimiento, la HPC permite la creación de efectos visuales complejos y simulaciones realistas en películas y videojuegos, contribuyendo a experiencias inmersivas de alta calidad. También cabe mencionar el auge de las plataformas de streaming, donde se requiere una gran potencia de cómputo para dar servicio a una gran cantidad de usuarios.
+    Por un lado, el uso de contenedores proporciona una solución flexible para empaquetar y desplegar aplicaciones en sistemas distribuidos de manera simple y efectiva. Herramientas como Kubernetes y su extensión empresarial, OpenShift, han sido ampliamente adoptadas para la orquestación de contenedores a gran escala. Estas plataformas ofrecen un marco robusto para la gestión eficiente de la infraestructura, reduciendo su complejidad y mejorando el rendimiento incluso en entornos de alta demanda.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/server.jpeg}
-    \caption{Imagen de los Servidores de la UGR por ej (esta es de google) / HPC}
-    \label{fig:server}
-\end{figure}
+    Por otro lado, la adopción de IaC permite automatizar de forma fiable la configuración, gestión y despliegue de recursos, asegurando coherencia, reduciendo errores humanos y facilitando la replicación de entornos. Este enfoque resulta especialmente valioso en entornos que emplean CI/CD, donde se requiere actualizar y desplegar aplicaciones de manera frecuente. La automatización de pruebas y validaciones permite que solo versiones estables lleguen a producción, previniendo la introducción de errores y mejorando la seguridad. Un ejemplo común de implementación de IaC es el uso de archivos YAML, que permiten describir de forma declarativa los recursos necesarios ,como aplicaciones, redes y volúmenes, mediante texto legible y versionable. Esto facilita tanto la automatización como el control del ciclo de vida de la infraestructura, integrándose fácilmente con herramientas de desarrollo y entrega continua. Además, IaC elimina gran parte del trabajo manual, permitiendo a los desarrolladores desplegar entornos de forma casi inmediata y liberando a los administradores de tareas repetitivas, lo que mejora la eficiencia operativa y reduce riesgos.
 
-A medida que la HPC sigue expandiéndose a estos nuevos dominios, surge la necesidad de asegurar que los sistemas no solo sean rápidos y escalables, sino también seguros y confiables, propiedades inherentes que a menudo resultan tentador sacrificar durante las fases iniciales de desarrollo o producción para priorizar la velocidad o la escalabilidad. A pesar de esto, dichas propiedades son fundamentales para el éxito a largo plazo de los sistemas, especialmente en aplicaciones que requieren un rendimiento y una disponibilidad constantes.
+    Este enfoque de IaC, combinado con prácticas avanzadas de diseño y gestión de sistemas, se plantea como parte de la solución a los desafíos abordados en este Trabajo de Fin de Grado. El objetivo es implementar una arquitectura robusta que permita desplegar modelos de lenguaje de gran tamaño en un entorno de alto rendimiento, aplicando principios que garantizan escalabilidad, seguridad y fiabilidad. Se analizará cómo optimizar un servidor tanto a nivel de hardware como de software, aplicando medidas preventivas frente a vulnerabilidades críticas como el acceso no autorizado o los ataques de denegación de servicio. Asimismo, se explorará la integración de principios operativos como el monitoreo continuo, con el fin de asegurar la estabilidad del sistema y responder de forma proactiva a posibles incidencias.
 
-En el campo de Site Reliability Engineering para supercomputadoras, las tendencias actuales apuntan a la integración de tecnología de contenedores, como Kubernetes y OpenShift, y la adopción de prácticas de Infrastructure as Code (IaC) y CI/CD.
+    La falta de una correcta valoración de la confiabilidad y la seguridad suele derivar, especialmente en entornos empresariales, en fallos graves a largo plazo. Un caso ilustrativo es el incidente ocurrido en septiembre de 2012 con el administrador de contraseñas interno de Google, utilizado por empleados para gestionar credenciales de servicios externos. Este ejemplo evidencia cómo la ausencia de prácticas de Site Reliability Engineering puede derivar en interrupciones catastróficas, incluso en sistemas aparentemente estables.
 
-Por una parte, los contenedores ofrecen una manera flexible de empaquetar y desplegar aplicaciones en sistemas distribuidos. Las plataformas como Kubernetes o OpenShift (una extensión de esta) están siendo adoptadas para la orquestación de contenedores a gran escala. Ofrecen un marco robusto para la gestión de la infraestructura que brinda HPC de forma eficiente, reduciendo su complejidad y mejorando el rendimiento incluso en ambientes de alto tráfico.
+    Todo comenzó con un cambio de contraseña en la red WiFi de los autobuses de la compañía, lo que generó un pico masivo de tráfico en un sistema diseñado originalmente para un uso limitado. El servidor principal colapsó y el balanceador de carga redirigió las solicitudes a un servidor secundario, que también falló por saturación.
 
-Las prácticas de infraestructura como código (IaC) permiten automatizar de manera eficiente la gestión y el despliegue de recursos, asegurando consistencia, reduciendo errores humanos y facilitando la replicabilidad de entornos. Este enfoque es particularmente valioso en el contexto de CI/CD (integración continua y entrega continua), donde las aplicaciones pueden ser actualizadas y desplegadas continuamente, mejorando tanto la fiabilidad como la rapidez con la que se entregan nuevas funcionalidades y se responden a los incidentes.
+    La resolución del incidente se complicó por la falta de experiencia del ingeniero de guardia, quien, tras cinco años sin interrupciones, operaba el sistema con soporte mínimo. Para el reinicio se requería una tarjeta inteligente perteneciente a un módulo de seguridad hardware (HSM), la cual debía extraerse de una caja fuerte. Sin embargo, la contraseña de dicha caja también se encontraba almacenada en el propio sistema fuera de servicio.
 
-Las fuentes explican que, para aprovechar al máximo las versiones frecuentes, se deben automatizar las pruebas y la validación. Esto permite que las versiones correctas se publiquen automáticamente, evitando que las versiones deficientes lleguen a producción. Las pruebas automatizadas también brindan confianza adicional cuando es necesario implementar correcciones para proteger contra vulnerabilidades críticas.
+    Finalmente, un empleado que recordaba la combinación permitió acceder a la tarjeta HSM. Aun así, el sistema no se restableció de inmediato. La solución llegó de forma inesperada, cuando un ingeniero del equipo de desarrollo identificó que las tarjetas HSM se estaban insertando al revés, pese a la luz verde que indicaba una inserción correcta. Una vez corregido este error, el sistema volvió a estar operativo.
 
-IaC elimina gran parte del trabajo manual de aprovisionamiento, permitiendo a los desarrolladores ejecutar scripts para tener la infraestructura lista de inmediato, evitando retrasos en las implementaciones. Esto también significa que los administradores de sistemas ya no tienen que gestionar procesos manuales que consumen mucho tiempo, liberando recursos para tareas más estratégicas. Al automatizar la infraestructura, se agilizan los despliegues, mejorando la eficiencia operativa y reduciendo el riesgo de errores. En entornos de alto rendimiento como HPC y plataformas de streaming, donde la capacidad de respuesta y la escalabilidad son clave, IaC facilita la gestión fluida y continua de recursos, asegurando que el sistema se mantenga fiable y disponible.
+    \section{Motivación}
 
-Lo típico de las empresas, al no valorar la confiabilidad y la seguridad, son los fallos a largo plazo. Un ejemplo de esto es el problema del administrador de contraseñas interno de Google. En septiembre de 2012, hubo un incidente significativo con este administrador, utilizado por empleados para gestionar contraseñas de servicios externos. Este caso ilustra cómo la falta de prácticas de Site Reliability Engineering (SRE) puede llevar a fallos catastróficos, incluso en servicios que aparentemente funcionan sin problemas:
+    La motivación detrás de este trabajo no se limita al despliegue del servidor de alto rendimiento ni a su aplicación práctica. Es fundamental destacar la importancia de construir ,desde el inicio, un sistema confiable, seguro y escalable, conforme a los principios del enfoque Site Reliability Engineering.
 
-Todo comenzó con un cambio de contraseña en la red WiFi de los autobuses de la compañía, lo que generó un pico masivo de tráfico en un sistema diseñado originalmente para un uso limitado, provocando el colapso del servidor principal. El balanceador de carga redirigió las solicitudes a un servidor secundario, que también falló debido a la misma saturación.
+    Hoy en día, los entornos de supercomputación deben enfrentarse a retos que van más allá de procesar grandes volúmenes de datos y ejecutar tareas intensivas en poco tiempo. La confiabilidad, escalabilidad y seguridad no deben considerarse atributos secundarios, sino requisitos fundamentales desde el diseño del sistema. Un sistema que no contemple mecanismos para gestionar situaciones críticas o mitigar fallos desde su concepción compromete la calidad y el valor de sus funcionalidades.
 
-La respuesta al incidente se complicó por la falta de experiencia del ingeniero de guardia, quien, al no haber sufrido nunca una interrupción en cinco años de funcionamiento, mantenía el sistema con un soporte mínimo. El ingeniero intentó reiniciar el servicio, pero desconocía que el reinicio requería una tarjeta inteligente de un módulo de seguridad de hardware (HSM). La búsqueda de una tarjeta HSM y la contraseña de la caja fuerte, que irónicamente estaba almacenada en el propio administrador de contraseñas fuera de servicio, prolongó la interrupción durante horas.
+    Este proyecto surge de la necesidad de adoptar un enfoque integral que combine rendimiento, fiabilidad y seguridad como pilares desde el inicio. A nivel personal, se deriva de un profundo interés por comprender cómo se construye y gestiona un servidor de alto rendimiento desde cero, abarcando tanto su instalación física como su configuración de software y el despliegue de aplicaciones. Quiero documentar cada paso del proceso técnico: desde la instalación y configuración del hardware y software base, hasta el despliegue y la evaluación comparativa de diversos modelos de lenguaje de gran tamaño (LLM), todo ello bajo una estricta perspectiva SRE. Además mostrar  un entorno de orquestación que simule un ecosistema de producción para validar estos principios en un escenario práctico.
 
-Finalmente, un colega en California, que recordaba la combinación de la caja fuerte, pudo recuperar una tarjeta HSM. Sin embargo, incluso con la tarjeta insertada, el servicio no se reinició.
-La solución al problema llegó de manera inesperada: un ingeniero del equipo de desarrollo del servicio, que trabajaba en una nueva versión, identificó que las tarjetas HSM se estaban insertando al revés, a pesar de la luz verde que indicaba una inserción correcta. Tras corregir este error, el servicio se reinició y la interrupción terminó.
+    La revisión de bases de datos académicas como Google Scholar o Web of Science revela una escasez de estudios que integren los principios de HPC con los del SRE, lo que subraya el potencial de desarrollo en este ámbito. Este proyecto, por lo tanto, pretende contribuir a subsanar ese vacío, proponiendo un marco metodológico que no solo asegure que los sistemas HPC satisfacen los objetivos de rendimiento, sino que además demuestren resiliencia, seguridad y capacidad de adaptación ante las demandas futuras.
 
-\section{Motivación}
+    Este proyecto me permitirá desarrollar habilidades de alto valor como el diseño de arquitectura de sistemas, la configuración y optimización de clústeres, la implementación de prácticas de SRE y DevOps, y el hardening de servidores.
 
-La motivación detrás de este trabajo no debe centrarse únicamente en el despliegue del servidor HPC y su aplicación práctica. Es fundamental destacar la importancia de construir desde el inicio un sistema confiable, seguro y escalable, según los principios de Site Reliability Engineering (SRE).
-
-Hoy en día, la supercomputación enfrenta desafíos que van más allá de procesar grandes volúmenes de datos y ejecutar tareas intensivas en poco tiempo. Un sistema HPC debe garantizar confiabilidad, escalabilidad y seguridad desde su inicio, ya que un diseño que no prevea cómo actuar ante situaciones críticas o prevenir fallos convierte cualquier funcionalidad en un servicio de valor cuestionable.
-
-Este trabajo surge de la necesidad de integrar prácticas avanzadas de diseño y administración que optimicen el rendimiento, mientras hacen de la confiabilidad y la seguridad pilares fundamentales del sistema. La importancia de HPC no solo radica en su capacidad técnica, sino también en su valor estratégico como motor del avance tecnológico y su impacto en el mercado. Cabe destacar que, al explorar recursos académicos como Google Scholar o Web of Science, se observa que los trabajos donde se combina HPC con los principios de SRE son escasos. Esto evidencia que es un tema novedoso y con un amplio potencial para desarrollar.
-
-Este enfoque no solo busca suplir un vacío en la literatura académica, sino también proponer un marco que garantice que los sistemas HPC no solo cumplan con sus objetivos de rendimiento, sino que además sean resilientes, seguros y preparados para enfrentar las demandas del futuro.
-
-De cara a la experiencia que puedo obtener, este proyecto me permitirá desarrollar habilidades demandadas, como, por ejemplo:
-\begin{itemize}
-    \item Diseño de arquitectura de sistemas
-    \item Configuración y optimización de clústeres
-    \item Prácticas de SRE y DevOps
-    \item Hardening de servidores
-\end{itemize}
-
-En un mundo donde el acceso a datos es más vasto y complejo que nunca, la capacidad de procesarlos de manera rápida, precisa y segura se ha convertido en una necesidad. Cada minuto, millones de dispositivos generan información que puede transformar industrias, predecir comportamientos y salvar vidas. Sin embargo, este potencial no puede aprovecharse plenamente sin sistemas robustos que garanticen confiabilidad y seguridad en entornos de alto rendimiento. La computación de alto rendimiento (HPC) desempeña un papel crucial en esta transformación, pero aún enfrenta desafíos significativos relacionados con su resiliencia y operatividad.
-
-Este proyecto busca cerrar esa brecha al no solo configurar un servidor HPC con una aplicación práctica, sino también incorporar principios de Site Reliability Engineering (SRE) para garantizar que estos sistemas puedan operar al máximo de su capacidad, incluso frente a la presión de demandas impredecibles y fallos críticos. Este enfoque no solo permitirá procesar grandes volúmenes de datos de manera eficiente, sino también asegurar que estos sistemas sean herramientas confiables para aplicaciones críticas, desde descubrimientos científicos hasta innovaciones en la industria tecnológica.
-
+    En paralelo, mi experiencia actual en prácticas internacionales como IT Infrastructure en Alemania me está proporcionando una base sólida en el manejo y despliegue de servidores. Estoy aprendiendo a resolver fallos y a poner en marcha servicios reales, y mi intención es plasmar toda esta experiencia de primera mano en el TFG. El objetivo es que este trabajo sea más que teoría; que sirva como una guía práctica respaldada por la experiencia del mundo real, ofreciendo un recurso de valor para futuros profesionales.
 \end{multicols*}
 
 %
@@ -77,140 +69,96 @@ Este proyecto busca cerrar esa brecha al no solo configurar un servidor HPC con 
 
 \section{Objetivos}
 
-\section*{O.G 1: Implementación Física y Preparación de Hardware para el Despliegue del Servidor HPC}
+El presente Trabajo de Fin de Grado persigue los siguientes objetivos, diseñados para abarcar el ciclo de vida completo de un servidor HPC desde su configuración inicial hasta el despliegue de cargas de trabajo avanzadas y la validación de principios SRE:
 
-\textbf{Objetivo:} Estudiar físicamente la infraestructura hardware necesaria para el servidor HPC. Entorno fiable y seguro que cumpla con las mejores prácticas en la gestión de servidores (principios de confiabilidad y seguridad).
+\subsection*{O.G. 1: Implementación Física y Preparación de Hardware para el Despliegue del Servidor HPC}
 
+Este objetivo se enfoca en la implementación física y la preparación del hardware para el despliegue del servidor HPC, asegurando que se cumplan las mejores prácticas en gestión de sistemas desde una perspectiva de confiabilidad y seguridad, principios fundamentales de SRE. La posibilidad de manejar un servidor de alto rendimiento proporcionado por la universidad constituye el punto de partida esencial.
+
+\subsubsection*{O.E. 1.1: Documentación de la infraestructura de hardware universitaria}
 \begin{itemize}
-    \item Visita a las instalaciones, como ver en términos de hardware racks etiquetado, etc.
+    \item Se realizará una visita técnica exhaustiva a las instalaciones para documentar el entorno físico disponible, incluyendo aspectos cruciales como la disposición de racks, el etiquetado de servidores y la organización del cableado.
 \end{itemize}
 
-\subsection*{O.E 1: Describir la infraestructura de la universidad desde la perspectiva de hardware}
+\subsubsection*{O.E. 1.2: Integración de principios de confiabilidad y seguridad (SRE) en la configuración del hardware}
 \begin{itemize}
-    \item Realizar un análisis detallado de la organización de la infraestructura del servidor en la universidad desde un enfoque de hardware, considerando racks, etiquetado y otras prácticas de instalación.
-    \item Prácticas útiles, relacionarlo con SRE reliability IMPORTANTE, seguro y confidente.
-    \item Dar contexto sobre el punto de partida y la integración del nuevo servidor HPC.
-    \item Dónde, cuál va a ser nuestro sandbox para el software.
-    \item Dónde vamos a trabajar, descripción de nuestro servidor.
+    \item Se identificarán y relacionarán las prácticas de hardware con los principios de confiabilidad y seguridad, contextualizando el punto de partida y la integración del nuevo servidor HPC en la infraestructura existente, sentando las bases para un sistema resiliente.
 \end{itemize}
 
-\subsection*{O.E 2: Relacionar las Prácticas de Hardware con la Confiabilidad (SRE) y Seguridad}
+
+\subsection*{O.G. 2: Despliegue y Evaluación Comparativa de Modelos de Lenguaje (LLMs)}
+
+Este objetivo profundiza en la aplicación práctica del servidor HPC, enfocándose en el despliegue y la evaluación comparativa de diferentes modelos de lenguaje de gran escala (LLMs), demostrando la capacidad de la infraestructura y validando su eficiencia.
+
+\subsubsection*{O.E. 2.1: Despliegue de LLMs utilizando la plataforma de orquestación}
 \begin{itemize}
-    \item Describir más a fondo las prácticas de hardware.
-    \item Responder, prepararse preguntas relacionadas a responder, reflejar los principios del libro en ejemplos prácticos.
+    \item Se procederá al despliegue de diversos modelos de lenguaje de gran escala (LLMs) en contenedores con acceso a GPU, aprovechando la plataforma de orquestación configurada. Se analizarán las ventajas de este enfoque en relación con las prácticas SRE.
 \end{itemize}
 
-\section*{O.G 2: Desplegar software de virtualización}
-
-OpenShift es una plataforma robusta para la creación, despliegue y gestión de aplicaciones en contenedores.
-
-\subsection*{O.E 1: Analizar y comparar software de virtualización}
+\subsubsection*{O.E. 2.2: Evaluación comparativa del rendimiento de los LLMs}
 \begin{itemize}
-    \item Comparar 3 soluciones, escalabilidad, rendimiento y facilidad de uso (empezar comparando soluciones, luego introducción a la herramienta, no ponerlo en el título directamente).
+    \item Se realizarán benchmarks comparativos utilizando los modelos de LLM desplegados, observando métricas relevantes para garantizar su eficiencia operativa y demostrar la capacidad de la infraestructura HP
 \end{itemize}
 
-\subsection*{O.E 2: Instalar y configurar Herramienta Virtualización en el servidor GPU}
+
+\subsection*{O.G. 3: Despliegue, Configuración y Aseguramiento de Plataformas de Contenerización y Orquestación}
+
+Este objetivo se centra en la evaluación, instalación, configuración y aseguramiento de una plataforma de virtualización de contenedores sobre el servidor, con el fin de ejemplificar un entorno de producción y validar capacidades avanzadas de SRE.
+
+\subsubsection*{O.E. 3.1: Análisis comparativo de soluciones de virtualización de contenedores}
 \begin{itemize}
-    \item Guía y documentación oficial (OpenShift).
+    \item Se estudiarán en detalle soluciones de virtualización de contenedores, evaluando su escalabilidad, rendimiento y facilidad de uso para seleccionar la más adecuada.
 \end{itemize}
 
-\subsection*{O.E 3: Securizar la instalación (políticas de seguridad para proteger las aplicaciones y datos)}
+\subsubsection*{O.E. 3.2: Documentación de la conexión remota y configuración inicial del servidor}
 \begin{itemize}
-    \item 3 políticas de seguridad por ejemplo, controles de acceso y redes seguras.
+    \item Se detallará el procedimiento para la conexión remota al servidor y su configuración inicial, documentando este paso crucial del ciclo de vida.
 \end{itemize}
 
-\subsection*{O.E 4: Monitorizar el sistema (cuidado)}
+\subsubsection*{O.E. 3.3: Instalación y configuración de la solución de contenerización seleccionada}
 \begin{itemize}
-    \item Zabbix, Grafana.
+    \item Se instalará y configurará la solución elegida en el servidor HPC, siguiendo estrictamente la documentación oficial y las buenas prácticas de seguridad.
 \end{itemize}
 
-\subsection*{O.E 5: Testear la instalación (pentesting)}
+\subsubsection*{O.E. 3.4: Demostración de capacidades SRE}
 \begin{itemize}
-    \item Hacerlo con un hola mundo por ejemplo o algo sencillo.
+    \item Se configurarán y mostrarán funcionalidades clave de SRE como el autoescalado de recursos y el autohealing (recuperación autónoma ante fallos) dentro del entorno de orquestación, simulando escenarios de producción.
 \end{itemize}
-
-\subsection*{O.E 6: Gestionar Automatización. DevOps por si acaso (o en la parte de ML) (Automatizar el proceso de despliegue utilizando CI/CD en OpenShift.) *(Opcional)*}
-\begin{itemize}
-    \item Configurar al menos 2 pipelines de CI/CD para aplicaciones específicas con Jenkins o Openshift pipelines.
-\end{itemize}
-
-\section*{O.G 3: Desplegar software para gestionar Modelos de Lenguaje LLMs en un servidor GPU, de manera eficiente y segura}
-
-Sujeto a cambio, podemos darle un enfoque hardware software y quitar la parte de ML (aparcado).
-
-Depende de si da tiempo lo implementamos.
-
-\textit{ML, gestionar los ML de aquella manera}
-
-En principio esta parte puedo hacerla en mi PC primero, luego en el servidor.
-
-Sujeto a cambiar, puede ser un chatbot, etc.
-
-NO TIENE PORQUE SER LLMs.
-
-\subsection*{O.E 1: Estudiar y escoger plataforma adecuada para gestionar LLMs}
-\begin{itemize}
-    \item Comparar 3 soluciones (escalabilidad, rendimiento, facilidad de uso).
-\end{itemize}
-
-\subsection*{O.E 2: Desplegar la plataforma escogida en un entorno docker}
-\begin{itemize}
-    \item 2 instancias de contenedores con distinto LLMs, ver los resultados luego gráfica o algo.
-\end{itemize}
-
-\subsection*{O.E 3: Herramientas de monitorización para evaluar rendimiento de LLMs (entra dentro de la monitorización anterior, no sé si ponerlo en el OG1)}
-
-
 
 %
 %   Estructura
 %
 \newpage
+
 \section{Estructura de la Memoria}
-La memoria del TFG se estructurará de la siguiente manera:
+La memoria del Trabajo de Fin de Grado se estructurará de la siguiente manera, con el objetivo de facilitar la comprensión del desarrollo del proyecto y reflejar adecuadamente su enfoque técnico y metodológico:
 
 \subsection*{Capítulo 1: Introducción}
-Presenta el contexto, la motivación y los principales objetivos del proyecto.
+Se presentará el contexto general del trabajo, destacando la relevancia actual de los sistemas de computación de alto rendimiento (HPC) y de la disciplina Site Reliability Engineering (SRE). Asimismo, se desarrollará la motivación del proyecto y se definirán los objetivos principales, tanto generales como específicos.
 
-\subsection*{Capítulo 2: Estado del arte}
+\subsection*{Capítulo 2: Estado del Arte}
+Este capítulo incluirá un análisis de las tecnologías y métodos relevantes para el proyecto, abarcando los siguientes puntos:
 \begin{itemize}
-    \item Un estudio de prácticas recomendadas en la gestión de hardware para HPC, basado en fuentes como \textit{CompTIA Server+}.
-    \item Comparación de plataformas de virtualización, analizando su rendimiento, escalabilidad y facilidad de uso.
-    \item Herramientas modernas para implementar SRE, como sistemas de monitorización y CI/CD.
-    \item Opcionalmente, se incluirá un apartado dedicado a plataformas para la gestión de modelos de lenguaje (LLMs), dependiendo de su inclusión en el desarrollo.
+    \item Explicación del proceso de recopilación y selección de fuentes utilizadas en la memoria.
+    \item Definición de un marco conceptual para facilitar la comprensión de los temas tratados.
+    \item Planteamiento del problema y formulación de la pregunta de investigación.
+    \item Comparación detallada de herramientas y tecnologías clave a utilizar en el desarrollo del proyecto.
 \end{itemize}
 
-\subsection*{Capítulo 3: Diseño del servidor}
-Se describirá la arquitectura del servidor, incluyendo la selección del hardware, la configuración del software y la justificación de las decisiones de diseño.
-\begin{itemize}
-    \item La propuesta de infraestructura física para el servidor HPC, alineada con principios de confiabilidad y seguridad.
-    \item Planificación de la integración de una plataforma de virtualización robusta, destacando la elección de OpenShift como herramienta principal.
-    \item Estrategias para garantizar la seguridad, confiabilidad y eficiencia del servidor, integrando conceptos de SRE.
-\end{itemize}
+\subsection*{Capítulo 3: Propuesta}
+Se definirá con claridad la propuesta técnica del proyecto, incluyendo la planificación temporal, los recursos necesarios y los resultados esperados. Se especificarán los criterios de éxito y la metodología general adoptada para alcanzar los objetivos definidos.
 
-\subsection*{Capítulo 4: Implementación y evaluación}
-Se detallará el proceso de implementación del servidor, la ejecución de benchmarks y el análisis estadístico de los resultados. Se incluirá, si es posible, el desarrollo del modelo para la clasificación de partículas.
-\begin{itemize}
-    \item \textbf{Infraestructura física}: Organización de racks, etiquetado y diseño físico del servidor en la universidad.
-    \item \textbf{Software de virtualización}: Configuración detallada de OpenShift y otros elementos seleccionados.
-    \item \textbf{Automatización y monitorización}: Pipelines de CI/CD, implementación de sistemas de alerta y análisis de rendimiento.
-    \item \textbf{Seguridad}: Políticas de acceso, segmentación de redes y medidas para mitigar ataques DDoS.
-\end{itemize}
+\subsection*{Capítulo 4: Infraestructura Física y Puesta a Punto}
+Se documentará el proceso de montaje del servidor, la organización en rack y la configuración inicial del sistema operativo, los controladores de GPU y la red. El objetivo es mostrar cómo se prepara una base estable y segura sobre la que desplegar los experimentos posteriores.
 
-\subsection*{Capítulo 5: Gestión en producción con enfoque en SRE}
-Se describirán las estrategias y herramientas de SRE implementadas para la gestión del servidor en producción, incluyendo la gestión del hardware, la orquestación de contenedores con OpenShift, el CI/CD, y las medidas de seguridad.
+\subsection*{Capítulo 5: Despliegue y Evaluación de LLM}
+En este capítulo se explicará cómo se han creado los contenedores con acceso a GPU, cómo se han puesto en funcionamiento un modelo de gran tamaño y varios modelos más pequeños, y qué metodología de benchmarking se ha seguido para medir su rendimiento.
 
-\subsection*{Capítulo 6: Resultados y Análisis}
-En este capítulo se presentarán los resultados obtenidos durante el desarrollo del proyecto:
-\begin{itemize}
-    \item Análisis comparativo del rendimiento del sistema antes y después de implementar las soluciones.
-    \item Impacto de las mejoras en confiabilidad, seguridad y escalabilidad.
-\end{itemize}
+\subsection*{Capítulo 6:  Gestión Operativa con Entornos de Orquestación y Enfoque SRE}
+Se describirá la instalación de OpenShift Local y su uso como laboratorio de buenas prácticas SRE. Se mostrará de forma general cómo se despliegan servicios desde un repositorio, cómo se habilitan mecanismos de escalado y auto-healing, y cómo se supervisa el sistema para garantizar su fiabilidad.
 
-\subsection*{Capítulo 7: Conclusiones y Trabajos Futuros}
-El proyecto se concluirá destacando los principales logros, desafíos superados y aprendizajes. También se sugerirán posibles extensiones o mejoras futuras, como:
-\begin{itemize}
-    \item Escalar la solución para manejar cargas más complejas.
-    \item Implementar funcionalidades avanzadas en SRE.
-    \item Explorar más a fondo el uso de LLMs y su integración con HPC.
-\end{itemize}
+\subsection*{Capítulo 7: Resultados y Análisis}
+Se recogerán de manera comparativa los datos obtenidos en los capítulos anteriores. Se analizará el impacto que tienen las distintas configuraciones sobre el rendimiento, la escalabilidad y la resiliencia, y se extraerán las conclusiones principales.
+
+\subsection*{Capítulo 8: Conclusiones y Trabajos Futuros}
+El documento se cerrará con una síntesis de los logros alcanzados y de las lecciones aprendidas. Finalmente, se propondrán líneas de mejora y posibles extensiones, como el escalado a infraestructuras más complejas o la aplicación de prácticas SRE avanzadas en entornos HPC de producción.

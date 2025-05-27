@@ -1,1 +1,71 @@
+
+
+\begin{multicols*}{2}
+
 \chapter{Propuesta}
+
+\section{Propuesta de Trabajo Final de Grado}
+
+Este Trabajo Final de Grado tiene como objetivo la implementación y evaluación de un entorno de computación de alto rendimiento (HPC) para la ejecución de modelos de lenguaje de gran escala (LLM), combinando el uso de contenedores con Podman para el despliegue real sobre GPU y OpenShift Local como entorno de demostración de principios de Site Reliability Engineering (SRE).
+
+Debido a las limitaciones inherentes a OpenShift Local, principalmente la imposibilidad de acceder directamente a la GPU desde su entorno virtualizado, se ha planteado una estrategia dual:
+\begin{itemize}
+    \item \textbf{Podman (GPU nativa):} Utilizar Podman para el despliegue de modelos LLM en un entorno nativo con GPU y realizar pruebas de rendimiento.
+    \item \textbf{OpenShift Local (SRE):} Usar OpenShift Local para simular un entorno de producción y evaluar capacidades avanzadas de SRE como escalado automático, auto-healing y despliegue continuo a partir de repositorios.
+\end{itemize}
+
+\section{Fases del Proyecto}
+
+\textbf{Fase de Hardware:}
+\begin{itemize}
+    \item Montaje físico del servidor, instalación del sistema operativo.
+    \item Instalación de controladores y librerías necesarias: NVIDIA Driver, CUDA Toolkit y soporte para contenedores con GPU.
+\end{itemize}
+
+\textbf{Fase de Despliegue con Podman (GPU):}
+\begin{itemize}
+    \item Creación de contenedores con Podman para desplegar un modelo LLM de gran tamaño (ej. DeepSeek) y varios modelos más pequeños.
+    \item Configuración del entorno para aprovechar la aceleración por GPU.
+    \item Ejecución de pruebas de rendimiento (benchmarks): inferencia, consumo de VRAM, latencias y rendimiento con carga concurrente.
+\end{itemize}
+
+\textbf{Fase de Evaluación con OpenShift Local (SRE):}
+\begin{itemize}
+    \item Instalación y configuración de OpenShift Local.
+    \item Despliegue de servicios ligeros desde URLs de GitHub, simulando pipelines DevOps.
+    \item Pruebas de capacidades SRE: auto-scaling basado en carga simulada, auto-healing tras fallos intencionados, observabilidad y monitorización de recursos, gestión de actualizaciones y reinicios controlados.
+\end{itemize}
+
+\section{Planificación Temporal}
+
+\begin{itemize}
+    \item \textbf{Fase Inicial (Semana 1-2):} Montaje del hardware y configuración básica del sistema. Instalación de drivers, CUDA y herramientas necesarias para ejecución con GPU.
+    \item \textbf{Fase de Despliegue LLM con Podman (Semanas 3–4):} Despliegue de modelos en contenedores. Ejecución de benchmarks de rendimiento.
+    \item \textbf{Fase SRE con OpenShift Local (Semanas 5–6):} Configuración de OpenShift Local. Despliegue de servicios ligeros desde GitHub. Pruebas de escalabilidad y resiliencia.
+    \item \textbf{Fase Final (Semana 7-8):} Análisis de resultados. Preparación de la demo y documentación final.
+\end{itemize}
+
+\section{Resultados Esperados}
+
+\textbf{Despliegue con GPU (Podman):}
+\begin{itemize}
+    \item Inferencia funcional de modelos LLM.
+    \item Métricas cuantitativas: velocidad de inferencia, uso de recursos, tiempos de respuesta.
+\end{itemize}
+
+\textbf{Simulación SRE (OpenShift Local):}
+\begin{itemize}
+    \item Demostración práctica de escalado automático y auto-healing.
+    \item Despliegue automatizado desde repositorios remotos.
+    \item Registro de eventos y capacidad de observación del sistema.
+\end{itemize}
+
+\section{Objetivo Final}
+
+El objetivo de este proyecto es evaluar la viabilidad y eficiencia del despliegue de modelos de lenguaje de gran escala (LLM) sobre servidores HPC mediante contenedores compatibles con GPU, así como demostrar capacidades clave de Site Reliability Engineering (SRE) mediante OpenShift Local.
+
+Este enfoque dual permite trabajar con modelos reales en el hardware disponible y familiarizarse con tecnologías de orquestación y fiabilidad operativa en entornos simulados. El trabajo se desarrollará con una perspectiva crítica, enfatizando la automatización, resiliencia y optimización del rendimiento, ofreciendo una visión práctica de los retos y soluciones en el despliegue de IA.
+
+Asimismo, este TFG refleja como un roadmap de la experiencia adquirida en el manejo de servidores. Se busca mostrar y consolidar los conocimientos obtenidos durante las prácticas extracurriculares realizadas en Alemania, especialmente en los primeros pasos en la gestión y uso de servidores. Se documentarán tanto los aciertos como los desafíos y los fallos encontrados, detallando el proceso de aprendizaje y las soluciones implementadas a lo largo del desarrollo del proyecto. La intención es ofrecer una referencia formativa útil para futuros estudiantes interesados en el ámbito de la computación de alto rendimiento y la fiabilidad operativa.
+
+\end{multicols*}

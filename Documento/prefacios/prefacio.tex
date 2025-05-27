@@ -22,12 +22,19 @@
 \noindent{\textbf{Palabras clave}:}
 \begin{itemize}
        \item \textbf{HPC}: También conocida como supercomputación, es un área de la informática en la que el rendimiento es el principal criterio de optimización, enfocándose en la capacidad de procesar grandes volúmenes de datos y realizar cálculos complejos
+
 \end{itemize}
 
 \vspace{0.7cm}
 \noindent{\textbf{Resumen}}\\
 
-En este proyecto se propone la instalación y configuración de un servidor para cómputo de modelos de IA. Se propone analizar alternativas de soluciones software para la ejecución en el equipo. Para evaluar las diferentes configuraciones se aplicarán benchmarks con su correspondiente análisis estadístico. Según las horas dedicadas a esta tarea, se podrá considerar el desarrollar algún modelo para un problema concreto (clasificación del tipo de partícula en detectores de argón líquido).
+
+En este proyecto se propone la implementación y evaluación de un servidor HPC (High Performance Computing), con un enfoque principal en comprender y documentar su ciclo de vida completo, desde el montaje inicial hasta su utilización. Esto representa mis primeros pasos consolidados en el ámbito del mantenimiento y despliegue de servidores, una tarea para la cual la experiencia en unas prácticas Erasmus como IT Infrastructure en Alemania, centrada en el montaje y despliegue de servidores, proporciona una base sólida.
+
+Una vez configurado y operativo el servidor HPC, se procederá con una estrategia dual para evaluar su rendimiento y utilidad. En primer lugar, se realizará el despliegue de modelos de lenguaje (LLM) de gran escala y varios modelos pequeños utilizando contenedores con acceso a unidades de procesamiento gráfico (GPU). Se llevarán a cabo benchmarks comparativos para evaluar su rendimiento y eficiencia, demostrando así la capacidad de la infraestructura HPC establecida.
+
+En segundo lugar, y aprovechando la infraestructura montada, se implementará un entorno de orquestación local. Este entorno simulará un ecosistema de producción con el fin de demostrar y validar los principios fundamentales de Site Reliability Engineering (SRE). Finalmente, se utilizará la plataforma de orquestación para examinar y validar capacidades avanzadas de SRE, tales como el escalado automático de recursos, la recuperación autónoma ante fallos y los procedimientos de despliegue continuo (CI/CD) desde repositorios de control de versiones.
+
 \cleardoublepage
 
 
@@ -35,10 +42,10 @@ En este proyecto se propone la instalación y configuración de un servidor para
 
 
 \begin{center}
-{\large\bfseries Project Title: Project Subtitle}\\
+{\large\bfseries \myTitleE: \mySubTitleE}\\
 \end{center}
 \begin{center}
-First name, Family name (student)\\
+\myName\\
 \end{center}
 
 %\vspace{0.7cm}
@@ -47,14 +54,19 @@ First name, Family name (student)\\
 \vspace{0.7cm}
 \noindent{\textbf{Abstract}}\\
 
-Write here the abstract in English.
+This project proposes the implementation and evaluation of a High Performance Computing (HPC) server. The primary focus is to thoroughly understand and document its complete lifecycle, from initial assembly to its full utilization. This endeavor represents my first consolidated steps in server maintenance and deployment, an area where my Erasmus internship experience as IT Infrastructure in Germany, centered on server assembly and deployment, provides a solid foundation.
+
+Once the HPC server is configured and operational, a dual strategy will be employed to assess its performance and utility. Firstly, we will deploy large-scale Language Models (LLMs) and several smaller models using containers with access to Graphics Processing Units (GPUs). Comparative benchmarks will be conducted to evaluate their performance and efficiency, thereby demonstrating the capabilities of the established HPC infrastructure.
+
+Secondly, leveraging the assembled infrastructure, a local orchestration environment will be implemented. This environment will simulate a production ecosystem to demonstrate and validate the fundamental principles of Site Reliability Engineering (SRE). Finally, the orchestration platform will be used to examine and validate advanced SRE capabilities, such as automatic resource scaling, autonomous fault recovery, and continuous integration/continuous deployment (CI/CD) procedures from version control repositories.
+
 
 \chapter*{}
 \thispagestyle{empty}
 
 \noindent\rule[-1ex]{\textwidth}{2pt}\\[4.5ex]
 
-Yo, \textbf{\myName}, alumno de la titulación TITULACIÓN de la \textbf{Escuela Técnica Superior
+Yo, \textbf{\myName}, alumno de la titulación \myDegree de la \textbf{Escuela Técnica Superior
 de Ingenierías Informática y de Telecomunicación de la Universidad de Granada}, con DNI 20596044G, autorizo la
 ubicación de la siguiente copia de mi Trabajo Fin de Grado en la biblioteca del centro para que pueda ser
 consultada por las personas que lo deseen.
@@ -75,7 +87,7 @@ consultada por las personas que lo deseen.
 
 \noindent\rule[-1ex]{\textwidth}{2pt}\\[4.5ex]
 
-D. \textbf{\myProf}, Profesor del Área de XXXX del \myDepartment\\ de la Universidad de Granada.
+D. \textbf{\myProf}, Profesor del Área de Ingeniería Informática del \myDepartment\\ de la Universidad de Granada.
 
 \vspace{0.5cm}
 
@@ -112,5 +124,4 @@ Y para que conste, expiden y firman el presente informe en \myDate\\.
        \vspace{1cm}
 
 
-Poner aquí agradecimientos...
-
+Dedicado a mi familia, que siempre me han apoyado en mis decisiones y me han hecho ser quien soy hoy. A mis amigos, que siempre han estado ahí para ayudarme y apoyarme en los momentos difíciles.  Y a todos los profesores y compañeros de la Universidad de Granada, que me han dado la oportunidad de crecer como persona y profesional.
