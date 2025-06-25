@@ -1,6 +1,7 @@
 Recursos/
 benchmark/apache-jmeter-5.6.3.tgz
-Clokify/
-tokenizer/
-Slidev/
+# Ignorar entornos virtuales en cualquier subcarpeta
 **/venv/
+
+# Ignorar node_modules solo en Slidev
+Slidev/node_modules/
