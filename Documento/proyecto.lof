@@ -1,40 +1,81 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Evolución comparativa del rendimiento de los modelos de IA de EE. UU. y China en LMSYS Chatbot Arena (2024–2025)\relax }}{2}{figure.caption.8}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Evolución comparativa del rendimiento de los modelos de IA de EE. UU. y China en LMSYS Chatbot Arena (2024–2025) \blx@tocontentsinit {0}\cite {ref5}\relax }}{3}{figure.caption.8}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Comparison of Kubernetes, Docker Swarm, Mesos and OpenShift\relax }}{16}{figure.caption.41}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces \relax }}{22}{figure.caption.49}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces \relax }}{23}{figure.caption.50}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces \relax }}{25}{figure.caption.55}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces \relax }}{26}{figure.caption.57}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Comparación de características clave entre Kubernetes, Docker Swarm, Mesos y OpenShift \blx@tocontentsinit {0}\cite {ref9}\relax }}{13}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Tabla de Métricas de Rendimiento de Modelos (GPT, LLaMA y Gemini) \blx@tocontentsinit {0}\cite {ref41}\relax }}{20}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Comparación de Latencia de Modelos \blx@tocontentsinit {0}\cite {ref41}\relax }}{20}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Rendimiento General de Modelos en Exámenes Estándar de la Industria \blx@tocontentsinit {0}\cite {ref16}\relax }}{22}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Tabla Chatbot Arena \blx@tocontentsinit {0}\cite {ref44}\relax }}{23}{figure.caption.20}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de Gantt generado con \textit {Plotly}\relax }}{30}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Resumen de \textit {Clockify} \blx@tocontentsinit {0}\cite {ref35}\relax }}{30}{figure.caption.24}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Server Room del CTT de la UGR\relax }}{31}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Montaje del servidor Dell PowerEdge R7615\relax }}{31}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Detalle durante la instalación\relax }}{32}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces \relax }}{33}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces \relax }}{33}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Comparison of Kubernetes, Docker Swarm, Mesos and OpenShift\relax }}{36}{figure.caption.65}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Comparison of Kubernetes, Docker Swarm, Mesos and OpenShift\relax }}{41}{figure.caption.71}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Sala de servidores del CTT.\relax }}{33}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Dell PowerEdge R7615 en el rack.\relax }}{34}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Corte en el dedo.\relax }}{35}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Supermicro as-4124gs-tnr-03-wa0004 en \textit {Desion} \relax }}{37}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Otro supermicro con 2 GPU 3090 en \textit {Desion} \relax }}{37}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Rack de Servidores de Schwechat (Austria)\relax }}{37}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagrama del doble salto de conexión.\relax }}{40}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Información del sistema (Neowofetch).\relax }}{41}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Salida del comando nvidia-smi\relax }}{45}{figure.caption.42}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquema del túnel SSH para acceder a la API FastAPI del modelo desplegado\relax }}{52}{figure.caption.43}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces logs del despliegue del modelo de 67B\relax }}{54}{figure.caption.47}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces monitoreo con nvidia-smi\relax }}{55}{figure.caption.49}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces interfaz FastAPI del modelo desplegado\relax }}{56}{figure.caption.50}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Aplicaciones en contenedores frente al sistema operativo del host\relax }}{46}{figure.caption.72}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Componentes de Kubernetes\relax }}{47}{figure.caption.73}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Gestión de recursos declarativa\relax }}{47}{figure.caption.75}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Proyectos de código abierto en una versión de OpenShift\relax }}{49}{figure.caption.77}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{50}{figure.caption.78}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{51}{figure.caption.79}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{52}{figure.caption.80}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{53}{figure.caption.81}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{54}{figure.caption.82}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{55}{figure.caption.83}%
-\contentsline {figure}{\numberline {6.11}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{56}{figure.caption.84}%
-\contentsline {figure}{\numberline {6.12}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{58}{figure.caption.86}%
-\contentsline {figure}{\numberline {6.13}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{58}{figure.caption.87}%
-\contentsline {figure}{\numberline {6.14}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{58}{figure.caption.88}%
-\contentsline {figure}{\numberline {6.15}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{59}{figure.caption.89}%
-\contentsline {figure}{\numberline {6.16}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{60}{figure.caption.90}%
-\contentsline {figure}{\numberline {6.17}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{61}{figure.caption.93}%
-\contentsline {figure}{\numberline {6.18}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{61}{figure.caption.94}%
-\contentsline {figure}{\numberline {6.19}{\ignorespaces Proceso de Source-to-Image (S2I)\relax }}{62}{figure.caption.95}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Interfaz de JMeter con el benchmark\relax }}{63}{figure.caption.54}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Resultado A1 7B\relax }}{65}{figure.caption.57}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Ejemplo output A1 7B\relax }}{65}{figure.caption.58}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Resultado A1 67B\relax }}{66}{figure.caption.59}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Ejemplo output A1 67B\relax }}{66}{figure.caption.60}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Resultado A2 7B\relax }}{67}{figure.caption.62}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Ejemplo output A2 7B\relax }}{67}{figure.caption.63}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Resultado A2 67B\relax }}{67}{figure.caption.64}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Ejemplo output A2 67B\relax }}{67}{figure.caption.65}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Resultado B1 7B\relax }}{69}{figure.caption.67}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Ejemplo output B1 7B\relax }}{69}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Resultado B1 67B\relax }}{70}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Ejemplo output B1 67B\relax }}{70}{figure.caption.70}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Resultado B2 7B\relax }}{71}{figure.caption.72}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Output B2 7B\relax }}{71}{figure.caption.73}%
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Output B2 7B pero con error\relax }}{71}{figure.caption.74}%
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Resultado B2 67B\relax }}{72}{figure.caption.75}%
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Ejemplo output B2 67B\relax }}{72}{figure.caption.76}%
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Resultado B3 7B\relax }}{73}{figure.caption.78}%
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Ejemplo output B3 7B\relax }}{73}{figure.caption.79}%
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Resultado B3 67B\relax }}{74}{figure.caption.80}%
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Ejemplo output B3 67B\relax }}{74}{figure.caption.81}%
+\contentsline {figure}{\numberline {6.23}{\ignorespaces Resultado C1 7B\relax }}{76}{figure.caption.83}%
+\contentsline {figure}{\numberline {6.24}{\ignorespaces Ejemplo output C1 7B\relax }}{76}{figure.caption.84}%
+\contentsline {figure}{\numberline {6.25}{\ignorespaces Resultado C1 67B\relax }}{77}{figure.caption.85}%
+\contentsline {figure}{\numberline {6.26}{\ignorespaces Ejemplo output C1 67B\relax }}{77}{figure.caption.86}%
+\contentsline {figure}{\numberline {6.27}{\ignorespaces Resultado C2 7B\relax }}{78}{figure.caption.88}%
+\contentsline {figure}{\numberline {6.28}{\ignorespaces Ejemplo output C2 7B\relax }}{78}{figure.caption.89}%
+\contentsline {figure}{\numberline {6.29}{\ignorespaces Resultado C2 67B\relax }}{78}{figure.caption.90}%
+\contentsline {figure}{\numberline {6.30}{\ignorespaces Ejemplo output C2 67B\relax }}{78}{figure.caption.91}%
+\contentsline {figure}{\numberline {6.31}{\ignorespaces Tabla Comparación Latencia por Escenario y Modelo (\textit {lower is better})\relax }}{81}{figure.caption.96}%
+\contentsline {figure}{\numberline {6.32}{\ignorespaces Tabla Comparación TPS por Escenario y Modelo (\textit {higher is better})\relax }}{81}{figure.caption.97}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Aplicaciones en contenedores frente al sistema operativo del host \blx@tocontentsinit {0}\cite {ref33}\relax }}{87}{figure.caption.103}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Proyectos de código abierto que hay en \textit {OpenShift} \blx@tocontentsinit {0}\cite {ref33}\relax }}{89}{figure.caption.104}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Componentes de Kubernetes \blx@tocontentsinit {0}\cite {ref33}\relax }}{90}{figure.caption.105}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Gestión de recursos declarativa \blx@tocontentsinit {0}\cite {ref33}\relax }}{91}{figure.caption.106}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Interfaz de \textit {OpenShift}. \textit {Fuente: elaboración propia.}\relax }}{93}{figure.caption.108}%
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Primer Pod creado \textit {Fuente: elaboración propia.}\relax }}{94}{figure.caption.109}%
+\contentsline {figure}{\numberline {7.7}{\ignorespaces Aplicación desplegada pero no se puede interactuar \textit {Fuente: elaboración propia.}\relax }}{95}{figure.caption.110}%
+\contentsline {figure}{\numberline {7.8}{\ignorespaces Pods de la base de datos y nodejs \textit {Fuente: elaboración propia.}\relax }}{97}{figure.caption.111}%
+\contentsline {figure}{\numberline {7.9}{\ignorespaces Aplicación desplegada con el \textit {backend} \textit {Fuente: elaboración propia.}\relax }}{98}{figure.caption.112}%
+\contentsline {figure}{\numberline {7.10}{\ignorespaces Interfaz de monitorización de \textit {OpenShift} \textit {Fuente: elaboración propia.}\relax }}{99}{figure.caption.113}%
+\contentsline {figure}{\numberline {7.11}{\ignorespaces Autoescalado como tag en el panel de \textit {OpenShift} \textit {Fuente: elaboración propia.}\relax }}{101}{figure.caption.114}%
+\contentsline {figure}{\numberline {7.12}{\ignorespaces El HPA incrementa a 3 réplicas tras mantener la carga al 200\%. \textit {Fuente: elaboración propia.}\relax }}{102}{figure.caption.115}%
+\contentsline {figure}{\numberline {7.13}{\ignorespaces Estado de los pods durante la prueba de carga \textit {Fuente: elaboración propia.}\relax }}{103}{figure.caption.116}%
+\contentsline {figure}{\numberline {7.14}{\ignorespaces Monitorización de los pods durante la prueba de carga \textit {Fuente: elaboración propia.}\relax }}{103}{figure.caption.117}%
+\contentsline {figure}{\numberline {7.15}{\ignorespaces Resultado de la prueba de carga con ApacheBench \textit {Fuente: elaboración propia.} \relax }}{104}{figure.caption.118}%
+\contentsline {figure}{\numberline {7.16}{\ignorespaces Decrecimiento del autoescalado tras la prueba de carga. Una vez finalizada la carga, el HPA reduce automáticamente el número de réplicas de la aplicación, volviendo progresivamente al mínimo configurado (1 pod) tras un periodo. \textit {Fuente: elaboración propia.}\relax }}{105}{figure.caption.119}%
+\contentsline {figure}{\numberline {7.17}{\ignorespaces Estado CrashLoopBackOff tras fallo en la sonda de \textit {readiness} \textit {Fuente: elaboración propia.}\relax }}{106}{figure.caption.120}%
+\contentsline {figure}{\numberline {7.18}{\ignorespaces Aplicación no disponible por culpa del cambio de puerto \textit {Fuente: elaboración propia.}\relax }}{106}{figure.caption.121}%
+\contentsline {figure}{\numberline {7.19}{\ignorespaces Recuperación del estado normal del pod \textit {Fuente: elaboración propia.}\relax }}{107}{figure.caption.122}%
 \addvspace {10\p@ }

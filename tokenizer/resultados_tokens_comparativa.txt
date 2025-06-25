@@ -1,0 +1,52 @@
+Modelo: deepseek-ai/deepseek-llm-67b-chat
+POST 1 (max_tokens=32):
+  Tokens en el prompt: 16
+  Tokens totales (prompt + max_tokens): 48
+
+POST 2 (max_tokens=64):
+  Tokens en el prompt: 58
+  Tokens totales (prompt + max_tokens): 122
+
+POST 2 (max_tokens=128):
+  Tokens en el prompt: 58
+  Tokens totales (prompt + max_tokens): 186
+
+POST 2 (max_tokens=256):
+  Tokens en el prompt: 58
+  Tokens totales (prompt + max_tokens): 314
+
+POST 3 (max_tokens=256):
+  Tokens en el prompt: 103
+  Tokens totales (prompt + max_tokens): 359
+
+Total tokens en los prompts (sumados): 293
+Total tokens (prompts + max_tokens, sumados): 1029
+
+----------------------------------------
+
+Modelo: deepseek-ai/deepseek-llm-7b-chat
+POST 1 (max_tokens=32):
+  Tokens en el prompt: 16
+  Tokens totales (prompt + max_tokens): 48
+
+POST 2 (max_tokens=64):
+  Tokens en el prompt: 58
+  Tokens totales (prompt + max_tokens): 122
+
+POST 2 (max_tokens=128):
+  Tokens en el prompt: 58
+  Tokens totales (prompt + max_tokens): 186
+
+POST 2 (max_tokens=256):
+  Tokens en el prompt: 58
+  Tokens totales (prompt + max_tokens): 314
+
+POST 3 (max_tokens=256):
+  Tokens en el prompt: 103
+  Tokens totales (prompt + max_tokens): 359
+
+Total tokens en los prompts (sumados): 293
+Total tokens (prompts + max_tokens, sumados): 1029
+
+----------------------------------------
+

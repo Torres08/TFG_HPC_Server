@@ -17,130 +17,1061 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
-  \entry{aly2018kubernetes}{inproceedings}{}
-    \name{author}{3}{}{%
-      {{hash=AF}{%
-         family={Aly},
+  \entry{ref23}{online}{}
+    \name{author}{1}{}{%
+      {{hash=AM}{%
+         family={Abbott},
          familyi={A\bibinitperiod},
-         given={F.},
-         giveni={F\bibinitperiod},
-      }}%
-      {{hash=KS}{%
-         family={Khomh},
-         familyi={K\bibinitperiod},
-         given={S.},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=YM}{%
-         family={Yacout},
-         familyi={Y\bibinitperiod},
          given={M.},
          giveni={M\bibinitperiod},
       }}%
     }
-    \list{organization}{1}{%
-      {IEEE}%
-    }
-    \strng{namehash}{AFKSYM1}
-    \strng{fullhash}{AFKSYM1}
+    \strng{namehash}{AM1}
+    \strng{fullhash}{AM1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{sortinit}{A}
     \field{sortinithash}{A}
-    \field{booktitle}{{2018 IEEE International Conference on Service-Oriented
-  Computing and Applications (SOCA)}}
-    \verb{doi}
-    \verb 10.1109/SOCA.2018.00024
+    \field{title}{Enabling the RPM Fusion repositories}
+    \verb{url}
+    \verb https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
     \endverb
-    \field{pages}{113\bibrangedash 120}
-    \field{title}{{Kubernetes or OpenShift? Which Technology Best Suits Eclipse
-  HONO IT Deployments}}
-    \field{year}{2018}
+    \field{year}{2024}
     \warn{\item Invalid format of field 'month'}
   \endentry
 
-  \entry{arxiv_2211_07032}{misc}{}
-    \name{author}{3}{}{%
-      {{hash=BR}{%
-         family={Bose},
-         familyi={B\bibinitperiod},
-         given={Ritwik},
-         giveni={R\bibinitperiod},
+  \entry{ref6}{book}{}
+    \name{author}{6}{}{%
+      {{hash=AH}{%
+         family={Adkins},
+         familyi={A\bibinitperiod},
+         given={Heather},
+         giveni={H\bibinitperiod},
       }}%
-      {{hash=CA}{%
-         family={Chhablani},
-         familyi={C\bibinitperiod},
-         given={Akshit},
+      {{hash=BB}{%
+         family={Beyer},
+         familyi={B\bibinitperiod},
+         given={Betsy},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=BP}{%
+         family={Blankinship},
+         familyi={B\bibinitperiod},
+         given={Paul},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=LP}{%
+         family={Lewandowski},
+         familyi={L\bibinitperiod},
+         given={Piotr},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=OA}{%
+         family={Oprea},
+         familyi={O\bibinitperiod},
+         given={Ana},
          giveni={A\bibinitperiod},
       }}%
-      {{hash=RS}{%
-         family={Roy},
-         familyi={R\bibinitperiod},
-         given={Subhajit},
-         giveni={S\bibinitperiod},
+      {{hash=SA}{%
+         family={Stubblefield},
+         familyi={S\bibinitperiod},
+         given={Adam},
+         giveni={A\bibinitperiod},
       }}%
     }
-    \strng{namehash}{BRCARS1}
-    \strng{fullhash}{BRCARS1}
+    \list{publisher}{1}{%
+      {O'Reilly Media}%
+    }
+    \strng{namehash}{AH+1}
+    \strng{fullhash}{AHBBBPLPOASA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{Building Secure \& Reliable Systems: Best Practices for
+  Designing, Implementing and Maintaining Systems}
+    \list{location}{1}{%
+      {Sebastopol, CA}%
+    }
+    \field{year}{2020}
+  \endentry
+
+  \entry{ref43}{online}{}
+    \name{author}{1}{}{%
+      {{hash=ASA}{%
+         family={Alkamel},
+         familyi={A\bibinitperiod},
+         given={Sayed\bibnamedelima Ali},
+         giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ASA1}
+    \strng{fullhash}{ASA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{DeepSeek and the Power of Mixture of Experts (MoE)}
+    \verb{url}
+    \verb https://dev.to/sayed_ali_alkamel/deepseek-and-the-power-of-mixture-of
+    \verb -experts-moe-ham
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref58}{online}{}
+    \name{author}{1}{}{%
+      {{hash=A}{%
+         family={{Apache JMeter}},
+         familyi={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{A1}
+    \strng{fullhash}{A1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{Apache JMeter}
+    \verb{url}
+    \verb https://jmeter.apache.org/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref79}{online}{}
+    \name{author}{1}{}{%
+      {{hash=A}{%
+         family={{ASUS}},
+         familyi={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{A2}
+    \strng{fullhash}{A2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{ESC4000A-E12 GPU Server}
+    \verb{url}
+    \verb https://servers.asus.com/products/servers/gpu-servers/ESC4000A-E12
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref30}{online}{}
+    \name{author}{1}{}{%
+      {{hash=B}{%
+         family={Baseten},
+         familyi={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{B1}
+    \strng{fullhash}{B1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{sortinit}{B}
     \field{sortinithash}{B}
-    \verb{eprint}
-    \verb 2211.07032
-    \endverb
-    \field{howpublished}{arXiv:2211.07032 [cs.AR]}
-    \field{title}{{A Survey on HPC System Deployment and Management
-  Strategies}}
+    \field{title}{LLM Transformer Inference Guide}
     \verb{url}
-    \verb https://arxiv.org/pdf/2211.07032
+    \verb https://www.baseten.co/blog/llm-transformer-inference-guide/#optimizi
+    \verb ng-llm-model-inference-with-transformer-math
     \endverb
-    \field{eprinttype}{arXiv}
-    \field{eprintclass}{cs.AR}
-    \field{year}{2022}
+    \field{year}{s.f.}
   \endentry
 
-  \entry{arxiv_2411_03344}{misc}{}
-    \name{author}{3}{}{%
-      {{hash=LJ}{%
-         family={Li},
-         familyi={L\bibinitperiod},
-         given={Jun},
-         giveni={J\bibinitperiod},
+  \entry{ref26}{article}{}
+    \name{author}{2}{}{%
+      {{hash=BX}{%
+         family={Bi},
+         familyi={B\bibinitperiod},
+         given={X.},
+         giveni={X\bibinitperiod},
       }}%
-      {{hash=WW}{%
-         family={Wang},
-         familyi={W\bibinitperiod},
-         given={Wei},
-         giveni={W\bibinitperiod},
-      }}%
-      {{hash=CY}{%
-         family={Chen},
-         familyi={C\bibinitperiod},
-         given={Yong},
-         giveni={Y\bibinitperiod},
+      {{hash=o}{%
+         family={otros},
+         familyi={o\bibinitperiod},
       }}%
     }
-    \strng{namehash}{LJWWCY1}
-    \strng{fullhash}{LJWWCY1}
+    \strng{namehash}{BXo1}
+    \strng{fullhash}{BXo1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{L}
-    \field{sortinithash}{L}
-    \verb{eprint}
-    \verb 2411.03344
-    \endverb
-    \field{howpublished}{arXiv:2411.03344 [cs.AI]}
-    \field{title}{{Exploring the Performance of LLMs in HPC Environments}}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{DeepSeek LLM: Scaling Open-Source Language Models with
+  Longtermism}
     \verb{url}
-    \verb https://arxiv.org/pdf/2411.03344
+    \verb https://arxiv.org/abs/2401.02954
     \endverb
-    \field{eprinttype}{arXiv}
-    \field{eprintclass}{cs.AI}
+    \field{journaltitle}{arXiv}
+    \field{year}{2024}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{ref27}{online}{}
+    \name{author}{1}{}{%
+      {{hash=msb}{%
+         prefix={model\bibnamedelima sizer},
+         prefixi={m\bibinitperiod\bibinitdelim s\bibinitperiod},
+         family={bot},
+         familyi={b\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{bms1}
+    \strng{fullhash}{bms1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{Model Memory Requirements}
+    \verb{url}
+    \verb https://huggingface.co/deepseek-ai/deepseek-llm-67b-base/discussions/
+    \verb 1
+    \endverb
+    \field{year}{2023}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{ref73}{online}{}
+    \name{author}{1}{}{%
+      {{hash=C}{%
+         family={{Canonical}},
+         familyi={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{C1}
+    \strng{fullhash}{C1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{Introduction to autoinstall}
+    \verb{url}
+    \verb https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to
+    \verb -autoinstall.html
+    \endverb
     \field{year}{2024}
   \endentry
 
-  \entry{malviya2022comparative}{inproceedings}{}
+  \entry{ref36}{online}{}
+    \name{author}{1}{}{%
+      {{hash=C}{%
+         family={{Cloud Native Computing Foundation}},
+         familyi={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{C2}
+    \strng{fullhash}{C2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{As Kubernetes Hits 1.0, Google Donates Technology To Newly
+  Formed Cloud Native Computing Foundation}
+    \verb{url}
+    \verb https://www.cncf.io/news/2015/07/21/techcrunch-as-kubernetes-hits-1-0
+    \verb -google-donates-technology-to-newly-formed-cloud-native-computing-fou
+    \verb ndation/
+    \endverb
+    \field{year}{2015}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{ref53}{online}{}
+    \name{author}{1}{}{%
+      {{hash=C}{%
+         family={{CVAT}},
+         familyi={C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{C3}
+    \strng{fullhash}{C3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{CVAT: Computer Vision Annotation Tool}
+    \verb{url}
+    \verb https://www.cvat.ai/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref3}{online}{}
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={{DeepMind}},
+         familyi={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{D1}
+    \strng{fullhash}{D1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{AlphaFold reveals the structure of the protein universe}
+    \verb{url}
+    \verb https://deepmind.google/discover/blog/alphafold-reveals-the-structure
+    \verb -of-the-protein-universe/
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{ref72}{online}{}
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={{DeepMind}},
+         familyi={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{D1}
+    \strng{fullhash}{D1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{DeepMind}
+    \verb{url}
+    \verb https://deepmind.google/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref45}{online}{}
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={{Dell Technologies}},
+         familyi={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{D2}
+    \strng{fullhash}{D2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{Servidor Dell PowerEdge R7615}
+    \verb{url}
+    \verb https://www.dell.com/es-es/shop/ipovw/poweredge-r7615
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref25}{online}{}
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={DenshiVideo},
+         familyi={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{D3}
+    \strng{fullhash}{D3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{NVIDIA Optimus: A \textit{Comfy} Guide}
+    \verb{url}
+    \verb https://www.youtube.com/watch?v=sS67P06h5Yg
+    \endverb
+    \field{year}{2022}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{ref38}{online}{}
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={{Desion}},
+         familyi={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{D4}
+    \strng{fullhash}{D4}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{Desion: AI-powered Document Search}
+    \verb{url}
+    \verb https://desion.de/en/start/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref28}{article}{}
+    \name{author}{4}{}{%
+      {{hash=DT}{%
+         family={Dettmers},
+         familyi={D\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=PA}{%
+         family={Pagnoni},
+         familyi={P\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=HA}{%
+         family={Holtzman},
+         familyi={H\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=ZL}{%
+         family={Zettlemoyer},
+         familyi={Z\bibinitperiod},
+         given={L.},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DT+1}
+    \strng{fullhash}{DTPAHAZL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{QLoRA: Efficient Finetuning of Quantized LLMs}
+    \verb{url}
+    \verb https://arxiv.org/abs/2305.14314
+    \endverb
+    \field{journaltitle}{arXiv}
+    \field{year}{2023}
+  \endentry
+
+  \entry{ref24}{online}{}
+    \name{author}{1}{}{%
+      {{hash=DN}{%
+         family={Developer},
+         familyi={D\bibinitperiod},
+         given={NVIDIA},
+         giveni={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DN1}
+    \strng{fullhash}{DN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{CUDA Toolkit 12.x Downloads (Fedora 41, x86\_64, RPM
+  Network)}
+    \verb{url}
+    \verb https://developer.nvidia.com/cuda-downloads
+    \endverb
+    \field{year}{2025}
+  \endentry
+
+  \entry{ref22}{online}{}
+    \name{author}{3}{}{%
+      {{hash=DA}{%
+         family={Dhar},
+         familyi={D\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=AJ}{%
+         family={Aruga},
+         familyi={A\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SA}{%
+         family={Sinha},
+         familyi={S\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DAAJSA1}
+    \strng{fullhash}{DAAJSA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{How to Set NVIDIA as Primary GPU on Optimus-based Laptops}
+    \verb{url}
+    \verb https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary
+    \verb -gpu-on-optimus-based-laptops/
+    \endverb
+    \field{year}{2024}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{ref54}{online}{}
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={{Docker}},
+         familyi={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{D5}
+    \strng{fullhash}{D5}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{Docker: Empowering App Development for Developers}
+    \verb{url}
+    \verb https://www.docker.com/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref20}{book}{}
+    \name{author}{4}{}{%
+      {{hash=DJ}{%
+         family={Dongarra},
+         familyi={D\bibinitperiod},
+         given={J.},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ST}{%
+         family={Sterling},
+         familyi={S\bibinitperiod},
+         given={T.},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SHD}{%
+         family={Simon},
+         familyi={S\bibinitperiod},
+         given={H.\bibnamedelima D.},
+         giveni={H\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=SE}{%
+         family={Strohmaier},
+         familyi={S\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DJ+1}
+    \strng{fullhash}{DJSTSHDSE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{High-Performance Computing: Clusters, Constellations, MPPs,
+  and Future Directions}
+    \verb{url}
+    \verb https://ieeexplore.ieee.org/document/1401802/
+    \endverb
+    \field{year}{2005}
+  \endentry
+
+  \entry{ref66}{online}{}
+    \name{author}{1}{}{%
+      {{hash=E}{%
+         family={{Elicit}},
+         familyi={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{E1}
+    \strng{fullhash}{E1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{title}{Elicit: The AI Research Assistant}
+    \verb{url}
+    \verb https://elicit.com/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref76}{online}{}
+    \name{author}{1}{}{%
+      {{hash=E}{%
+         family={{European Commission: Directorate-General for Digital
+  Services}},
+         familyi={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{E2}
+    \strng{fullhash}{E2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{title}{New European interoperability framework – Promoting
+  seamless services and data flows for European public administrations}
+    \verb{url}
+    \verb https://data.europa.eu/doi/10.2799/78681
+    \endverb
+    \field{year}{2017}
+  \endentry
+
+  \entry{ref78}{online}{}
+    \name{author}{1}{}{%
+      {{hash=E}{%
+         family={{European Union}},
+         familyi={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{E3}
+    \strng{fullhash}{E3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{title}{Regulation (EU) 2024/903 of the European Parliament and of
+  the Council of 13 March 2024 on harmonised rules on fair access to and use of
+  data and amending Regulation (EU) 2017/2394 and Directive (EU) 2020/1828
+  (Data Act)}
+    \verb{url}
+    \verb https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX:32024R0903
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref37}{online}{}
+    \name{author}{1}{}{%
+      {{hash=FCNC}{%
+         family={Foundation},
+         familyi={F\bibinitperiod},
+         given={Cloud Native\bibnamedelima Computing},
+         giveni={C\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim
+  C\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FCNC1}
+    \strng{fullhash}{FCNC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{title}{As Kubernetes Hits 1.0, Google Donates Technology To Newly
+  Formed Cloud Native Computing Foundation}
+    \verb{url}
+    \verb https://www.cncf.io/news/2015/07/21/techcrunch-as-kubernetes-hits-1-0
+    \verb -google-donates-technology-to-newly-formed-cloud-native-computing-fou
+    \verb ndation/
+    \endverb
+    \field{year}{2015}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{ref60}{online}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{Gatling}},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{G1}
+    \strng{fullhash}{G1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{Gatling Load Testing for DevOps CICD}
+    \verb{url}
+    \verb https://gatling.io/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref77}{online}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{Gobierno de España}},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{G2}
+    \strng{fullhash}{G2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{Ley 11/2007, de 22 de junio, de acceso electrónico de los
+  ciudadanos a los Servicios Públicos}
+    \verb{url}
+    \verb https://www.boe.es/buscar/doc.php?id=BOE-A-2010-1331
+    \endverb
+    \field{year}{2010}
+  \endentry
+
+  \entry{ref68}{online}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{Google}},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{G3}
+    \strng{fullhash}{G3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{Gemini}
+    \verb{url}
+    \verb https://gemini.google.com/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref67}{online}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{Google}},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{G3}
+    \strng{fullhash}{G3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{NotebookLM}
+    \verb{url}
+    \verb https://notebooklm.google.com/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref51}{online}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{Grafana Labs}},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{G4}
+    \strng{fullhash}{G4}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{Grafana: The Open Observability Platform}
+    \verb{url}
+    \verb https://grafana.com/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref34}{online}{}
+    \name{author}{1}{}{%
+      {{hash=GA}{%
+         family={Guillén},
+         familyi={G\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GA1}
+    \strng{fullhash}{GA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{CÓMO ESCRIBIR TU TFG O TFM DE INGENIERÍA INFORMÁTICA Y NO
+  MORIR EN EL INTENTO}
+    \verb{url}
+    \verb https://github.com/aguillenATC/LibroTFGyTFMInform-tica-PIBD-22-29-UGR
+    \endverb
+    \field{year}{s.f.}
+  \endentry
+
+  \entry{ref42}{online}{}
+    \name{author}{1}{}{%
+      {{hash=H}{%
+         family={{Hugging Face}},
+         familyi={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{H1}
+    \strng{fullhash}{H1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{Chatbot Arena Leaderboard}
+    \verb{url}
+    \verb https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref15}{online}{}
+    \name{author}{1}{}{%
+      {{hash=H}{%
+         family={{Hugging Face}},
+         familyi={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{H1}
+    \strng{fullhash}{H1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{note}{Disponible en línea. Consultado en 2024}
+    \field{title}{Chunking Text Generation Inference}
+    \verb{url}
+    \verb https://huggingface.co/docs/text-generation-inference/en/conceptual/c
+    \verb hunking
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref14}{online}{}
+    \name{author}{1}{}{%
+      {{hash=H}{%
+         family={{Hugging Face}},
+         familyi={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{H1}
+    \strng{fullhash}{H1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{Text Generation Inference Documentation}
+    \verb{url}
+    \verb https://huggingface.co/docs/text-generation-inference/en/index
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref4}{online}{}
+    \name{author}{1}{}{%
+      {{hash=H}{%
+         family={{Human Brain Project}},
+         familyi={H\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{H2}
+    \strng{fullhash}{H2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{Human Brain Project}
+    \verb{url}
+    \verb https://www.humanbrainproject.eu/en/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref46}{online}{}
+    \name{author}{1}{}{%
+      {{hash=I}{%
+         family={{Ibertrónica}},
+         familyi={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{I1}
+    \strng{fullhash}{I1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \field{title}{NVIDIA L40S 48GB GDDR6}
+    \verb{url}
+    \verb https://ibertronica.es/en/nvidia-l40s-48gb-gddr6
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref1}{online}{}
+    \name{author}{1}{}{%
+      {{hash=I}{%
+         family={{IBM}},
+         familyi={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{I2}
+    \strng{fullhash}{I2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \field{title}{¿Qué es la computación de alto rendimiento (HPC)?}
+    \verb{url}
+    \verb https://www.ibm.com/es-es/topics/hpc
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref47}{online}{}
+    \name{author}{1}{}{%
+      {{hash=I}{%
+         family={{Indeed}},
+         familyi={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{I3}
+    \strng{fullhash}{I3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \field{title}{¿Cuánto gana un informático en España?}
+    \verb{url}
+    \verb https://es.indeed.com/career/informatico/salaries
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref49}{online}{}
+    \name{author}{1}{}{%
+      {{hash=i}{%
+         family={{iVentoy}},
+         familyi={i\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{i1}
+    \strng{fullhash}{i1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \field{title}{iVentoy PXE Network Boot Server}
+    \verb{url}
+    \verb https://www.iventoy.com/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref64}{online}{}
+    \name{author}{1}{}{%
+      {{hash=J}{%
+         family={{Jenkins}},
+         familyi={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{J1}
+    \strng{fullhash}{J1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{J}
+    \field{sortinithash}{J}
+    \field{title}{Jenkins: Build great things at any scale}
+    \verb{url}
+    \verb https://www.jenkins.io/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref59}{online}{}
+    \name{author}{1}{}{%
+      {{hash=k}{%
+         family={{k6}},
+         familyi={k\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{k1}
+    \strng{fullhash}{k1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{title}{k6 Open source Load Testing Tool for Engineering Teams}
+    \verb{url}
+    \verb https://k6.io/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref8}{online}{}
+    \name{author}{1}{}{%
+      {{hash=K}{%
+         family={{Kubernetes Documentation}},
+         familyi={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{K1}
+    \strng{fullhash}{K1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{title}{Kubernetes Concepts Overview}
+    \verb{url}
+    \verb https://kubernetes.io/docs/concepts/overview/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref39}{article}{}
+    \name{author}{9}{}{%
+      {{hash=KW}{%
+         family={Kwon},
+         familyi={K\bibinitperiod},
+         given={Woosuk},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=LZ}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Zhuohan},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhuang},
+         familyi={Z\bibinitperiod},
+         given={Siyuan},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Sheng},
+         familyi={S\bibinitperiod},
+         given={Ying},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=ZL}{%
+         family={Zheng},
+         familyi={Z\bibinitperiod},
+         given={Lianmin},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=YCH}{%
+         family={Yu},
+         familyi={Y\bibinitperiod},
+         given={Cody\bibnamedelima Hao},
+         giveni={C\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=GJE}{%
+         family={Gonzalez},
+         familyi={G\bibinitperiod},
+         given={Joseph\bibnamedelima E.},
+         giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=ZH}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Hao},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=SI}{%
+         family={Stoica},
+         familyi={S\bibinitperiod},
+         given={Ion},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KW+1}
+    \strng{fullhash}{KWLZZSSYZLYCHGJEZHSI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{title}{Efficient Memory Management for Large Language Model Serving
+  with PagedAttention}
+    \verb{url}
+    \verb https://arxiv.org/abs/2309.06180
+    \endverb
+    \field{journaltitle}{arXiv}
+    \field{year}{2023}
+  \endentry
+
+  \entry{ref9}{inproceedings}{}
     \name{author}{2}{}{%
       {{hash=MA}{%
          family={Malviya},
@@ -155,23 +1086,17 @@
          giveni={R\bibinitperiod},
       }}%
     }
-    \list{organization}{1}{%
-      {IEEE}%
-    }
     \strng{namehash}{MADR1}
     \strng{fullhash}{MADR1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{sortinit}{M}
     \field{sortinithash}{M}
-    \field{booktitle}{{2022 9th International Conference on Computing for
-  Sustainable Global Development (INDIACom)}}
-    \verb{doi}
-    \verb 10.1109/INDIACom54597.2022.9763171
-    \endverb
+    \field{booktitle}{2022 9th International Conference on Computing for
+  Sustainable Global Development (INDIACom)}
     \field{pages}{698\bibrangedash 703}
-    \field{title}{{A Comparative Analysis of Container Orchestration Tools in
-  Cloud Computing}}
+    \field{title}{A Comparative Analysis of Container Orchestration Tools in
+  Cloud Computing}
     \verb{url}
     \verb https://ieeexplore.ieee.org/document/9763171
     \endverb
@@ -181,7 +1106,7 @@
     \field{year}{2022}
   \endentry
 
-  \entry{mordorintelligence2023}{misc}{}
+  \entry{ref2}{online}{}
     \name{author}{1}{}{%
       {{hash=M}{%
          family={{Mordor Intelligence}},
@@ -194,84 +1119,756 @@
     \field{labeltitlesource}{title}
     \field{sortinit}{M}
     \field{sortinithash}{M}
-    \field{note}{Accessed: 2025-05-22}
-    \field{title}{{High Performance Computing Market}}
+    \field{title}{High-Performance Computing Market - Growth, Trends, and
+  Forecasts (2024 - 2029)}
     \verb{url}
-    \verb https://www.mordorintelligence.com/es/industry-reports/high-performan
-    \verb ce-computing-market
+    \verb https://www.mordorintelligence.com/industry-reports/high-performance-
+    \verb computing-market
     \endverb
-    \field{year}{2023}
+    \field{year}{2024}
   \endentry
 
-  \entry{arxiv_2002_02806}{misc}{}
+  \entry{ref50}{online}{}
     \name{author}{1}{}{%
-      {{hash=SGT}{%
-         family={Shinde},
-         familyi={S\bibinitperiod},
-         given={Ganesh\bibnamedelima Tukaram},
-         giveni={G\bibinitperiod\bibinitdelim T\bibinitperiod},
+      {{hash=N}{%
+         family={{Nagios}},
+         familyi={N\bibinitperiod},
       }}%
     }
-    \strng{namehash}{SGT1}
-    \strng{fullhash}{SGT1}
+    \strng{namehash}{N1}
+    \strng{fullhash}{N1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{Nagios: The Industry Standard in IT Infrastructure
+  Monitoring}
+    \verb{url}
+    \verb https://www.nagios.org/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref69}{online}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={{Neural Magic}},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N2}
+    \strng{fullhash}{N2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{Neural Magic: AI Inference at Scale}
+    \verb{url}
+    \verb https://neuralmagic.com/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref70}{online}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={{NVIDIA}},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N3}
+    \strng{fullhash}{N3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{FasterTransformer}
+    \verb{url}
+    \verb https://github.com/NVIDIA/FasterTransformer
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref13}{online}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={{NVIDIA}},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N3}
+    \strng{fullhash}{N3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{H100 vs A100: Performance Comparison}
+    \verb{url}
+    \verb https://nvidia.github.io/TensorRT-LLM/blogs/H100vsA100.html
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref29}{online}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={NVIDIA},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N4}
+    \strng{fullhash}{N4}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{LLM Benchmarking: Fundamental Concepts}
+    \verb{url}
+    \verb https://developer.nvidia.com/blog/llm-benchmarking-fundamental-concep
+    \verb ts/
+    \endverb
+    \field{year}{s.f.}
+  \endentry
+
+  \entry{ref31}{online}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={NVIDIA},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N4}
+    \strng{fullhash}{N4}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{LLM Benchmarking Metrics}
+    \verb{url}
+    \verb https://docs.nvidia.com/nim/benchmarking/llm/latest/metrics.html
+    \endverb
+    \field{year}{s.f.}
+  \endentry
+
+  \entry{ref12}{online}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={{NVIDIA}},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N3}
+    \strng{fullhash}{N3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{TensorRT-LLM}
+    \verb{url}
+    \verb https://developer.nvidia.com/tensorrt
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref44}{online}{}
+    \name{author}{1}{}{%
+      {{hash=O}{%
+         family={{OpenLM}},
+         familyi={O\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{O1}
+    \strng{fullhash}{O1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{O}
+    \field{sortinithash}{O}
+    \field{title}{OpenLM Chatbot Arena}
+    \verb{url}
+    \verb https://openlm.ai/chatbot-arena/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref75}{online}{}
+    \name{author}{1}{}{%
+      {{hash=P}{%
+         family={{Podman}},
+         familyi={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{P1}
+    \strng{fullhash}{P1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{title}{Podman: A tool for managing OCI containers and pods}
+    \verb{url}
+    \verb https://podman.io/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref63}{online}{}
+    \name{author}{1}{}{%
+      {{hash=P}{%
+         family={{Prometheus}},
+         familyi={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{P2}
+    \strng{fullhash}{P2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{title}{Prometheus: Monitoring system \& time series database}
+    \verb{url}
+    \verb https://prometheus.io/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref55}{online}{}
+    \name{author}{1}{}{%
+      {{hash=P}{%
+         family={{PyTorch}},
+         familyi={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{P3}
+    \strng{fullhash}{P3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{title}{PyTorch: An open source machine learning framework}
+    \verb{url}
+    \verb https://pytorch.org/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref11}{online}{}
+    \name{author}{1}{}{%
+      {{hash=R}{%
+         family={{Red Hat}},
+         familyi={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{R1}
+    \strng{fullhash}{R1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{OpenShift Features}
+    \verb{url}
+    \verb https://www.redhat.com/en/technologies/cloud-computing/openshift/feat
+    \verb ures
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref61}{online}{}
+    \name{author}{1}{}{%
+      {{hash=R}{%
+         family={{Red Hat}},
+         familyi={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{R1}
+    \strng{fullhash}{R1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{Red Hat Academy}
+    \verb{url}
+    \verb https://www.redhat.com/es/services/training/red-hat-academy
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref33}{online}{}
+    \name{author}{1}{}{%
+      {{hash=R}{%
+         family={{Red Hat}},
+         familyi={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{R1}
+    \strng{fullhash}{R1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{Red Hat OpenShift Administration I (DO180)}
+    \verb{url}
+    \verb https://www.redhat.com/en/services/training/red-hat-openshift-adminis
+    \verb tration-i-operating-a-production-cluster
+    \endverb
+    \field{year}{s.f.}
+  \endentry
+
+  \entry{ref40}{online}{}
+    \name{author}{1}{}{%
+      {{hash=R}{%
+         family={{Red Hat}},
+         familyi={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{R1}
+    \strng{fullhash}{R1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{Red Hat Unlocks Generative AI for Any Model and Any
+  Accelerator Across the Hybrid Cloud with Red Hat AI Inference Server}
+    \verb{url}
+    \verb https://www.businesswire.com/news/home/20250520450429/en/Red-Hat-Unlo
+    \verb cks-Generative-AI-for-Any-Model-and-Any-Accelerator-Across-the-Hybrid
+    \verb -Cloud-with-Red-Hat-AI-Inference-Server
+    \endverb
+    \field{year}{2025}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{ref74}{online}{}
+    \name{author}{1}{}{%
+      {{hash=R}{%
+         family={{RPM Fusion}},
+         familyi={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{R2}
+    \strng{fullhash}{R2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{Howto/Optimus}
+    \verb{url}
+    \verb https://rpmfusion.org/Howto/Optimus
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref62}{online}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{SCLorg}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S1}
+    \strng{fullhash}{S1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{sortinit}{S}
     \field{sortinithash}{S}
-    \verb{eprint}
-    \verb 2002.02806
-    \endverb
-    \field{howpublished}{arXiv:2002.02806 [cs.DC]}
-    \field{title}{{A Comprehensive Survey on Container Orchestration
-  Technologies}}
+    \field{note}{Repositorio de ejemplo de Node.js para OpenShift}
+    \field{title}{nodejs-ex: Node.js Example Application}
     \verb{url}
-    \verb https://arxiv.org/abs/2002.02806
+    \verb https://github.com/sclorg/nodejs-ex
     \endverb
-    \field{eprinttype}{arXiv}
-    \field{eprintclass}{cs.DC}
-    \field{year}{2020}
+    \field{year}{2024}
   \endentry
 
-  \entry{simon2023comparative}{article}{}
-    \name{author}{3}{}{%
-      {{hash=SM}{%
-         family={Simon},
+  \entry{ref7}{article}{}
+    \name{author}{4}{}{%
+      {{hash=SSI}{%
+         family={Shamim},
          familyi={S\bibinitperiod},
-         given={M.},
-         giveni={M\bibinitperiod},
+         given={S.\bibnamedelima I.},
+         giveni={S\bibinitperiod\bibinitdelim I\bibinitperiod},
       }}%
-      {{hash=HL}{%
-         family={Huraj},
-         familyi={H\bibinitperiod},
-         given={L.},
+      {{hash=GJA}{%
+         family={Gibson},
+         familyi={G\bibinitperiod},
+         given={J.\bibnamedelima A.},
+         giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=MP}{%
+         family={Morrison},
+         familyi={M\bibinitperiod},
+         given={P.},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=RA}{%
+         family={Rahman},
+         familyi={R\bibinitperiod},
+         given={A.},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SSI+1}
+    \strng{fullhash}{SSIGJAMPRA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{Benefits, Challenges, and Research Topics: A Multi-vocal
+  Literature Review of Kubernetes}
+    \verb{url}
+    \verb https://arxiv.org/pdf/2211.07032
+    \endverb
+    \field{journaltitle}{arXiv preprint arXiv:2211.07032}
+    \field{year}{n.d.}
+  \endentry
+
+  \entry{ref48}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{Talent.com}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T1}
+    \strng{fullhash}{T1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{Salario de ingeniero informático en España}
+    \verb{url}
+    \verb https://es.talent.com/salary?job=ingeniero+inform%C3%A1tico
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref65}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{Tekton}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T2}
+    \strng{fullhash}{T2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{Tekton: Powerful and Flexible Open Source CI/CD System}
+    \verb{url}
+    \verb https://tekton.dev/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref35}{online}{}
+    \name{author}{1}{}{%
+      {{hash=TRJL}{%
+         family={Torres\bibnamedelima Ramos},
+         familyi={T\bibinitperiod\bibinitdelim R\bibinitperiod},
+         given={Juan\bibnamedelima Luis},
+         giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TRJL1}
+    \strng{fullhash}{TRJL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{note}{Registro compartido de horas}
+    \field{title}{Registro de horas TFG en Clockify}
+    \verb{url}
+    \verb https://app.clockify.me/shared/68414f7712fd89289030ea52
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref17}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={Torres08},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T3}
+    \strng{fullhash}{T3}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{note}{Repositorio GitHub del proyecto}
+    \field{title}{TFG\_HPC\_Server}
+    \verb{url}
+    \verb https://github.com/Torres08/TFG_HPC_Server
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref52}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{Traefik Labs}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T4}
+    \strng{fullhash}{T4}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{Traefik: The Cloud-Native Application Proxy}
+    \verb{url}
+    \verb https://traefik.io/traefik/
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref10}{article}{}
+    \name{author}{5}{}{%
+      {{hash=TE}{%
+         family={Truyen},
+         familyi={T\bibinitperiod},
+         given={E.},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=VLD}{%
+         family={Van\bibnamedelima Landuyt},
+         familyi={V\bibinitperiod\bibinitdelim L\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=PD}{%
+         family={Preuveneers},
+         familyi={P\bibinitperiod},
+         given={D.},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=LB}{%
+         family={Lagaisse},
+         familyi={L\bibinitperiod},
+         given={B.},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=JW}{%
+         family={Joosen},
+         familyi={J\bibinitperiod},
+         given={W.},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{TE+1}
+    \strng{fullhash}{TEVLDPDLBJW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{A comprehensive feature comparison study of open-source
+  container orchestration frameworks (versión 2)}
+    \verb{url}
+    \verb https://doi.org/10.48550/arxiv.2002.02806
+    \endverb
+    \field{journaltitle}{arXiv}
+    \field{year}{2021}
+  \endentry
+
+  \entry{ref56}{online}{}
+    \name{author}{1}{}{%
+      {{hash=W}{%
+         family={{Wikipedia contributors}},
+         familyi={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{W1}
+    \strng{fullhash}{W1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{EdDSA --- Wikipedia, The Free Encyclopedia}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/EdDSA#Ed25519
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref5}{online}{}
+    \name{author}{1}{}{%
+      {{hash=W}{%
+         family={{Will Knight}},
+         familyi={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{W2}
+    \strng{fullhash}{W2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{A Stanford Study Ranks the Worlds Most Important AI Models}
+    \verb{url}
+    \verb https://www.wired.com/story/stanford-study-global-artificial-intellig
+    \verb ence-index
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref57}{online}{}
+    \name{author}{1}{}{%
+      {{hash=Y}{%
+         family={{Yarn}},
+         familyi={Y\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{Y1}
+    \strng{fullhash}{Y1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{Y}
+    \field{sortinithash}{Y}
+    \field{title}{neowofetch}
+    \verb{url}
+    \verb https://yarnpkg.com/package?name=neowofetch
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref71}{online}{}
+    \name{author}{7}{}{%
+      {{hash=YCH}{%
+         family={Yu},
+         familyi={Y\bibinitperiod},
+         given={Cody\bibnamedelima Hao},
+         giveni={C\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=LZ}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Zhuohan},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhuang},
+         familyi={Z\bibinitperiod},
+         given={Siyuan},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=ZL}{%
+         family={Zheng},
+         familyi={Z\bibinitperiod},
+         given={Lianmin},
          giveni={L\bibinitperiod},
       }}%
-      {{hash=BN}{%
-         family={Búčik},
-         familyi={B\bibinitperiod},
-         given={N.},
-         giveni={N\bibinitperiod},
+      {{hash=ZH}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Hao},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=GJE}{%
+         family={Gonzalez},
+         familyi={G\bibinitperiod},
+         given={Joseph\bibnamedelima E.},
+         giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=SI}{%
+         family={Stoica},
+         familyi={S\bibinitperiod},
+         given={Ion},
+         giveni={I\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {MDPI}%
-    }
-    \strng{namehash}{SMHLBN1}
-    \strng{fullhash}{SMHLBN1}
+    \strng{namehash}{YCH+1}
+    \strng{fullhash}{YCHLZZSZLZHGJESI1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{S}
-    \field{sortinithash}{S}
-    \verb{doi}
-    \verb 10.3390/fi15080253
+    \field{sortinit}{Y}
+    \field{sortinithash}{Y}
+    \field{title}{Orca: A Distributed Serving System for Transformer-Based
+  Generative Models}
+    \verb{url}
+    \verb https://www.usenix.org/conference/osdi22/presentation/yu
     \endverb
-    \field{number}{8}
-    \field{pages}{253}
-    \field{title}{{A Comparative Analysis of High Availability for Linux
-  Container Infrastructures}}
-    \field{volume}{15}
-    \field{journaltitle}{{Future Internet}}
-    \field{year}{2023}
+    \field{year}{2022}
+  \endentry
+
+  \entry{ref16}{article}{}
+    \name{author}{4}{}{%
+      {{hash=ZY}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Y.},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=WX}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={X.},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=LH}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={H.},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=o}{%
+         family={otros},
+         familyi={o\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZY+1}
+    \strng{fullhash}{ZYWXLHo1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \field{title}{Comparative Analysis Based on DeepSeek, ChatGPT, and Google
+  Gemini: Features, Techniques, Performance, Future Prospects}
+    \verb{url}
+    \verb https://arxiv.org/abs/2503.04783
+    \endverb
+    \field{journaltitle}{arXiv preprint arXiv:2503.04783}
+    \field{year}{2024}
+  \endentry
+
+  \entry{ref41}{article}{}
+    \name{author}{4}{}{%
+      {{hash=ZY}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Y.},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=WX}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={X.},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=LH}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={H.},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=o}{%
+         family={otros},
+         familyi={o\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZY+1}
+    \strng{fullhash}{ZYWXLHo1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{Z}
+    \field{sortinithash}{Z}
+    \field{title}{Zero-Shot End-to-End Relation Extraction in Chinese: A
+  Comparative Study of Gemini, LLaMA, and ChatGPT}
+    \verb{url}
+    \verb https://arxiv.org/pdf/2502.05694
+    \endverb
+    \field{journaltitle}{arXiv preprint arXiv:2502.05694}
+    \field{year}{2024}
   \endentry
 \enddatalist
 \endinput

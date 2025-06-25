@@ -1,0 +1,54 @@
+\chapter{Conclusiones y trabajos futuros}
+
+\section{Conclusiones}
+
+Este \textit{TFG} ha tenido como objetivo principal la implementación y documentación del ciclo completo de vida de un servidor de \textit{HPC} orientado al despliegue eficiente de \textit{LLM}, aplicando principios de \textit{SRE}. A lo largo del proyecto, se ha demostrado la viabilidad de una infraestructura de este tipo, desde su montaje físico inicial hasta su utilidad en escenarios reales. El proceso incluyó un estudio comparativo de modelos LLM de distinto tamaño, evaluando métricas clave de rendimiento en diversos entornos, lo que permitió validar la capacidad y fiabilidad operativa del sistema.
+
+En cuanto al cumplimiento de los objetivos específicos, el OG.1, relacionado a la implementación física y preparación del servidor \textit{HPC}, se ha alcanzado al 100\,\%. Se completó el montaje del hardware, la instalación del sistema operativo y la configuración del entorno base, incluyendo los controladores NVIDIA y las bibliotecas necesarias. Todo ello quedó documentado en el Capítulo~4, sirviendo como base sólida y fiable para el resto del proyecto.
+
+El OG.2, centrado en el despliegue y evaluación comparativa de modelos \textit{LLM}, se ha cumplido en un 90\,\%. Se logró desplegar y analizar dos modelos de diferente tamaño, uno grande y otro pequeño, aplicando técnicas de cuantización y realizando \textit{benchmarking} sobre métricas clave. Sin embargo, en un principio estaba planeado ejecutar varios modelos pequeños simultaneos en vez de uno, pero no fue posible de ejecutarlo debido a problemas de contención de memoria relacionados con la \textit{KV cache} de la GPU. Esta limitación técnica supuso cambiar un poco el planteamiento inicial, pero no comprometió la validez de los resultados obtenidos, como se detalla en los Capítulos~5 y~6.
+
+El OG.3, relacionado con la integración de una plataforma de contenerización y orquestación, se ha alcanzado un 100\,\%. Se llevó a cabo la instalación de \textit{OpenShift Local}, aunque, debido a restricciones del entorno virtualizado, no se logró habilitar el uso de la GPU ni establecer una conexión externa mediante \textit{port forwarding}. Para solucionarlo, se empleó la máquina virtual que tiene el curso de \textit{Red Hat}, lo que permitió demostrar funcionalidades clave de \textit{SRE} como el autoescalado de recursos, la recuperación ante fallos y la monitorización de servicios, tal como se expone en el Capítulo~7.
+
+A continuación, se da respuesta a las preguntas de investigación planteadas al inicio del estudio:
+
+\begin{enumerate}
+    \item \textbf{¿Qué ventajas y limitaciones presentan las dos estrategias de despliegue de \textit{LLMs} en \textit{HPC}: un único modelo grande frente a uno pequeño?}
+    
+    El estudio reveló un claro \textit{trade-off} entre el tamaño del modelo y su eficiencia (\textit{TPS} y latencia) Los modelos pequeños ofrecen alta eficiencia y baja latencia, adecuados para entornos concurrentes. Los modelos grandes cuantizados pueden ejecutarse en una única GPU, pero a costa de una mayor demanda de recursos y latencias más elevadas.
+
+    \item \textbf{¿Cómo afecta la cuantización avanzada al rendimiento, consumo de memoria y calidad de inferencia de modelos \textit{LLM} de gran tamaño en hardware limitado?}
+    
+    La cuantización permite ejecutar modelos grandes en hardware limitado (como una GPU de 48~\textit{VRAM}) al reducir su huella de memoria. Sin embargo, niveles agresivos de cuantización (como 4-bit) afectan negativamente a la calidad de la inferencia y al rendimiento general, como se refleja en los resultados obtenidos.
+
+    \item \textbf{¿Cuáles son las métricas y metodologías más adecuadas para evaluar el rendimiento real de \textit{LLMs} en escenarios de uso concurrente y bajo diferentes cargas de trabajo?}
+    
+    Las métricas más representativas fueron la latencia media y el throughput (tokens por segundo). El uso de memoria VRAM resultó menos relevante debido al modo de asignación de \textit{vLLM}, que mantiene la GPU ocupada de forma continua. Se utilizaron escenarios progresivos para analizar el rendimiento bajo diferentes condiciones.
+
+    \item \textbf{¿Qué impacto tienen las prácticas de \textit{SRE} y la automatización (\textit{OpenShift}, \textit{CI/CD}, autoescalado) en la robustez y operatividad de un servidor?}
+    
+    Estas prácticas demostraron ser fundamentales para asegurar fiabilidad operativa, permitiendo escalar recursos automáticamente, recuperar servicios ante fallos y facilitar el mantenimiento mediante flujos de integración y despliegue continuo.
+    
+    \newpage
+    \item \textbf{¿Cuáles son los retos y mejores prácticas en la puesta a punto de un servidor \textit{HPC} con \textit{GPU} para el despliegue eficiente de \textit{LLM}?}
+    
+    Los principales retos incluyeron la configuración adecuada del hardware, compatibilidad de drivers, gestión de la GPU y establecimiento de acceso remoto seguro. Las buenas prácticas incluyeron documentación precisa, automatización de tareas y aplicación temprana de principios de \textit{SRE}.
+
+\end{enumerate}
+
+La formación universitaria en sistemas operativos, redes, virtualización y programación proporcionó una base sólida. El curso oficial de \textit{OpenShift} permitió profundizar en orquestación y automatización, y las prácticas Erasmus en Alemania como \textit{IT Infrastructure} ofrecieron un primer contacto profesional con infraestructuras reales. Esta combinación formativa ha facilitado un aprendizaje práctico y aplicado.
+
+Las prácticas de \textit{SRE} despertaron interés por su impacto en la fiabilidad del sistema. Se ha reforzado la comprensión de cómo el diseño orientado a la resiliencia mejora la experiencia del desarrollador y la operación a largo plazo. Este enfoque ha consolidado la vocación por especializarse en fiabilidad y sistemas distribuidos.
+
+En términos éticos y sostenibles, se priorizó el uso de software libre, recursos institucionales (como la biblioteca digital de O'Reilly) y prácticas responsables en el consumo energético. También se aplicaron medidas de protección de datos y control de accesos.
+
+El proyecto, abordado de forma integral desde el montaje físico hasta su validación operativa, se considera completado con éxito. Ha permitido un buen aprendizaje, fortaleciendo tanto las competencias técnicas como la organización, la resolución de problemas y la comunicación. A pesar de las dificultades en la gestión del tiempo, se aprendió a priorizar tareas y adaptarse a imprevistos, un aspecto clave para el desarrollo profesional futuro.
+
+\section{Trabajos Futuros}
+A partir del trabajo realizado, se identifican varias líneas claras para continuar y ampliar el proyecto. En primer lugar se propone la instalación de \textit{OpenShift} en bare metal sobre un servidor \textit{HPC}, lo que permitiría desplegar la plataforma en un entorno real con soporte para \textit{GPU}. Esto facilita el despliegue de modelos \textit{LLM}, la gestión eficiente de recursos y la exploración de herramientas más avanzadas de \textit{OpenShift}, incluyendo estudiar \textit{pipelines} más complejos e intentar desplegar aplicaciones más complejas.
+
+También otro aspecto a destacar es en el despliegue simultáneo de varios modelos mediante \textit{NVIDIA Triton Inference Server}, lo que permitiría comparar su rendimiento en el servidor y estudiar otro caso relevante. Sin embargo, es importante considerar que compartir una misma \textit{GPU} entre múltiples modelos puede generar problemas de contención de memoria y reducir el rendimiento, en base a las experiencias personales, ya que durante el desarrollo del \textit{TFG} se intento desplegar varios modelos pero no funcionó.
+
+Una tercera idea se basa en incluir pruebas automáticas, pipelines más complejos y despliegues progresivos podría mejorar la operativa y adaptarse a escenarios reales empresariales.
+
+Estas líneas no pudieron abordarse por limitaciones de tiempo y recursos, pero representan oportunidades claras para futuros TFG, TFM o proyectos de investigación. La experiencia y documentación generadas suponen una base sólida para continuar el trabajo en nuevas fases.

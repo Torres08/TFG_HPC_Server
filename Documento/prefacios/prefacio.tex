@@ -11,7 +11,7 @@
 %\thispagestyle{empty}
 
 \begin{center}
-{\large\bfseries \myTitle: \mySubTitle}\\
+{\large\bfseries \myTitle:} \textit{\mySubTitle}\\
 \end{center}
 \begin{center}
 \myName\\
@@ -20,20 +20,16 @@
 % Palabras Clave
 %\vspace{0.7cm}
 \noindent{\textbf{Palabras clave}:}
-\begin{itemize}
-       \item \textbf{HPC}: También conocida como supercomputación, es un área de la informática en la que el rendimiento es el principal criterio de optimización, enfocándose en la capacidad de procesar grandes volúmenes de datos y realizar cálculos complejos
-
-\end{itemize}
+\textit{High-Performance Computing} (HPC), \textit{Large Language Models} (LLM), \textit{Site Reliability Engineering} (SRE), Contenedores, Orquestación, \textit{Benchmarking}, Inferencia, Cuantización.
 
 \vspace{0.7cm}
 \noindent{\textbf{Resumen}}\\
 
+En este proyecto, se propone la implementación y evaluación de un servidor \textit{High Performance Computing} (\textit{HPC}), con un enfoque principal en la comprensión y documentación de su ciclo de vida completo, desde el montaje inicial hasta su utilización. Esta iniciativa representa un paso en el ámbito del mantenimiento y despliegue de servidores, apoyado por la experiencia adquirida durante unas prácticas Erasmus como \textit{IT Infrastructure} en Alemania, centradas en el montaje y despliegue de infraestructuras.
 
-En este proyecto se propone la implementación y evaluación de un servidor HPC (High Performance Computing), con un enfoque principal en comprender y documentar su ciclo de vida completo, desde el montaje inicial hasta su utilización. Esto representa mis primeros pasos consolidados en el ámbito del mantenimiento y despliegue de servidores, una tarea para la cual la experiencia en unas prácticas Erasmus como IT Infrastructure en Alemania, centrada en el montaje y despliegue de servidores, proporciona una base sólida.
+Una vez configurado y operativo el servidor \textit{HPC}, se procederá con una estrategia dual para evaluar su rendimiento y utilidad. En primer lugar, se realizará el despliegue de un modelo de lenguaje (\textit{LLM}) de gran escala y de un modelo pequeño, ambos utilizando contenedores con acceso a unidades de procesamiento gráfico (\textit{GPU}). Se llevarán a cabo \textit{benchmarks} comparativos para evaluar el rendimiento y la eficiencia de ambos modelos, demostrando así la capacidad de la infraestructura \textit{HPC}.
 
-Una vez configurado y operativo el servidor HPC, se procederá con una estrategia dual para evaluar su rendimiento y utilidad. En primer lugar, se realizará el despliegue de modelos de lenguaje (LLM) de gran escala y varios modelos pequeños utilizando contenedores con acceso a unidades de procesamiento gráfico (GPU). Se llevarán a cabo benchmarks comparativos para evaluar su rendimiento y eficiencia, demostrando así la capacidad de la infraestructura HPC establecida.
-
-En segundo lugar, y aprovechando la infraestructura montada, se implementará un entorno de orquestación local. Este entorno simulará un ecosistema de producción con el fin de demostrar y validar los principios fundamentales de Site Reliability Engineering (SRE). Finalmente, se utilizará la plataforma de orquestación para examinar y validar capacidades avanzadas de SRE, tales como el escalado automático de recursos, la recuperación autónoma ante fallos y los procedimientos de despliegue continuo (CI/CD) desde repositorios de control de versiones.
+En segundo lugar, y aprovechando la infraestructura montada, se implementará un entorno de orquestación local. Este entorno simulará un ecosistema de producción con el fin de demostrar y validar tanto los principios fundamentales de \textit{Site Reliability Engineering} (SRE) como sus capacidades avanzadas. Esto incluye aspectos como el escalado automático de recursos, la recuperación autónoma ante fallos y los procedimientos de despliegue continuo (CI/CD) desde repositorios de control de versiones.
 
 \cleardoublepage
 
@@ -49,16 +45,16 @@ En segundo lugar, y aprovechando la infraestructura montada, se implementará un
 \end{center}
 
 %\vspace{0.7cm}
-\noindent{\textbf{Keywords}: Keyword1, Keyword2, Keyword3, ....}\\
+\noindent{\textbf{Keywords}: \textit{High-Performance Computing} (HPC), \textit{Large Language Models} (LLM), \textit{Site Reliability Engineering} (SRE), \textit{Containers}, \textit{Orchestration}, \textit{Benchmarking}, \textit{Inference}, \textit{Quantization}}
 
 \vspace{0.7cm}
 \noindent{\textbf{Abstract}}\\
 
-This project proposes the implementation and evaluation of a High Performance Computing (HPC) server. The primary focus is to thoroughly understand and document its complete lifecycle, from initial assembly to its full utilization. This endeavor represents my first consolidated steps in server maintenance and deployment, an area where my Erasmus internship experience as IT Infrastructure in Germany, centered on server assembly and deployment, provides a solid foundation.
+This project proposes the implementation and evaluation of a \textit{High Performance Computing} (\textit{HPC}) server, with a primary focus on understanding and documenting its complete lifecycle, from initial assembly to its utilization. This initiative represents a step forward in the field of server maintenance and deployment, supported by the experience gained during an Erasmus internship as \textit{IT Infrastructure} in Germany, focused on infrastructure assembly and deployment.
 
-Once the HPC server is configured and operational, a dual strategy will be employed to assess its performance and utility. Firstly, we will deploy large-scale Language Models (LLMs) and several smaller models using containers with access to Graphics Processing Units (GPUs). Comparative benchmarks will be conducted to evaluate their performance and efficiency, thereby demonstrating the capabilities of the established HPC infrastructure.
+Once the \textit{HPC} server is configured and operational, a dual strategy will be followed to evaluate its performance and usefulness. First, both a large-scale and a small \textit{Large Language Model} (\textit{LLM}) will be deployed, both using containers with access to \textit{Graphics Processing Units} (\textit{GPU}). Comparative \textit{benchmarks} will be carried out to assess the performance and efficiency of both models, thus demonstrating the capabilities of the \textit{HPC} infrastructure.
 
-Secondly, leveraging the assembled infrastructure, a local orchestration environment will be implemented. This environment will simulate a production ecosystem to demonstrate and validate the fundamental principles of Site Reliability Engineering (SRE). Finally, the orchestration platform will be used to examine and validate advanced SRE capabilities, such as automatic resource scaling, autonomous fault recovery, and continuous integration/continuous deployment (CI/CD) procedures from version control repositories.
+Secondly, taking advantage of the assembled infrastructure, a local orchestration environment will be implemented. This environment will simulate a production ecosystem in order to demonstrate and validate both the fundamental principles of \textit{Site Reliability Engineering} (SRE) and its advanced capabilities. This includes aspects such as automatic resource scaling, autonomous fault recovery, and continuous deployment (CI/CD) procedures from version control repositories.
 
 
 \chapter*{}
@@ -66,8 +62,7 @@ Secondly, leveraging the assembled infrastructure, a local orchestration environ
 
 \noindent\rule[-1ex]{\textwidth}{2pt}\\[4.5ex]
 
-Yo, \textbf{\myName}, alumno de la titulación \myDegree de la \textbf{Escuela Técnica Superior
-de Ingenierías Informática y de Telecomunicación de la Universidad de Granada}, con DNI 20596044G, autorizo la
+Yo, \textbf{\myName}, alumno de la titulación \myDegree de la \textbf{Escuela Técnica Superior de Ingenierías Informática y de Telecomunicación de la Universidad de Granada}, con DNI 20596044G, autorizo la
 ubicación de la siguiente copia de mi Trabajo Fin de Grado en la biblioteca del centro para que pueda ser
 consultada por las personas que lo deseen.
 
@@ -87,7 +82,7 @@ consultada por las personas que lo deseen.
 
 \noindent\rule[-1ex]{\textwidth}{2pt}\\[4.5ex]
 
-D. \textbf{\myProf}, Profesor del Área de Ingeniería Informática del \myDepartment\\ de la Universidad de Granada.
+D. \textbf{\myProf}, Profesor del Área de Ingeniería Informática del \myDepartment de la Universidad de Granada y D. \textbf{\myProfsec}, Subdirector Técnico de Infraestructuras y Servicios TIC de la Universidad de Granada.
 
 \vspace{0.5cm}
 
@@ -105,7 +100,7 @@ que corresponda.
 
 \vspace{0.5cm}
 
-Y para que conste, expiden y firman el presente informe en \myDate\\.
+%Y para que conste, expiden y firman el presente informe en \myDate\\.
 
 \vspace{1cm}
 
@@ -115,7 +110,7 @@ Y para que conste, expiden y firman el presente informe en \myDate\\.
 
 %\noindent \textbf{Nombre Apellido1 Apellido2 (tutor1) \ \ \ \ \ Nombre Apellido1 Apellido2 (tutor2)}
 
-\noindent \textbf{\myProf}
+%\noindent \textbf{\myProf}
 
 
 \chapter*{Agradecimientos}
@@ -124,4 +119,4 @@ Y para que conste, expiden y firman el presente informe en \myDate\\.
        \vspace{1cm}
 
 
-Dedicado a mi familia, que siempre me han apoyado en mis decisiones y me han hecho ser quien soy hoy. A mis amigos, que siempre han estado ahí para ayudarme y apoyarme en los momentos difíciles.  Y a todos los profesores y compañeros de la Universidad de Granada, que me han dado la oportunidad de crecer como persona y profesional.
+Dedicado a mi familia, que siempre me han apoyado en mis decisiones y me han hecho ser quien soy hoy. A mis amigos, que siempre han estado ahí para ayudarme y apoyarme en los momentos difíciles. Y a todos los profesores y compañeros que he ido haciendo por el camino que me han dado la oportunidad de crecer como persona y profesional.

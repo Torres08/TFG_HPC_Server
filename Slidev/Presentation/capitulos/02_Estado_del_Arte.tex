@@ -1,0 +1,277 @@
+\chapter{Estado del arte}
+
+\section{Introducción}
+\textit{HPC}es esencial para ejecutar cargas de trabajo intensivas, especialmente al desplegar modelos avanzados de Artificial Intelligence (AI). LLM, en particular, demandan una gran capacidad de procesamiento y una gestión de memoria muy eficiente. Este proyecto se centra en instalar y configurar un servidor \text{HPC} para desplegar \text{HPC}. Se compararon el despliegue de un modelo grande y uno pequeño y se estudió su impacto en el servidor mediante varios \textit. Se evaluarán métricas clave como los tokens por segundo y la latencia de las respuestas. Además se desplegó una herramienta de orquestación para estudiar herramientas \textit{SRE} y ver su utilidad.
+
+Para esta revisión, se sigue una metodología rigurosa basada en preguntas clave , la consulta de fuentes especializadas y el estudio de varias herramientas y conceptos de interés para el proyecto.
+\subsection{Preguntas de Investigación para la Revisión}
+\begin{itemize}
+    \item ¿Qué ventajas y limitaciones presentan las dos estrategias de despliegue de \textit{LLM} en \textit{HPC}: un único modelo grande cuantizado frente a un modelo pequeño?
+    \item ¿Cómo afecta la cuantización avanzada al rendimiento, consumo de memoria y calidad de inferencia de modelos \textit{LLM} de gran tamaño en hardware limitado?
+    \item ¿Cuáles son las métricas y metodologías más adecuadas para evaluar el rendimiento real de \textit{LLM} en escenarios de uso concurrente y bajo diferentes cargas de trabajo?
+    \item ¿Qué impacto tienen las prácticas de \textit{SRE} y la automatización (\textit{OpenShift}, \textit{CI/CD}, autoescalado) en la robustez y operatividad de servicios de \textit{LLM} en producción?
+    \item ¿Cuáles son los retos y mejores prácticas en la puesta a punto de un servidor \textit{HPC} con \textit{GPU} para el despliegue eficiente de modelos de lenguaje de gran escala?
+\end{itemize}
+
+\section*{Fuentes de información y uso de la \textit{IA}}
+La búsqueda de información se concentró en fuentes académicas reconocidas, como bases de datos \textit{IEEE Xplore}, \textit{ACM Digital Library}, \textit{arXiv} y \textit{Google Scholar}. También se consultaron recursos técnicos especializados, como la colección digital de O'Reilly y documentación oficial de tecnologías relevantes, gracias a que la Universidad de Granada las ofrece. Para mejorar el proceso de búsqueda y síntesis, se emplearon \textit{Elicit}, una herramienta de \textit{artificial intelligence} que facilitó el rastreo en repositorios, el mapeo de referencias y la extracción de información, y \textit{NotebookLM}, para organizar y sintetizar notas de las fuentes consultadas, lo que mejoró la coherencia y la integración de la información. Se descartaron fuentes no académicas o desactualizadas. Además, se utilizó \textit{Google Gemini Pro}, una herramienta ofrecida también por la universidad, para que el texto tuviese un tono profesional e impersonal en la redacción final.
+
+El uso de estas herramientas de \textit{IA} se consideró adecuado, ya que su aplicación se centró para ayudar en la búsqueda, organización, síntesis de información y el refinamiento del texto, tal como se recomienda para un TFG \cite{ref34}, libro el cual ha sido en parte escrito por mi tutor. Este enfoque garantizó que la \textit{IA} actuara como un complemento en la elaboración del contenido, manteniendo la autoría y el análisis crítico.
+%Para una comprensión completa, se definen los siguientes conceptos clave para este estudio:
+%\begin{itemize}
+%    \item \textbf{Infraestructura \textit{HPC}:} Se refiere a una infraestructura computacional diseñada para un rendimiento superior en el procesamiento de datos complejos y tareas computacionalmente intensivas.
+%    \item \textbf{Virtualización:} Técnica que, mediante plataformas de \textit{orquestación}, permite gestionar eficientemente los recursos del servidor y coordinar contenedores de manera optimizada.
+%    \item \textbf{Benchmarks:} Herramientas de evaluación que miden el rendimiento del sistema bajo diferentes configuraciones, proporcionando métricas objetivas para su análisis y optimización.
+%    \item  \textit{SRE}:} Disciplina que garantiza la fiabilidad, disponibilidad y rendimiento de los sistemas aplicando principios de \textit{software engineering} a las operaciones.
+%    \item \textit{LLM}:} Sistemas de \textit{artificial intelligence} entrenados con grandes volúmenes de datos para entender, generar y procesar lenguaje natural.
+%    \item \textbf{Tokens por segundo:} Métrica que mide la cantidad de tokens (unidades de texto) que un modelo de lenguaje puede procesar o generar en un segundo, indicando su velocidad de inferencia.
+%\end{itemize}
+
+\section{Revisión}
+Esta sección presenta los hallazgos de la investigación bibliográfica, estructurados temáticamente para ofrecer una visión clara de las soluciones y brechas existentes en el despliegue de \textit{LLM} en entornos \textit{HPC} con perspectiva \textit{SRE}. Se analizarán y compararán las principales herramientas de \textit{orquestación}, los motores de inferencia para \textit{LLM} y los modelos de lenguaje más relevantes, interpretando sus aportaciones, ventajas y limitaciones, e identificando áreas clave para la contribución de este proyecto.
+
+\subsection{Análisis de Soluciones Tecnológicas para el Despliegue de LLM en HPC}
+Para la puesta a punto y la operación eficiente de \textit{LLM} en un entorno de \textit{HPC}, resulta importante evaluar las herramientas y componentes clave que conforman la infraestructura. La selección de estas soluciones impacta directamente en la escalabilidad, fiabilidad, rendimiento y facilidad de gestión de todo el sistema. Dichos aspectos son importantes para los objetivos de este trabajo, que incluyen no solo el despliegue inicial, sino también la optimización del software, el mantenimiento continuo y la puesta en producción de los modelos.
+
+En esta sección, se realizará un análisis detallado de las principales categorías de herramientas relevantes para el ciclo de vida completo de los \textit{LLM} en \textit{HPC}:
+\begin{itemize}
+    \item \textbf{Herramientas de Orquestación de Contenedores:} Son fundamentales para gestionar y desplegar aplicaciones en entornos distribuidos. Se evaluarán opciones líderes del mercado que son robustas y escalables para \textit{HPC}, asegurando una base sólida para la infraestructura.
+    \item \textbf{Motores de Inferencia para LLM:} Son esenciales para optimizar la velocidad y eficiencia en la ejecución de los modelos de lenguaje, aprovechando al máximo los recursos de la \textit{GPU}. Su estudio busca identificar soluciones que permitan la puesta a punto del rendimiento y el uso inteligente de los modelos.
+    \item \textbf{Modelos LLM Específicos:} La selección de los modelos de lenguaje más adecuados es clave para asegurar la calidad y la eficiencia en la respuesta. Se compararán modelos que han demostrado su relevancia en el ámbito de la investigación y la industria, considerando su adaptabilidad a la puesta en producción y su capacidad de mantenimiento.
+\end{itemize}
+
+\subsection{Análisis de Herramientas de Orquestación}
+Una vez establecida la base teórica y documental, se procede a la selección de la herramienta para orquestar los servicios necesarios para el proyecto de investigación. Para ello, se comparan cuatro herramientas de \textit{orquestación} ampliamente reconocidas y utilizadas en la industria: \textit{Kubernetes}, \textit{Docker Swarm}, \textit{OpenShift} y \textit{Apache Mesos}. La selección de estas herramientas se fundamenta en su amplio reconocimiento y fiabilidad en la industria, su comprobada eficacia en entornos de producción y su capacidad para operar eficientemente en infraestructuras de \textit{HPC}, como los servidores \textit{HPC}.
+
+El análisis presentado a continuación se basa sobre todo en la investigación de Malviya y Dwivedi~\cite{ref9}, quienes evaluaron estas herramientas utilizando diversos parámetros técnicos. Las herramientas se analizan a partir de cinco criterios fundamentales:
+\begin{itemize}
+    \item Desarrollo activo
+    \item Facilidad de uso
+    \item Flexibilidad para entornos diversos
+    \item Rendimiento óptimo
+    \item Integración con prácticas de \textit{SRE}
+\end{itemize}
+
+\noindent\textbf{Kubernetes}
+
+\textit{Kubernetes}, lanzado por Google en 2015, es actualmente la plataforma de \textit{orquestación} de código abierto más adoptada, con una cuota de mercado del 77\% (2020)~\cite{ref7} y el respaldo de una amplia comunidad internacional activa. Originalmente desarrollado por Google, Kubernetes fue donado a la Cloud Native Computing Foundation (CNCF), parte de la Linux Foundation~\cite{ref37}. Esta donación aseguró que Kubernetes se mantuviera como un proyecto impulsado por la comunidad y con un desarrollo abierto.  En cuanto a la adaptabilidad, \textit{Kubernetes} puede desplegarse en ``casi cualquier plataforma'', lo que lo convierte en una opción altamente versátil. Respecto al rendimiento, destaca por sus ``mejores características de programación'' (\textit{scheduling features}), esenciales para optimizar cargas de trabajo en entornos \textit{HPC}. \textit{Kubernetes} ofrece funcionalidades como ``self-healing'', escalabilidad y gestión del ciclo de vida de contenedores, aspectos clave para garantizar la fiabilidad y resiliencia de los servicios~\cite{ref8}. Sin embargo, su curva de aprendizaje es alta y su configuración puede resultar compleja, especialmente en las fases iniciales del proyecto.
+
+\vspace{0.5cm}
+\noindent\textbf{Docker Swarm}
+
+\textit{Docker Swarm} es una solución más sencilla e integrada para aquellos usuarios familiarizados con \textit{Docker}. Su principal fortaleza radica en su facilidad de uso, ya que permite la construcción de \textit{clusters} mediante comandos familiares para los desarrolladores. Aunque ofrece escalabilidad y alta disponibilidad, sus capacidades son limitadas para cargas de trabajo \textit{HPC} y su adopción ha decrecido frente a \textit{Kubernetes}. Para implementaciones de menor escala o en contextos donde la simplicidad es prioritaria, puede ser una opción válida, aunque su compatibilidad con herramientas modernas de \textit{CI/CD} y \textit{SRE} es más reducida~\cite{ref9,ref10}.
+\newpage
+
+\vspace{0.5cm}
+\noindent\textbf{OpenShift}
+
+\textit{OpenShift}, desarrollado por Red Hat y lanzado inicialmente en 2011, se basa en \textit{Kubernetes}, pero incorpora una capa adicional de seguridad empresarial y herramientas integradas para \textit{DevOps}. Ofrece soporte para \textit{WebAssembly}, despliegue automatizado y políticas de seguridad avanzadas. Se presenta como una alternativa sólida para entornos \textit{HPC} que requieren control, seguimiento y cumplimiento de requisitos legales. Además, facilita la integración con pipelines de \textit{CI/CD} y proporciona monitorización, registro de eventos (\textit{logging}) y escalado automático como parte de su plataforma base. Al estar basado en \textit{Kubernetes}, hereda muchas de sus funcionalidades relevantes para \textit{SRE}~\cite{ref11}.
+
+\vspace{0.5cm}
+\noindent\textbf{Apache Mesos}
+
+\textit{Apache Mesos} fue diseñado para orquestar \textit{clusters} heterogéneos a gran escala, incluyendo máquinas físicas, virtuales y contenedores. Destaca en escenarios de \textit{Big Data} y tareas de alto rendimiento gracias a su escalabilidad lineal y compatibilidad con frameworks como \textit{Hadoop} y \textit{Spark}. No obstante, su complejidad de uso y el descenso en su popularidad lo hacen menos accesible que \textit{Kubernetes} u \textit{OpenShift}. Su integración con \textit{SRE} requiere más configuración personalizada, y su comunidad de desarrollo es actualmente menos activa.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{imagenes/image13.png}
+    \caption{Comparación de características clave entre Kubernetes, Docker Swarm, Mesos y OpenShift \cite{ref9}}
+    \label{fig:comparativa_k8s_swarm_mesos_openshift}
+\end{figure}
+
+
+
+% [Comparación de características clave entre Kubernetes, Docker Swarm, Mesos y OpenShift] [9]
+\newpage
+\subsubsection*{Análisis Comparativo}
+A continuación, se presenta una tabla comparativa que detalla las herramientas y su relación con los objetivos de este proyecto.
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{3.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+\hline
+\textbf{Características} & \textbf{Docker Swarm} & \textbf{Kubernetes} & \textbf{OpenShift} & \textbf{Apache Mesos} \\
+\hline
+Compatibilidad con \textit{HPC} & Limitada & Alta, ampliamente adoptado & Alta, diseñado para entornos empresariales & Alta, especialmente en \textit{Big Data} \\
+\hline
+Despliegue de \textit{LLM} & Posible, requiere config. extra & Ideal para despliegue de aplicaciones complejas, incl. \textit{LLM}. & Adecuado para \textit{LLM}, seguridad reforzada & Escalable, pero no especializado en \textit{LLM} \\
+\hline
+Herramientas de \textit{SRE} & Limitadas & Requiere configuración, pero muy potentes & Integradas (\textit{logging}, \textit{autoscaling}, \textit{RBAC}) & Básicas, depende de configuración manual \\
+\hline
+Escalabilidad & Buena, pero menos flexible & Excelente, diseñado para escalabilidad horizontal y vertical. & Excelente, con alta disponibilidad & Excelente, enfocado en escalabilidad masiva \\
+\hline
+Integración con \textit{CI/CD} & Requiere herramientas externas & Amplia integración con Jenkins, GitLab... & \textit{CI/CD} nativo y pipelines predefinidos & Limitada \\
+\hline
+Facilidad de uso & Alta, interfaz simple & Complejo pero flexible y potente & Equilibrado, interfaz gráfica útil & Complejo, curva de aprendizaje elevada \\
+\hline
+\end{tabular}
+\captionsetup{justification=centering}
+\caption{Comparativa de herramientas de orquestación}
+\label{tab:comparativa_orquestacion}
+\end{table}
+
+\newpage
+\subsubsection*{Justificación de la Selección}
+Cada una de las herramientas analizadas tiene sus puntos fuertes y débiles frente a los criterios definidos: desarrollo activo, rendimiento \textit{HPC}, flexibilidad, herramientas \textit{SRE} y facilidad de integración \textit{CI/CD}.
+
+\textit{Kubernetes} destaca por su flexibilidad y una comunidad activa muy grande. \textit{Docker Swarm} es fácil de usar y está bien integrado en el ecosistema \textit{Docker}, pero está más enfocado en aplicaciones de menor escala. \textit{Apache Mesos} es excelente para manejar grandes \textit{clusters}, pero su comunidad reducida y la falta de integración con herramientas sobre \textit{SRE} lo hacen menos atractivo para este proyecto. Finalmente, \textit{OpenShift}, basado en \textit{Kubernetes}, combina seguridad, facilidad de despliegue y automatización, y es una solución de nivel empresarial ideal para entornos \textit{HPC}.
+
+\textit{OpenShift} incorpora herramientas de \textit{SRE} que permiten el monitoreo, el registro de eventos y el escalado automático, facilitando una gestión proactiva de los recursos y la detección temprana de fallos. Estos aspectos son clave para garantizar la disponibilidad y el rendimiento tanto del servidor \textit{HPC} como de los modelos \textit{LLM}. Diseñado para entornos empresariales exigentes, permite gestionar aplicaciones complejas con alta eficiencia y continuidad operativa mediante mecanismos de recuperación y escalado dinámico.
+
+Además, su compatibilidad nativa con pipelines de \textit{CI/CD} agiliza la entrega continua de software, lo que resulta fundamental en proyectos con despliegues frecuentes. Sus funciones de seguridad integradas, como el control de acceso basado en roles y políticas de aislamiento de contenedores, lo hacen especialmente adecuado para entornos sensibles. Por último, aunque \textit{Kubernetes} ofrece mayor flexibilidad, \textit{OpenShift} destaca por su interfaz gráfica y sus herramientas integradas de administración, que simplifican considerablemente el despliegue y mantenimiento de \textit{clusters}, reduciendo la complejidad operativa.
+
+Finalmente, se debe mencionar una motivación personal: \textit{Red Hat} ha ofrecido a los estudiantes de la universidad un curso de formación de \textit{OpenShift}, lo que facilita el proceso de implementación dentro del proyecto. Esta oportunidad permite consolidar los conocimientos técnicos necesarios para aprovechar al máximo esta plataforma, asegurando así una integración más eficiente y alineada con los objetivos del trabajo.
+
+\newpage
+\subsection{Análisis de Motores de Inferencia para LLM}
+Al trabajar con \textit{LLM}, se requieren sistemas que operen de manera rápida y eficiente, especialmente para aprovechar al máximo la infraestructura en la que están desplegados. En este contexto, los motores de inferencia desempeñan un papel clave, actuando como los mecanismos de gestión que orquestan estos modelos. Su función principal es organizar y optimizar los recursos disponibles de la forma más eficiente, asegurando un rendimiento óptimo y un uso inteligente de la infraestructura. En el presente análisis se exploran tres opciones destacadas: \textit{vLLM}, \textit{TensorRT-LLM} de NVIDIA y \textit{Text Generation Inference} (\textit{TGI}) de Hugging Face.
+
+\vspace{0.5cm}
+\noindent \textbf{vLLM}
+
+\textit{vLLM} es un framework de alto rendimiento y código abierto~\cite{ref11}. Se desarrolló originalmente en la Universidad de California en Berkeley, en colaboración con Neural Magic, empresa que lideraba su mantenimiento y desarrollo. Desde diciembre de 2024, Red Hat adquirió Neural Magic, convirtiéndose en el principal impulsor comercial del proyecto~\cite{ref12}. A pesar de este cambio, \textit{vLLM} sigue siendo un proyecto \textit{open source}, con desarrollo activo en colaboración con la comunidad y la universidad donde se originó.
+
+Su principal innovación es el algoritmo \textit{PagedAttention} \cite{ref39}, inspirado en las técnicas de paginación de memoria virtual que emplean los sistemas operativos. En lugar de asignar grandes bloques contiguos de memoria para la caché clave-valor (\textit{KV cache}), una estructura esencial en los \textit{LLM}, \textit{vLLM} organiza la memoria en bloques físicos no contiguos y lógicos. Esto reduce significativamente la fragmentación interna y externa de la memoria, un problema común que limita la cantidad de solicitudes que pueden procesarse concurrentemente.
+
+Gracias a esta estrategia, \textit{vLLM} logra un uso casi perfecto de la memoria de la \textit{KV cache}, con prácticamente cero desperdicio. Además, permite compartir de manera flexible esta cache entre diferentes solicitudes o incluso dentro de una misma solicitud, como ocurre en tareas de generación paralela o búsqueda por haz (\textit{beam search}). Esta capacidad de compartir memoria de forma inteligente disminuye aún más el consumo total, lo que posibilita manejar más solicitudes en paralelo y mejora el rendimiento general del sistema.
+
+Las evaluaciones presentadas en el artículo Efficient Memory Management for Large Language Model Serving with PagedAttention \cite{ref39} muestran que \textit{vLLM} puede aumentar el rendimiento de modelos como OPT y LLaMA entre 2 y 4 veces en comparación con sistemas avanzados como \textit{FasterTransformer} y \textit{Orca}, manteniendo niveles de latencia similares. Estas mejoras son especialmente notables en escenarios complicados, como secuencias de texto largas, modelos de mayor tamaño y algoritmos de decodificación complejos.
+
+\newpage
+\noindent \textbf{TensorRT-LLM - NVIDIA}
+
+\textit{TensorRT-LLM}, desarrollado por NVIDIA~\cite{ref12}, está optimizado específicamente para sus \textit{GPUs}, como las A100 o H100. Este motor está diseñado para ofrecer el máximo rendimiento en hardware NVIDIA, utilizando técnicas avanzadas como la fusión de capas, la cuantización y la ejecución optimizada de \textit{CUDA kernels}. Estas optimizaciones permiten alcanzar velocidades de inferencia significativamente superiores a las de otros motores más generales.
+
+Por ejemplo, en \textit{benchmarks} oficiales, \textit{TensorRT-LLM} logró un rendimiento de aproximadamente 3.679 tokens por segundo con el modelo GPT-J de 6 mil millones de parámetros sobre una \textit{GPU} A100 de 80 GB~\cite{ref13}. En comparación, \textit{vLLM} alcanza aproximadamente 714 tokens por segundo con modelos equivalentes como LLaMA-7B en una A100 de 40 GB. Esta diferencia se debe principalmente a las optimizaciones de bajo nivel específicas para \textit{GPUs} NVIDIA que implementa \textit{TensorRT-LLM}.
+
+Sin embargo, esta especialización tiene un precio: \textit{TensorRT-LLM} está limitado a \textit{GPUs} NVIDIA y requiere que los modelos se conviertan a un formato especial llamado \textit{TensorRT Engine}, lo que puede añadir complejidad al proceso. Aunque es una herramienta potente para quienes ya trabajan con hardware NVIDIA, su falta de flexibilidad la hace menos versátil en comparación con \textit{vLLM}.
+
+\vspace{0.5cm}
+\noindent\textbf{Text Generation Inference (TGI) - Hugging Face}
+
+Por otro lado, \textit{TGI}, creado por Hugging Face~\cite{ref14}, se destaca por su capacidad para manejar textos extremadamente largos de manera eficiente. Se utilizan técnicas que permiten retener información previa sin necesidad de recalcular todo desde cero, lo que ahorra memoria y acelera las respuestas. En pruebas con \textit{prompts} de más de 200.000 tokens, \textit{TGI} generó respuestas en solo 2 segundos, mientras que \textit{vLLM} tardó 27.5 segundos~\cite{ref15}. Además, en una \textit{GPU} NVIDIA L4, \textit{TGI} puede manejar hasta 30.000 tokens, tres veces más que \textit{vLLM} en configuraciones similares.
+
+\textit{TGI} también es de muy fácil uso: con solo especificar el nombre de un modelo de Hugging Face, está listo para funcionar, sin configuraciones complicadas. Aunque está optimizado principalmente para \textit{GPUs} NVIDIA, su buen desempeño en hardware con recursos limitados lo hace atractivo para usuarios con equipos más modestos.
+
+\subsubsection*{Análisis Comparativo}
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{3.5cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+\textbf{Característica} & \textbf{vLLM} & \textbf{TensorRT-LLM (NVIDIA)} & \textbf{Text Generation Inference (TGI) (Hugging Face)} \\
+\hline
+Open Source? & Sí & No, es de NVIDIA & Sí \\
+\hline
+Hardware Principal & Amplia gama de \textit{GPUs} (NVIDIA, AMD, etc.) & \textit{GPUs} NVIDIA (optimizado para) & Principalmente \textit{GPUs} NVIDIA (ejemplo con L4) \\
+\hline
+Optimización Clave & \textit{PagedAttention} \cite{ref39}, ahora con soporte de Red Hat & Optimización a nivel de kernel, fusión de capas, gestión dinámica de memoria & Optimización de memoria para \textit{prompts} largos, retención de contexto, estructuras de datos eficientes \\
+\hline
+Facilidad de Uso & API de Python sencilla, servidor compatible con OpenAI API & Requiere conversión de modelos a formato \textit{TensorRT Engine} & Cero configuración para la mayoría de los casos, basado en ID de modelo de Hugging Face \\
+\hline
+Rendimiento (vs. vLLM) & 2-4x más rápido que \textit{Orca}; generalmente más lento que \textit{TensorRT-LLM} en NVIDIA & Generalmente más rápido y energéticamente eficiente en \textit{GPUs} NVIDIA & Hasta 13x más rápido en \textit{prompts} largos (>200.000 tokens), triplica la capacidad de tokens \\
+\hline
+Manejo de \textit{Prompts} Largos & Gestión eficiente de \textit{KV cache} ayuda & Optimizado para reducir latencia y huella de memoria & Optimizado significativamente, triplica la capacidad de tokens \\
+\hline
+Flexibilidad Hardware & Alta & Limitada a NVIDIA & Principalmente NVIDIA, buena optimización para hardware limitado \\
+\hline
+\end{tabular}
+\captionsetup{justification=centering}
+\caption{Comparativa de motores de inferencia para LLM: vLLM, TensorRT-LLM y TGI}
+\label{tab:comparativa_motores_inferencia}
+\end{table}
+
+\subsubsection*{Justificación de la Selección}
+Tras evaluar \textit{vLLM}, \textit{TensorRT-LLM} y \textit{TGI}, \textit{vLLM} se destaca como la opción más equilibrada en términos de eficiencia, flexibilidad y facilidad de integración. Su algoritmo \textit{PagedAttention} optimiza el uso de la memoria \textit{GPU}, permitiendo gestionar múltiples solicitudes concurrentes sin desperdicio de recursos. Por ejemplo, en pruebas con el modelo OPT-13B, \textit{vLLM} procesó hasta 2.2 veces más solicitudes simultáneas que \textit{Orca} (Oracle) y 4.3 veces más que \textit{Orca} (Max), manteniendo latencias similares.
+
+Además, su compatibilidad con hardware diverso (\textit{GPUs} NVIDIA, AMD, CPUs, TPUs), su naturaleza open source, y el impulso actual de Red Hat como principal contribuyente tras la adquisición de Neural Magic, refuerzan su sostenibilidad a largo plazo y su capacidad de innovación.
+
+Un aspecto especialmente relevante para este TFG es que se trabajará sobre Red Hat \textit{OpenShift} como plataforma de \textit{orquestación}. En este entorno, \textit{vLLM} está mejor documentado e integrado que otras opciones. Red Hat anunció soporte directo de \textit{vLLM} en su ecosistema de IA empresarial (incluido en \textit{OpenShift AI}), facilitando el despliegue, el escalado automático, el control de recursos y la integración con pipelines de \textit{MLOps} \cite{ref40}.
+
+Aunque \textit{TensorRT-LLM} ofrece un rendimiento superior en hardware NVIDIA y \textit{TGI} tiene ventajas notables en escenarios con \textit{prompts} extremadamente largos, \textit{vLLM} proporciona un rendimiento estable y adaptable, siendo ampliamente utilizado en entornos reales y cada vez más estandarizado. En consecuencia, es la opción más práctica y escalable para un proyecto que busca eficiencia sin comprometer portabilidad ni simplicidad operativa.
+
+\newpage
+\subsection{Análisis de Modelos LLM}
+Una vez seleccionada \textit{OpenShift} como plataforma para la gestión del proyecto, el siguiente paso consistió en determinar qué modelos de lenguaje (\textit{LLM}) eran más adecuados para su implementación en entornos de \textit{HPC} mediante \textit{vLLM}. Para ello, se analizaron modelos reconocidos como \textit{ChatGPT}, \textit{Google Gemini}, \textit{LLaMA} y \textit{DeepSeek}.
+
+La evaluación se basó en tres enfoques complementarios y se fundamentó en estudios técnicos de referencia, incluyendo los documentos~\cite{ref41} y \cite{ref16}, que aportan métricas objetivas cruciales para este análisis. En primer lugar, se revisaron estudios técnicos detallados publicados en artículos científicos, en los cuales se aplicó una metodología \textit{zero-shot} para tareas de extracción de relaciones en chino, utilizando métricas objetivas como precisión, recall, F1-score y latencia. En segundo lugar, se consideraron resultados normalizados en pruebas estandarizadas ampliamente reconocidas, como \textit{MMLU}, \textit{SAT}, \textit{LSAT}, \textit{GRE}, \textit{TOEFL} o \textit{GMAT}, que permiten medir la capacidad de los modelos en tareas académicas complejas y diversas. Por último, se incorporó la información procedente de \textit{Chatbot Arena}, una plataforma de evaluación comunitaria basada en comparaciones por pares y votaciones entre modelos, que genera puntuaciones mediante el sistema \textit{Elo} a partir de más de 2,8 millones de enfrentamientos. Esta combinación de enfoques permite integrar la precisión técnica, el rendimiento en escenarios exigentes y la experiencia práctica de los usuarios en un único análisis.
+
+\textit{Chatbot Arena}, en particular, resultó ser una herramienta importante para evaluar la percepción práctica de los usuarios sobre estos modelos. Con más de 24 millones de votos, la plataforma genera clasificaciones generales mediante un sistema \textit{Elo}, ofreciendo una visión actualizada y dinámica. Este enfoque destaca diferencias en fluidez, relevancia y coherencia que, en ocasiones, no se evidencian en pruebas más controladas. Por ejemplo, las puntuaciones \textit{Elo} indican que \textit{ChatGPT}, especialmente en su versión \textit{GPT-4o}, alcanza una calificación destacada de aproximadamente 1406, superando a otros modelos y mostrando coherencia con los buenos resultados obtenidos en los análisis técnicos.
+
+% [Tabla de Métricas de Rendimiento de Modelos (GPT,LLaMA y Gemini)]  [Comparación de Latencia de Modelos]
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.38\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/image30.png}
+        \caption{Tabla de Métricas de Rendimiento de Modelos (GPT, LLaMA y Gemini) \cite{ref41}}
+        \label{fig:metricas_modelos}
+    \end{minipage}\hfill
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/image37.png}
+        \caption{Comparación de Latencia de Modelos \cite{ref41}}
+        \label{fig:latencia_modelos}
+    \end{minipage}
+\end{figure}
+
+\noindent\textbf{ChatGPT}
+
+\textit{ChatGPT}, desarrollado por \textit{OpenAI}, alcanzó una notable popularidad tras su lanzamiento en noviembre de 2022. Inicialmente construido sobre \textit{GPT-3.5} y posteriormente evolucionado a \textit{GPT-4}, este modelo emplea una arquitectura de \textit{transformer} perfeccionada mediante técnicas como el aprendizaje por refuerzo con retroalimentación humana (\textit{Reinforcement Learning from Human Feedback}, \textit{RLHF}). Estas mejoras permiten ofrecer respuestas claras, coherentes y adaptadas al contexto, lo que lo ha convertido en una herramienta destacada para la conversación, la redacción de textos y el soporte en programación.
+En el estudio de extracción de relaciones en chino, por ejemplo, \textit{ChatGPT} alcanzó una precisión de aproximadamente 0,363 y un F1-score de 0,358~(véase Figura~\ref{fig:metricas_modelos} \cite{ref41}), lo que demuestra su capacidad para generar contenido relevante. No obstante, esta capacidad conlleva un coste: su elevado consumo computacional puede provocar demoras. En el caso de \textit{GPT-4}, las respuestas pueden tardar hasta 3,98 segundos. En plataformas como \textit{Chatbot Arena}, los usuarios elogian la calidad de sus respuestas, aunque algunos han señalado que la espera puede representar un inconveniente cuando se requiere inmediatez.
+
+\vspace{0.4cm}
+\noindent\textbf{Google Gemini}
+
+\textit{Google Gemini}, desarrollado por el equipo de \textit{DeepMind} de Google, fue lanzado en 2023. Este modelo se caracteriza por su arquitectura multimodal, que le permite procesar y generar simultáneamente distintos tipos de datos, incluyendo texto, imágenes y código. En el documento \textit{Zero-Shot End-to-End Relation Extraction in Chinese} \cite{ref41} se muestra que algunas variantes de \textit{Gemini}, como \textit{gemini-1.5-flash-8b}, presentan latencias extremadamente bajas, en torno a 0,57 segundos, y precisiones que varían entre 0,295 (\textit{gemini-1.0-pro}) y 0,354 (\textit{gemini-1.5-pro}) (véase Figura~\ref{fig:rendimiento_modelos_examenes} \cite{ref41} ). Esta combinación resulta especialmente atractiva para aplicaciones en tiempo real, donde la velocidad de respuesta es un factor crítico.
+Además, las evaluaciones de \textit{Chatbot Arena} destacan la rapidez de \textit{Gemini}, situándose en posiciones altas en términos de velocidad. Sin embargo, en comparativas centradas exclusivamente en contenido textual, sus puntuaciones \textit{Elo} suelen ser algo inferiores a las de \textit{ChatGPT}, lo que sugiere un compromiso entre velocidad y precisión.
+
+\vspace{0.4cm}
+\noindent\textbf{LLaMA}
+
+\textit{LLaMA}, acrónimo de \textit{Large Language Model Meta AI}, es un modelo desarrollado por \textit{Meta} y lanzado en febrero de 2023. Las evaluaciones técnicas en el estudio de extracción de relaciones indican que \textit{LLaMA} presenta un rendimiento inferior en este contexto. Por ejemplo, la versión \textit{llama3.1-405b} obtuvo un F1-score de apenas 0,117 y registró una latencia aproximada de 3,36 segundos. Estos resultados evidencian limitaciones significativas tanto en precisión como en eficiencia, lo que se refleja en los rankings generales (\textit{overall}) de \textit{Chatbot Arena} \cite{ref44}, donde la comunidad de usuarios posiciona a \textit{LLaMA} en un rango inferior en escenarios de alta exigencia.
+%Esta baja valoración confirma que, tal como se observa en las métricas experimentales, \textit{LLaMA} requiere ajustes y mejoras sustanciales para competir eficazmente en aplicaciones críticas.
+
+\newpage
+\noindent\textbf{DeepSeek}
+
+\textit{DeepSeek}, desarrollado por la empresa emergente china del mismo nombre, fue introducido a finales de 2023. Se basa en una arquitectura \textit{Mixture-of-Experts} (\textit{MoE}) \cite{ref43} que activa selectivamente los parámetros necesarios para cada consulta, con el objetivo de optimizar la eficiencia computacional. En el documento \textit{Comparative Analysis Based on DeepSeek, ChatGPT, and Google Gemini: Features, Techniques, Performance, Future Prospects} \cite{ref16} se destacan sus capacidades en tareas de razonamiento, codificación y especialización en ámbitos como la salud, el derecho o las finanzas. Por ejemplo, en la tabla de evaluación general de rendimiento, el modelo \textit{DeepSeek R1} obtiene una puntuación de 84,0 en \textit{MMLU} (\textit{Overall}), frente a 90,0 de \textit{ChatGPT GPT-4o} y 87,0 de \textit{Gemini 1.5 Pro}, lo que indica un rendimiento competitivo, aunque ligeramente inferior en tareas generales de razonamiento y conocimiento~(véase Cuadro~\ref{fig:rendimiento_modelos_examenes}).
+No obstante, \textit{DeepSeek} alcanza este nivel de rendimiento mediante una arquitectura mucho más eficiente y orientada, lo que lo convierte en una opción especialmente útil en entornos con recursos limitados. En la plataforma \textit{Chatbot Arena}, los usuarios reconocen su excelente rendimiento en dominios específicos, aunque su capacidad de generalización no alcanza los niveles de los modelos más amplios y carece de capacidades multimodales robustas. A pesar de ello, \textit{DeepSeek} ha logrado posicionarse como el modelo mejor valorado dentro de la categoría de código abierto, lo que representa un logro significativo para una propuesta relativamente reciente en este mercado competitivo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imagenes/image38.png}
+    \caption{Rendimiento General de Modelos en Exámenes Estándar de la Industria \cite{ref16}}
+    \label{fig:rendimiento_modelos_examenes}
+\end{figure}
+
+\newpage
+\subsubsection*{Síntesis y Perspectivas de Rendimiento}
+Una vez presentadas las principales características de los modelos analizados, resulta importante incorporar la evaluación que realiza \textit{Chatbot Arena}, una plataforma de comparación directa basada en enfrentamientos aleatorios entre modelos. Además del ranking general (\textit{Arena Elo}), se incluyen \textit{benchmarks} específicos como \textit{MMLU}, visto anteriormente (prueba de precisión multitarea en 57 tareas) y \textit{Arena-Hard-Auto}, una evaluación automática dirigida a modelos adaptados a instrucciones.
+La tabla más reciente de \textit{Chatbot Arena}, a día que se escribe esta memoria, muestra que \textit{ChatGPT-4o} y \textit{Gemini-2.5-Pro} lideran el ranking con valores \textit{Elo} muy elevados (1406 y 1437, respectivamente), mientras que modelos como \textit{DeepSeek-V3} o \textit{DeepSeek-R1} presentan rendimientos sólidos pero más discretos (\textit{Elo} de 1318 y 1359, respectivamente). A pesar de ello, \textit{DeepSeek-R1} alcanza una puntuación sobresaliente de 90,8 en \textit{MMLU}, superando a versiones de \textit{Gemini 2.0} y situándose cerca del nivel de \textit{GPT-4.5} (92,7) o \textit{GPT-4o}. \textit{LLaMA} no aparece en los primeros puestos del ranking, aparece con una puntuación de 1296, siendo el modelo de \textit{Llama-3.3-Nemotron-Super-49B-v1}, familia de modelo de NVIDIA pero basado en \textit{LLaMA}, se posiciona como el 5 entre modelos \textit{open source}.
+Esta evaluación empírica confirma que \textit{ChatGPT} mantiene una posición destacada, no solo por su precisión en entornos controlados, sino también por la preferencia general de los usuarios. \textit{Gemini}, por su parte, es reconocido por su velocidad y eficiencia multimodal, mientras que \textit{DeepSeek} se consolida como una opción muy competitiva en precisión multitarea, a pesar de contar con menor visibilidad en el ranking general. En conjunto, la plataforma \textit{Chatbot Arena} ofrece una perspectiva valiosa al reflejar el rendimiento real y percibido por la comunidad, complementando eficazmente las métricas estáticas tradicionales.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{imagenes/image8.png}
+    \caption{Tabla Chatbot Arena \cite{ref44}}
+    \label{fig:tabla_chatbot_arena}
+\end{figure}
+
+
+\subsubsection*{Justificación de la Selección}
+El análisis realizado ha permitido comprender las fortalezas y limitaciones de los principales modelos \textit{LLM} en distintos contextos, combinando métricas técnicas con evaluaciones empíricas como las ofrecidas por \textit{Chatbot Arena}. No obstante, es importante señalar que el ecosistema de modelos evoluciona con gran rapidez: nuevas versiones se publican de forma constante, y un modelo que hoy lidera los rankings puede ser superado en cuestión de semanas.
+
+Aun así, el estudio en profundidad de las características de estos modelos sigue siendo fundamental en el marco de este Trabajo de Fin de Grado, ya que comprender su funcionamiento, eficiencia y adaptación a distintas tareas permite tomar decisiones informadas y anticiparse a futuros desarrollos.
+
+Considerando estos factores, y a partir de la evaluación detallada realizada, la elección final para la implementación en este proyecto se ha decantado por la familia de modelos \textit{DeepSeek}. Esta decisión se fundamenta en su sólido rendimiento, que ha demostrado ser competitivo en diversas métricas relevantes para las tareas de este trabajo. Además, su naturaleza completamente \textit{open source} representa una ventaja operativa crucial; al no requerir procesos de registro ni la solicitud de tokens de acceso (que a menudo conllevan tiempos de espera significativos), facilita en gran medida su despliegue con \textit{vLLM}. Finalmente, la creciente popularidad que los modelos \textit{DeepSeek} han ganado en los últimos meses, sumado al respaldo de la comunidad, asegura un ecosistema activo y una evolución constante, lo que refuerza su uso para el proyecto.
+
+\newpage
+\section{Conclusión}
+Esta revisión del estado del arte ha sintetizado los avances clave en \textit{HPC}, la \textit{orquestación} de contenedores, los motores de inferencia para \textit{LLM} y la evolución de los propios modelos de lenguaje. Se ha constatado que herramientas como \textit{OpenShift} (basada en \textit{Kubernetes}) y motores como \textit{vLLM} son soluciones robustas y eficientes para el despliegue de cargas de trabajo intensivas, aprovechando al máximo los recursos de \textit{GPU}. Además, la exploración de \textit{LLM} como \textit{ChatGPT}, \textit{Gemini}, \textit{LLaMA} y \textit{DeepSeek} ha proporcionado una comprensión de sus capacidades y limitaciones en diversos escenarios.
+
+A pesar de estos avances, se ha identificado una brecha significativa en la literatura: la ausencia de un estudio que aborde el ciclo de vida completo de un servidor \textit{HPC} para el despliegue de \textit{LLM}. Esto incluye desde su montaje inicial hasta la puesta en producción, pasando por una evaluación cuantitativa de estrategias de despliegue dual (modelo único grande frente a múltiples modelos pequeños) y la validación práctica de principios de \textit{SRE}. La mayoría de los trabajos se centran en optimizaciones, dejando sin documentar la experiencia completa de construir y operar tal infraestructura con un enfoque en fiabilidad y escalabilidad.
+
+El presente proyecto se enmarca directamente en esta laguna, proponiendo no solo la implementación detallada de un servidor \textit{HPC} y el despliegue de \textit{LLM}, sino también la simulación de un entorno de producción para demostrar y validar capacidades avanzadas de \textit{SRE} como el escalado automático y la recuperación autónoma ante fallos. Al ofrecer una documentación completa y una evaluación cuantitativa desde la base, este trabajo busca mejorar la situación actual del conocimiento, ofreciendo una orientación para futuros despliegues de \textit{LLM} en entornos \textit{HPC} y consolidando las mejores prácticas de \textit{SRE} en este ámbito emergente.
+
+
+

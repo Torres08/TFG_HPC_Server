@@ -1,0 +1,504 @@
+\chapter{Gestión Operativa con Entornos de Orquestación y Enfoque \textit{SRE}}
+%Al desplegar un \textit{LLM} con Podman, rápidamente se hicieron evidentes las limitaciones de una orquestación manual. Aunque Podman es excelente para la gestión de contenedores individuales, surgieron desafíos al pensar en el entorno de producción. ¿Cómo se podría monitorizar el rendimiento del LLM a alto nivel, similar a lo que ofrece Grafana? Gestionar que la aplicación se adaptara a las variaciones de carga y que se mantuviera funcionando sin interrupciones se volvió una tarea compleja y propensa a errores. Además, la gestión de los logs de múltiples contenedores resultó poco intuitiva y demandó un esfuerzo considerable. Todas estas dificultades dejaron claro que se necesitan herramientas y estrategias que automaticen y simplifiquen estas tareas, algo fundamental para que los sistemas sean eficientes y robustos en un entorno SRE.
+Al desplegar un \textit{LLM} con \textit{Podman}, rápidamente se hicieron evidentes las limitaciones de una orquestación manual. Aunque \textit{Podman} es excelente para la gestión de contenedores individuales, surgieron desafíos al pensar en el entorno de producción. ¿Cómo se podría monitorizar el rendimiento del \textit{LLM} a alto nivel, similar a lo que ofrece Grafana? ¿Qué mecanismos existen para detectar automáticamente fallos y recuperarse sin intervención manual? ¿Cómo garantizar actualizaciones seguras y sin afectar la disponibilidad? ¿De qué manera se puede escalar la infraestructura ante picos de demanda? ¿Cómo gestionar de forma eficiente los logs de múltiples contenedores? Todas estas dificultades dejaron claro que se necesitan herramientas y estrategias que automaticen y simplifiquen estas tareas, algo fundamental para que los sistemas sean eficientes y robustos en un entorno \textit{SRE}.
+
+En este contexto, se descubrió \textit{OpenShift}, una plataforma integrada que agrupa capacidades como el escalado automático, la recuperación ante fallos, la gestión avanzada de logs y la monitorización unificada. Desde la perspectiva de \textit{SRE}, \textit{OpenShift} facilita la implementación de buenas prácticas desde el diseño hasta la operación, siguiendo recomendaciones sobre diseño resiliente y seguridad integrada.
+
+Todo este capítulo se basa en el curso de \textit{OpenShift} que recibí de la Universidad de Granada: \textit{Red Hat OpenShift} Administration I (DO180) \cite{ref33} \cite{ref61} . Aprovechando esta formación, este trabajo complementa la teoría mostrando la utilidad de \textit{OpenShift} para automatizar despliegues, mejorar la observabilidad y gestionar servicios de manera eficiente.
+
+En este ámbito, el concepto de \textit{LLMOps} es especialmente relevante. \textit{LLMOps} abarca el conjunto de prácticas, herramientas y procesos para la operación eficiente de modelos de lenguaje a gran escala, incluyendo despliegue, monitorización, escalado y mantenimiento continuo en producción. Integrar prácticas de \textit{LLMOps} en proyectos basados en \textit{OpenShift} es un avance para mejorar la gestión, asegurar la escalabilidad y reducir el esfuerzo manual en la operación diaria de los modelos. 
+
+% Todo este capítulo se basa en el curso de \textit{OpenShift} que recibí de la Universidad de Granada: \textit{Red Hat OpenShift} Administration I (DO180).\cite{ref33} \cite{ref61}
+
+
+\section{Introducción a \textit{OpenShift}}
+\textit{OpenShift} es una plataforma que permite a las organizaciones desplegar aplicaciones en contenedores de manera eficiente y escalable. Construida sobre Kubernetes \cite{ref8}, añade una capa de abstracción y automatización que simplifica tareas esenciales del ciclo de vida de las aplicaciones, adaptándose a diversos entornos (desarrollo, pruebas, producción).
+
+La importancia de \textit{OpenShift} radica en su capacidad para gestionar aplicaciones en contenedores de forma declarativa. Los administradores definen el estado deseado de las aplicaciones (mediante archivos YAML o JSON), y la plataforma se encarga automáticamente de mantenerlo, ajustándose a cambios o imprevistos. Esta característica reduce la carga operativa, aporta consistencia y su integración con herramientas de observabilidad y flujos de trabajo de desarrollo la hace atractiva para entornos empresariales que buscan agilidad y confiabilidad.
+
+\newpage
+En cuanto a su funcionamiento, \textit{OpenShift} utiliza contenedores para empaquetar aplicaciones y sus dependencias, ofreciendo aislamiento respecto al sistema operativo del host. A diferencia de las máquinas virtuales, los contenedores comparten el kernel subyacente y operan en espacios aislados (namespaces), lo que disminuye la carga del sistema y mejora la portabilidad de las aplicaciones.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image12.png}
+    \caption{Aplicaciones en contenedores frente al sistema operativo del host \cite{ref33}}
+    \label{fig:contenedores_vs_vm}
+\end{figure}
+
+\newpage
+\section{\textit{OpenShift} y \textit{SRE}}
+%Una de las cualidades más destacadas de \textit{OpenShift} es su capacidad para facilitar la implementación de prácticas \textit{SRE}, al añadir un entorno robusto y flexible a Kubernetes.
+
+\vspace{0.5cm}
+\noindent\textbf{Automatización y escalabilidad}
+
+\textit{OpenShift} incorpora mecanismos avanzados como el autoescalado horizontal (HPA) y operadores para gestionar recursos dinámicamente. Esto permite que las aplicaciones se adapten automáticamente a fluctuaciones en la demanda sin intervención manual constante. La plataforma automatiza tareas operativas críticas como el aprovisionamiento de recursos y el balanceo de carga, reduciendo errores humanos y manteniendo la estabilidad del sistema bajo cargas variables.
+
+\vspace{0.5cm}
+\noindent\textbf{Observabilidad proactiva}
+
+La plataforma integra soluciones como Prometheus \cite{ref63} para recolección de métricas y Grafana para visualización, proporcionando una visión completa y en tiempo real del estado del clúster y las aplicaciones. Esta capacidad permite monitorear el rendimiento actual y establecer alertas predictivas. Los equipos pueden detectar anomalías tempranamente, investigar incidentes mediante análisis forenses detallados y realizar mejoras continuas basadas en datos concretos.
+
+\vspace{0.5cm}
+\noindent\textbf{Gestión del ciclo de vida con CI/CD}
+
+\textit{OpenShift} simplifica los flujos de trabajo de integración y despliegue continuo mediante herramientas como Jenkins \cite{ref64} y Tekton \cite{ref65}. La plataforma soporta estrategias avanzadas de despliegue (ej. rolling updates, despliegues azul-verde), permitiendo implementar cambios con mínimo riesgo. En caso de problemas, los rollbacks automatizados garantizan una rápida recuperación. Todo esto facilita el equilibrio entre velocidad de entrega y estabilidad operacional.
+
+\vspace{0.5cm}
+\noindent\textbf{Resiliencia y seguridad integrada}
+
+La arquitectura de \textit{OpenShift} está diseñada para alta disponibilidad, con características como replicación automática de pods y distribución inteligente de cargas de trabajo. Las Security Context Constraints (SCC)\footnote{Las Security Context Constraints (SCC) son políticas de seguridad específicas de OpenShift que definen los permisos y restricciones bajo los cuales se ejecutan los pods, permitiendo aplicar el principio de mínimo privilegio y limitar acciones potencialmente peligrosas.} implementan el principio de mínimo privilegio, mientras que el cifrado de datos en tránsito y en reposo protege la información sensible. El control de acceso granular mediante RBAC (Role-Based Access Control)\footnote{RBAC (Role-Based Access Control) es un mecanismo de control de acceso que permite definir roles y asignar permisos a usuarios o grupos, asegurando que solo los usuarios autorizados puedan realizar acciones específicas sobre los recursos del clúster.} asegura que solo usuarios autorizados realicen cambios críticos en el sistema.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image40.png}
+    \caption{Proyectos de código abierto que hay en \textit{OpenShift} \cite{ref33}}
+    \label{fig:proyectos_codigo_abierto}
+\end{figure}
+%"La integración con el ecosistema CNCF (Cloud Native Computing Foundation) asegura interoperabilidad y flexibilidad".
+
+
+\subsection{Tipos de instalación}
+\textit{OpenShift} ofrece varias opciones de instalación, adaptadas a las necesidades específicas de cada usuario, desde entornos de desarrollo hasta implementaciones de producción a gran escala.
+
+\vspace{0.5cm}
+\noindent\textbf{OpenShift Local} \\
+\textit{OpenShift} Local permite implementar un clúster de \textit{OpenShift} directamente en una computadora personal. Es ideal para pruebas, desarrollo y exploración inicial de la plataforma, proporcionando un entorno rápido y fácil de configurar. Su propósito principal es servir como espacio de familiarización y experimentación, no para entornos de producción. Esta es la opción seleccionada para este trabajo, permitiendo seguir utilizando el servidor para demostrar las capacidades de \textit{OpenShift}.
+
+\vspace{0.5cm}
+\noindent\textbf{Sandbox para desarrolladores} \\
+Para quienes desean probar \textit{OpenShift} sin costos iniciales, Red Hat ofrece el Sandbox para Desarrolladores. Este servicio proporciona acceso gratuito durante 30 días a un clúster de \textit{OpenShift} compartido, útil para familiarizarse con la plataforma y realizar pruebas en un entorno controlado. Sin embargo, su naturaleza temporal y compartida lo hace inadecuado para implementaciones de producción.
+
+\vspace{0.5cm}
+\noindent\textbf{Ediciones gestionadas de Red Hat \textit{OpenShift}} \\
+Las organizaciones que buscan soluciones de producción con menor carga operativa pueden optar por las Ediciones gestionadas de \textit{Red Hat OpenShift}. Estas incluyen servicios en la nube administrados por Red Hat y proveedores asociados (ej. \textit{Red Hat OpenShift} Service on AWS, Azure Red Hat OpenShift). En estas ediciones, Red Hat y el proveedor se encargan de la gestión, mantenimiento y actualizaciones del clúster, lo que reduce significativamente las responsabilidades del usuario, aunque puede implicar ciertas limitaciones (ej. menor control sobre la autenticación).
+
+\section{Arquitectura y Componentes de \textit{OpenShift}}
+\textit{OpenShift} se basa en la arquitectura modular de Kubernetes, extendiendo sus funcionalidades para ofrecer una plataforma robusta en la gestión de aplicaciones en contenedores. Esta combinación aprovecha la escalabilidad y tolerancia a fallos de Kubernetes, a la vez que introduce capacidades adicionales de automatización y control.
+
+La figura siguiente ofrece una vista de la arquitectura interna de \textit{Kubernetes}, fundamental para comprender cómo \textit{OpenShift} gestiona y orquesta las aplicaciones en contenedores.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image46.png}
+    \caption{Componentes de Kubernetes \cite{ref33}}
+    \label{fig:componentes_kubernetes}
+\end{figure}
+
+\subsection{Componentes Fundamentales de Kubernetes}
+La arquitectura de \textit{OpenShift} se fundamenta en los componentes esenciales de Kubernetes. Los \textit{control plane nodes}\footnote{Los \textit{control plane nodes} son los nodos responsables de coordinar el clúster, gestionando la programación y el estado global.} coordinan globalmente el clúster, gestionando la programación de cargas de trabajo y manteniendo el estado del sistema mediante servicios como la API de Kubernetes, el \textit{scheduler}\footnote{El \textit{scheduler} es el componente que decide en qué nodo se ejecutará cada pod, optimizando el uso de recursos y la distribución de la carga.} y el \textit{controller manager}\footnote{El \textit{controller manager} es el proceso que ejecuta los controladores responsables de mantener el estado deseado de los recursos, como la creación o eliminación automática de pods según la configuración declarada.}. Por su parte, los \textit{compute plane nodes}\footnote{Los \textit{compute plane nodes} ejecutan las cargas de trabajo del usuario, alojando los pods y contenedores de las aplicaciones.} ejecutan las cargas de trabajo del usuario, alojando los \textit{pods}\footnote{Un \textit{pod} es la unidad mínima de despliegue en Kubernetes, que puede contener uno o varios contenedores que comparten red y almacenamiento.} con las aplicaciones en contenedores. Esta separación mejora la estabilidad y seguridad, previniendo interferencias y reforzando la escalabilidad y tolerancia a fallos.
+
+La API de Kubernetes, enriquecida en \textit{OpenShift} con recursos personalizados, permite definir las cargas de trabajo mediante un modelo de configuración declarativa. Los usuarios especifican el estado deseado de las aplicaciones a través de archivos YAML o JSON, y \textit{OpenShift} se encarga de mantenerlo automáticamente. Este enfoque sigue un ciclo de “Definir → Aplicar → Monitorizar → Ajustar”, lo que reduce errores manuales y simplifica la gestión a gran escala. Además, los \textit{namespaces}\footnote{Los \textit{namespaces} son espacios lógicos que permiten aislar y organizar recursos dentro de un clúster, facilitando la gestión de permisos y el control de acceso en entornos multi-equipo o multi-proyecto.} son cruciales para organizar y aislar recursos dentro del clúster, facilitando la gestión granular de permisos y el control de acceso en entornos multi-equipo o multi-proyecto.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image29.png}
+    \caption{Gestión de recursos declarativa \cite{ref33}}
+    \label{fig:gestion_recursos_declarativa}
+\end{figure}
+
+\subsection{Extensiones específicas de \textit{OpenShift}}
+\textit{OpenShift} amplía las capacidades de Kubernetes con herramientas diseñadas para optimizar el flujo de trabajo de desarrollo y operaciones. Su entorno integrado para desarrolladores simplifica el ciclo de vida de las aplicaciones.
+
+El registro de contenedores incorporado permite almacenar y gestionar imágenes de forma nativa, eliminando la necesidad de soluciones externas y mejorando la seguridad. Para automatizar procesos, OpenShift incluye pipelines de \textit{CI/CD (Continuous Integration/Continuous Delivery)} listos para usar, que facilitan la integración y entrega continua con mínima intervención manual.
+
+En cuanto a observabilidad, \textit{OpenShift} ofrece un conjunto completo de herramientas para monitorear aplicaciones e infraestructura. Los equipos pudieron acceder a métricas en tiempo real, configurar alertas proactivas y analizar registros desde la consola web integrada. Esta visibilidad fue crucial para mantener la confiabilidad y el rendimiento de las aplicaciones en producción, permitiendo detectar y resolver problemas de forma proactiva.
+\subsubsection{Source-to-Image (S2I)}
+\textit{Source-to-Image (S2I)} es una herramienta a destacar de \textit{OpenShift} que permite construir imágenes de contenedor reproducibles a partir del código fuente de una aplicación, por ejemplo de \textit{git}, sin necesidad de escribir un \textit{Dockerfile} directamente. Este proceso implica la inyección del código fuente en una imagen base de constructor (\textit{builder image}), que contiene las herramientas y el entorno de ejecución necesarios.
+
+Para enseñar el funcionamiento de \textit{S2I}, se utilizó un repositorio de ejemplo de aplicación \textit{Node.js} \cite{ref62}. Generalmente, para que \textit{S2I} interactúe correctamente con el código fuente, suele ser necesario definir scripts como \textit{assemble}, \textit{run} o \textit{save-artifacts}, los cuales residen en el directorio \texttt{.s2i/bin/} del repositorio. Sin embargo, en el caso de aplicaciones \textit{Node.js} estándar, como la que uso en este proyecto, \textit{OpenShift} gestionó internamente este proceso sin la necesidad de estos \textit{scripts}. La plataforma se encargó de tomar el código fuente, instalar automáticamente las dependencias (\textit{npm install}), y luego ejecutar la aplicación.
+
+
+\section{Despliegue y administración de aplicaciones}
+Esta sección detalla el proceso de despliegue y gestión de una aplicación full-stack en \textit{OpenShift}. En la demostración, se realizó sobre el entorno \textit{OpenShift Sandbox} proporcionado por Red Hat, ya que la virtualización de \textit{OpenShift Local} impidió la conexión con la GPU del servidor y las limitaciones del port forwarding\footnote{El \textit{port forwarding} es una técnica que permite redirigir el tráfico de una dirección y puerto de red a otra, facilitando el acceso a servicios internos de una red desde el exterior. En entornos virtualizados, puede ser necesario para acceder a aplicaciones desplegadas dentro de máquinas virtuales o contenedores.} (posiblemente por la gestión de dos saltos de conexión) obstaculizaron el acceso a la interfaz web. Este entorno simuló un ecosistema de producción con el fin de demostrar y validar los principios fundamentales de \textit{SRE}. Este enfoque permitió ilustrar el uso de herramientas nativas de orquestación, aprovisionamiento, observabilidad y fiabilidad, reflejando un caso de uso realista alineado con las prácticas de \textit{SRE}.
+
+Para la demostración, se utilizó la interfaz de línea de comandos (CLI) de \textit{OpenShift} (oc), lo que garantizó la reproducibilidad de los pasos. Aunque \textit{OpenShift} ofrece una potente interfaz web, todas las acciones realizadas mediante la CLI tuvieron su equivalente gráfico. Se utilizó para la demostración como base los tutoriales y ejemplos disponibles del repositorio sclorg \cite{ref62}, que también se usan en el curso \textit{OpenShift DO180} realizado.
+
+Una recomendación a la hora de manejar la terminal, se pueden configurar alias para las cuentas de administrador y desarrollador:
+\begin{verbatim}
+echo "alias al='oc login -u admin -p redhatocp\
+ https://api.ocp4.example.com:6443'" >> ~/.bashrc
+source ~/.bashrc
+echo "alias dl='/usr/local/bin/oc login -u \
+developer -p developer https://api.ocp4.example.com:6443'" >> ~/.bashrc
+source ~/.bashrc
+\end{verbatim}
+
+Para saber la URL de la consola web asociada a la sesión de \textit{OpenShift} con:
+\begin{verbatim}
+oc whoami --show-console
+# https://console-openshift-console.apps.ocp4.example.com
+
+\end{verbatim}
+Con una sesión de developer (usando el alias dl) es suficiente para esta demostración.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image24.png}
+    \caption{Interfaz de \textit{OpenShift}. \textit{Fuente: elaboración propia.}}
+    \label{fig:interfaz_openshift}
+\end{figure}
+
+\newpage
+\subsection{Pasos de Despliegue y Administración}
+
+\vspace{0.5cm}
+\noindent\textbf{1. Creación del proyecto de trabajo} \\
+    Para aislar y organizar todos los recursos de la demostración, se creó un nuevo proyecto en \textit{OpenShift}:
+    \begin{verbatim}
+oc new-project sre-demo
+    \end{verbatim}
+
+\vspace{0.5cm}
+\noindent\textbf{2. Despliegue del \textit{frontend} desde GitHub} \\
+    Se utilizó la aplicación de ejemplo nodejs-ex del repositorio de Red Hat, que contiene una interfaz web básica para la gestión de frutas. Dicho despliegue se realizó con el comando oc new-app, el cual, como se explicó anteriormente, utilizó la funcionalidad Source-to-Image (S2I):
+    \begin{verbatim}
+oc new-app https://github.com/sclorg/nodejs-ex --name=nodejs-ex
+    \end{verbatim}
+
+    \textit{OpenShift} detectó el tipo de aplicación (Node.js en este caso) y automáticamente creó y configuró los objetos necesarios para su despliegue y gestión: un BuildConfig, un DeploymentConfig (o Deployment en versiones recientes de \textit{OpenShift}) y un Service. En la vista de topología de la consola web, el pod apareció con un color naranja, indicando que se estaba creando o construyendo.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{imagenes/image66.png}
+        \caption{Primer Pod creado \textit{Fuente: elaboración propia.}}
+        \label{fig:primer_pod_creado}
+    \end{figure}
+
+    Posteriormente, se expuso este servicio públicamente; con oc expose se generó una URL pública para acceder a la aplicación.
+    \begin{verbatim}
+oc expose service nodejs-ex
+    \end{verbatim}
+
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{imagenes/image44.png}
+        \caption{Aplicación desplegada pero no se puede interactuar \textit{Fuente: elaboración propia.}}
+        \label{fig:aplicacion_desplegada}
+    \end{figure}
+\vspace{0.5cm}
+\noindent\textbf{3. Verificación y Diagnóstico del \textit{frontend}} \\
+    Al intentar interactuar con la aplicación desplegada a través de la URL generada, se observó que la aplicación se desplegó, pero no se pueden realizar acciones CRUD (Crear, Leer, Actualizar, Borrar). En principio, debería haber sido posible añadir frutas a una lista, por lo que se procedió a diagnosticar el problema.
+    Primero, se obtuvieron los pods del proyecto:
+    \begin{verbatim}
+oc get pods 
+    \end{verbatim}
+
+    Luego, se consultaron los logs de la instancia del pod del \textit{frontend}:
+    \begin{verbatim}
+oc logs nodejs-ex-6d6c6d6b79-ckxb8
+    \end{verbatim}
+
+\newpage    
+    Los logs revelaron el siguiente error:
+    \begin{verbatim}
+{"level":50,"time":1747902770555,"pid":21,"hostname":"nodejs-ex-6d6c6d6b79-ckxb8"
+,"err":{"type":"Error","message":"connect ECONNREFUSED <IP_DEL_BACKEND>:5432",
+"stack":"Error: connect ECONNREFUSED <IP_DEL_BACKEND>:
+5432\n\tat TCPConnectWrap.afterConnect [as oncomplete] (node:net:1607:16)",
+"errno":-111,"code":"ECONNREFUSED","syscall":"connect","address":"<IP_DEL_BACKEND>",
+"port":5432},"msg":"connect ECONNREFUSED <IP_DEL_BACKEND>:5432"}
+    \end{verbatim}
+
+    Este mensaje de ECONNREFUSED nos confirmó que la aplicación intenta conectarse a una base de datos PostgreSQL, que aún no estaba desplegada. 
+
+\subsection{Gestión de almacenamiento y configuración externa}
+\vspace{0.5cm}
+\noindent\textbf{4. Despliegue de PostgreSQL} \\
+    Para proporcionar el \textit{backend} de datos, se desplegó una instancia persistente de PostgreSQL. La persistencia es importante para que los datos de la base de datos no se perdieran si el pod se reiniciaba o se movía a otro nodo.
+    Se utilizó el siguiente comando para desplegar PostgreSQL, configurando las credenciales de usuario y la base de datos:
+    \begin{verbatim}
+oc new-app postgresql-persistent \
+  -p POSTGRESQL_USER=user \
+  -p POSTGRESQL_PASSWORD=password \
+  -p POSTGRESQL_DATABASE=nodejsdb \
+  --name=postgresql
+    \end{verbatim}
+
+    Este comando automatizó la creación de varios objetos clave en \textit{OpenShift}: un DeploymentConfig (para gestionar el despliegue del pod de PostgreSQL), un Service denominado postgresql (que permite al \textit{frontend} conectarse a la base de datos), un PersistentVolumeClaim (PVC) de 1 \textit{Gibibyte}\footnote{En Kubernetes y OpenShift, el término \textit{Gibibyte} (abreviado como \texttt{Gi}) se utiliza para especificar capacidades de almacenamiento siguiendo el estándar binario, donde 1~GiB equivale a $2^{30}$ bytes} para la persistencia de datos, y un Secret que almacena de forma segura las credenciales.
+    El PersistentVolumeClaim (PVC) fue una solicitud de almacenamiento por parte de la aplicación. Actuó como una abstracción que permitió al pod de PostgreSQL solicitar y consumir almacenamiento persistente sin necesidad de conocer los detalles específicos de la infraestructura subyacente. \textit{OpenShift} se encargó de enlazar este PVC con un PersistentVolume (un recurso de almacenamiento provisionado en el clúster) que cumpliera con los requisitos del PVC, asegurando así que los datos de la base de datos no se perdieran entre reinicios o movimientos del pod.
+    Se pudo verificar la creación del PVC con:
+    \begin{verbatim}
+$ oc get pvc
+    \end{verbatim}
+
+    El resultado esperado muestra el PVC en estado \texttt{Bound}, lo que indica la asignación exitosa de un volumen persistente. Un ejemplo resumido de la salida sería:
+
+    \begin{verbatim}
+NAME       STATUS  VOLUME          CAPACITY  ACCESS MODES  STORAGECLASS   AGE
+postgresql Bound   pvc-8ec3...ee9  1Gi       RWO           gp3            38s
+    \end{verbatim}
+
+
+    Desde la interfaz web de \textit{OpenShift}, se pudo crear una aplicación para englobar estos pods, lo que mejoró la visualización en la vista de topología. Incluso se pudieron añadir etiquetas a los deployments (ej. app.kubernetes.io/name=postgresql,
+     app.kubernetes.io/name=nodejs) para cambiar los iconos y hacerlos más visuales y organizados en la interfaz.
+
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image25.png}
+        \caption{Pods de la base de datos y nodejs \textit{Fuente: elaboración propia.}}
+        \label{fig:pods_base_datos_nodejs}
+    \end{figure}
+ \vspace{0.5cm}
+\noindent\textbf{5. Conexión del \textit{frontend} con el \textit{backend}} \\
+    Una vez que el servicio de PostgreSQL estuvo disponible y su almacenamiento configurado, se establecieron las variables de entorno en el deployment del \textit{frontend} (nodejs-ex) para que pudiera conectarse a la base de datos recién desplegada:
+\newpage    
+\begin{verbatim}
+oc set env deployment/nodejs-ex \
+  POSTGRESQL_USER=user \
+  POSTGRESQL_PASSWORD=password \
+  POSTGRESQL_DATABASE=nodejsdb \
+  DATABASE_SERVICE_NAME=postgresql
+    \end{verbatim}
+
+    Para que el \textit{frontend} aplicara estos cambios y reiniciara con las nuevas variables de entorno, se ejecutó un rollout restart:
+    \begin{verbatim}
+oc rollout restart deployment/nodejs-ex
+    \end{verbatim}
+
+
+    Tras este paso, la aplicación del \textit{frontend} comenzó a funcionar correctamente, sin el error previo de conexión a la base de datos, integrando \textit{backend} con \textit{frontend}. La vista de topología mostró ahora la conexión entre el \textit{frontend} y el \textit{backend}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image53.png}
+        \caption{Aplicación desplegada con el \textit{backend} \textit{Fuente: elaboración propia.}}
+        \label{fig:aplicacion_desplegada_backend}
+    \end{figure}
+
+\subsection{Monitorización de cargas de trabajo}
+\textit{OpenShift} ofreció diversas herramientas para la monitorización, que fueron desde la línea de comandos hasta una consola web avanzada, importantes para la observabilidad en un entorno \textit{SRE}.
+
+\vspace{0.5cm}
+\noindent\textbf{6. Uso de herramientas básicas desde CLI} \\
+    Para una monitorización rápida y básica del uso de recursos de pods y nodos, se emplearon los siguientes comandos, que proporcionaron una visión general del rendimiento del clúster:
+    \begin{verbatim}
+oc adm top pods
+oc adm top nodes
+    \end{verbatim}
+
+    La consola web de \textit{OpenShift} proporcionó herramientas de observabilidad más completas, permitiendo un análisis detallado del estado de la infraestructura y las aplicaciones:
+    \begin{itemize}
+        \item \textbf{Observe → Dashboards}: Ofreció visualizaciones gráficas de métricas clave como CPU, memoria y estado de los pods.
+        \item \textbf{Observe → Metrics}: Permitió realizar consultas PromQL personalizadas para un análisis similar a Grafana.
+    \end{itemize}
+    Estas capacidades serán para establecer umbrales de alerta, configurar notificaciones proactivas y tomar decisiones informadas sobre el escalado o los ajustes de recursos en un futuro.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image34.png}
+        \caption{Interfaz de monitorización de \textit{OpenShift} \textit{Fuente: elaboración propia.}}
+        \label{fig:interfaz_monitorizacion_openshift}
+    \end{figure}
+
+\subsection{Fiabilidad, escalabilidad automática y auto-recuperación}
+\textit{OpenShift} incorporó características esenciales para garantizar la fiabilidad, la escalabilidad y la recuperación automática de las aplicaciones, principios fundamentales de \textit{SRE}.
+
+\vspace{0.5cm}
+\noindent\textbf{7. Configuración de \textit{Probes} (Sondas)} \\
+Los \textit{probes} (\textit{liveness} y \textit{readiness})\footnote{Un \textit{probe} es una comprobación automática que permite a Kubernetes saber si un contenedor está funcionando correctamente y actuar en consecuencia.} fueron esenciales para que \textit{OpenShift} determinara el estado de salud de una aplicación. Los \textit{probes} de \textit{liveness} indicaron a Kubernetes cuándo reiniciar un contenedor si este se había quedado colgado o no respondía. Esto aseguró que los contenedores muertos pero no caídos fueran reiniciados para intentar recuperarlos y mejorar la robustez de la aplicación. Los \textit{probes} de \textit{readiness} indicaron a Kubernetes cuándo un contenedor estaba listo para empezar a recibir tráfico, controlando cuándo podía recibir tráfico y garantizando que los usuarios siempre fueran dirigidos a instancias que funcionaban correctamente, evitando errores durante el inicio o problemas temporales. Ambas comprobaciones fueron evaluadas por el kubelet (agente principal que se ejecuta en cada nodo de Kubernetes y OpenShift).
+
+Es importante mencionar que los \textit{probes} es propia del núcleo de Kubernetes. \textit{OpenShift} facilita su configuración y visualización, pero no modifica su funcionamiento básico.
+
+     Se configuraron probes para el deployment del \textit{frontend}:
+    \begin{verbatim}
+oc set probe deployment/nodejs-ex \
+  --liveness --get-url=http://:8080/ --initial-delay-seconds=15
+oc set probe deployment/nodejs-ex \
+  --readiness --get-url=http://:8080/ --initial-delay-seconds=5
+    \end{verbatim}
+
+    Con la configuración de estos \textit{probes}, el archivo YAML del deployment se actualizó.
+
+\vspace{0.5cm}
+\noindent\textbf{8. Autoescalado} \\
+    Se habilitó el autoescalado horizontal para el deployment del \textit{frontend}, de forma que \textit{OpenShift} ajustó automáticamente el número de pods en función de la carga de CPU: 
+    \begin{verbatim}
+oc autoscale deployment/nodejs-ex --min=1 --max=3 --cpu-percent=50
+    \end{verbatim}
+
+    Esto permitió que la aplicación mantuviera un rendimiento aceptable durante aumentos de demanda, sin necesidad de intervención humana.
+
+    \newpage
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image31.png}
+        \caption{Autoescalado como tag en el panel de \textit{OpenShift} \textit{Fuente: elaboración propia.}}
+        \label{fig:autoescalado_tag}
+    \end{figure}
+
+
+\noindent\textbf{9. Recursos} \\
+    Se definieron límites y solicitudes de CPU y memoria para el deployment del \textit{frontend}:
+    \begin{verbatim}
+oc set resources deployment/nodejs-ex \
+  --limits=cpu=500m,memory=512Mi \
+  --requests=cpu=200m,memory=256Mi
+    \end{verbatim}
+
+    Esto asegura que los pods no consuman más recursos de los necesarios, y evita que un solo pod sobrecargue el nodo.
+
+\subsection{Ejemplos prácticos de fiabilidad y recuperación }
+
+Se llevaron a cabo una serie de pruebas para demostrar la fiabilidad inherente de \textit{OpenShift} y su capacidad de auto-recuperación.
+
+\vspace{0.5cm}
+\noindent\textbf{10. Autoescalado en acción} \\
+    Para observar el comportamiento del autoescalado, se generó una carga sobre la aplicación. Para esto, se utilizó un script que simuló múltiples peticiones con ApacheBench (ab).
+    Este fue el script utilizado (test-autoscaling.sh):
+
+    \newpage
+
+    \begin{verbatim}
+#!/bin/bash
+
+APP_URL="http://nodejs-ex-sre-demo.apps.ocp4.example.com/api/fruits"
+TOTAL_REQUESTS=100000 # peticiones a enviar
+CONCURRENCY=50    	# peticiones simultaneas
+DURATION=60       	# tiempo (segundos)
+echo "Iniciando ..."
+echo "Duración: $DURATION segundos (puede variar)"
+echo "Peticiones totales: $TOTAL_REQUESTS"
+echo "Concurrencia: $CONCURRENCY"
+echo "Generando carga sobre: $APP_URL"
+echo "Observa con: oc get hpa -w && oc get pods -w"
+
+# Comando ab
+# -n: número de peticiones
+# -c: número de peticiones concurrentes
+# -t: tiempo máximo para el test (segundos opcional podemos solo usar -n
+# -k: habilita Keep-Alive HTTP (mejor rendimiento,mas realista)
+# -s: timeout (segundos)
+
+ab -n $TOTAL_REQUESTS -c $CONCURRENCY -s 30 -k "$APP_URL"
+
+echo "Test de carga con ab completado"
+    \end{verbatim}
+
+    Mientras la carga se generaba, se monitoreó el estado del HPA (Horizontal Pod Autoscaler) y los pods en tiempo real para observar cómo \textit{OpenShift} creaba automáticamente nuevas instancias para manejar el aumento de la demanda:
+
+    \begin{verbatim}
+oc get hpa -2 && oc get pods -w
+    \end{verbatim}
+
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image65.png}
+        \caption{El HPA incrementa a 3 réplicas tras mantener la carga al 200\%. \textit{Fuente: elaboración propia.}}
+    \end{figure}
+    
+    \newpage
+    
+    Después de generar carga, el HPA mostró el aumento de pods hasta el máximo configurado (en este caso, 3 réplicas). El ApacheBench mostró una carga significativa con Requests per second: 2066.19 [\#/sec] (mean) y Time per request (mean): 24.196 [ms] , lo que se resumió en un pico de uso de CPU visible en los gráficos de monitoreo de \textit{OpenShift}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image45.png}
+        \caption{Estado de los pods durante la prueba de carga \textit{Fuente: elaboración propia.}}
+        \label{fig:estado_pods}
+    \end{figure}
+
+    %\newpage
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image33.png}
+        \caption{Monitorización de los pods durante la prueba de carga \textit{Fuente: elaboración propia.}}
+        \label{fig:monitorizacion_pods}
+    \end{figure}
+
+    \newpage
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image67-2.png}
+        \caption{Resultado de la prueba de carga con ApacheBench \textit{Fuente: elaboración propia.} }
+        \label{fig:resultado_ab}
+    \end{figure}
+    Fue importante notar que, incluso después de que la carga terminó, las réplicas pudieron tardar unos 5 minutos en desescalar completamente debido a la ventana de estabilización del HPA. Tras 5 minutos, volvió a ser solo 1 pod.
+    \newpage
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image51.png}
+        \caption{Decrecimiento del autoescalado tras la prueba de carga. Una vez finalizada la carga, el HPA reduce automáticamente el número de réplicas de la aplicación, volviendo progresivamente al mínimo configurado (1 pod) tras un periodo. \textit{Fuente: elaboración propia.}}
+        \label{fig:autoescalado_decrece}
+    \end{figure}
+    
+\noindent\textbf{11. Auto-recuperación de pods} \\
+    Para demostrar la capacidad de auto-recuperación de la plataforma, se eliminó manualmente un pod de la aplicación: 
+    \begin{verbatim}
+oc delete pod $(oc get pod -l app=nodejs-ex -o name)
+    \end{verbatim}
+
+    \textit{OpenShift}, al detectar el fallo y gracias a la configuración de \textit{probes} y réplicas, automáticamente creó un nuevo pod para reemplazar al eliminado, manteniendo así la disponibilidad del servicio sin intervención manual. Este comportamiento fue posible gracias a los \textit{probes} y al deployment (siempre hubo 1 como mínimo por defecto), así el sistema se recuperó por sí mismo ante fallos comunes como borrar sin querer el pod. Es muy rapido asi que no se pudo hacer captura. 
+
+\vspace{0.5cm}
+\noindent\textbf{12. Comprobación de \textit{readiness/liveness}} \\
+    Para entender cómo \textit{OpenShift} reaccionó a un pod que no funcionaba bien, se simuló un fallo en la sonda de \textit{readiness}. Se intentó que el \textit{frontend} se conectara a un puerto incorrecto (cambiando 8080 a 9999). Esto hizo que la sonda de \textit{readiness} fallara y \textit{OpenShift} supiera que ese pod no estaba listo para recibir tráfico.
+    Se monitoreó el estado del pod en otra terminal:
+    \begin{verbatim}
+oc get pods -w 
+    \end{verbatim}
+
+    \newpage
+
+    Luego, se ejecutó el comando para cambiar la sonda:
+    \begin{verbatim}
+oc set probe deployment/nodejs-ex --readiness --get-url=http://:9999/ \
+--initial-delay-seconds=5
+    \end{verbatim}
+
+    Tras ejecutar este comando, se observó que el pod se mostró como 0/1 Running en la columna \textit{READY}. Esto significó que la sonda de readiness falló para este pod, y \textit{OpenShift} lo consideró "no listo" para recibir tráfico.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image7.png}
+        \caption{Estado CrashLoopBackOff tras fallo en la sonda de \textit{readiness} \textit{Fuente: elaboración propia.}}
+        \label{fig:crashloopbackoff}
+    \end{figure}
+
+    Este resultado demostró que la prueba de falla de \textit{readiness} funcionó. Cuando un pod estuvo 0/1 \textit{Ready}, \textit{OpenShift} lo sacó del balanceador de carga. Esto significó que el tráfico se dirigió a otros pods listos y, si este fuera el único pod, la aplicación sería inaccesible externamente, lo que confirmó el problema inicial.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{imagenes/image2.png}
+        \caption{Aplicación no disponible por culpa del cambio de puerto \textit{Fuente: elaboración propia.}}
+        \label{fig:aplicacion_no_disponible}
+    \end{figure}
+    Posteriormente, se restauró la configuración correcta de la sonda para verificar la recuperación del estado \textit{Ready} del pod:
+\newpage
+
+    \begin{verbatim}
+oc set probe deployment/nodejs-ex --readiness --get-url=http://:8080/\
+ --initial-delay-seconds=5
+    \end{verbatim}
+
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{imagenes/image22.png}
+        \caption{Recuperación del estado normal del pod \textit{Fuente: elaboración propia.}}
+        \label{fig:vuelve_estado_normal}
+    \end{figure}
+
+Las \textit{probes} de \textit{liveness} aseguraron que los contenedores "muertos pero no caídos" fueran reiniciados para intentar recuperarlos, mejorando la robustez de la aplicación. Los \textit{probes} de \textit{readiness} controlaron cuándo un contenedor pudo recibir tráfico, garantizando que los usuarios siempre fueran dirigidos a instancias que funcionaron correctamente y evitando errores durante el inicio o problemas temporales.
+
+\vspace{0.5cm}
+\noindent\textbf{13. Actualización Automática de la Aplicación (\textit{CI/CD} Básico)} \\
+    
+\textit{OpenShift} facilitó la implementación de un mecanismo de actualización continua cuando se realizaron cambios en el repositorio de código fuente (git). Esto se logró configurando un trigger automático sobre el BuildConfig. Este comportamiento pudo estar ya habilitado por defecto, pero se pudo comprobar o forzar con: 
+    \begin{verbatim}
+oc set triggers bc/nodejs-ex --from-github=true --auto
+    \end{verbatim}
+
+    Además, en situaciones donde no se deseó esperar a un push o se requirió forzar una construcción, se pudo iniciar manualmente un nuevo build con el siguiente comando:
+    \begin{verbatim}
+oc start-build nodejs-ex
+    \end{verbatim}
+
+    Este enfoque demostró cómo se pudo implementar un flujo básico de \textit{CI/CD} directamente desde el control de versiones, agilizando el ciclo de entrega de software y reduciendo el esfuerzo manual.
+
+\newpage

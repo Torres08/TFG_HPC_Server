@@ -1,0 +1,6 @@
+{
+    "markdown.marp.themes": [
+        "./themes/beam.css",
+        "./themes/academic.css"
+    ]
+}

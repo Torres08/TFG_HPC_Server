@@ -1,0 +1,51 @@
+\chapter{Conclusiones y trabajos futuros}
+
+\section{Conclusiones}
+Este Trabajo de Fin de Grado tuvo como objetivo principal la implementación y documentación del ciclo completo de vida de un servidor de \textit{HPC} para el despliegue eficiente de \textit{LLM} bajo principios de \textit{SRE}. Este proyecto demostró con éxito la viabilidad y operatividad de una infraestructura de este tipo, desde su montaje inicial hasta su validación en escenarios de uso real. El proceso incluyó un estudio comparativo de modelos \textit{LLM} de distinto tamaño, evaluando métricas clave de rendimiento en diversos entornos, lo que permitió validar la capacidad y fiabilidad operativa del sistema.
+
+En cuanto a los objetivos específicos, el OG 1: Implementar físicamente y preparar el hardware para el despliegue del servidor \textit{HPC}, se ha cumplido al 100\%. Este objetivo fue alcanzado mediante la implementación física y la preparación del hardware y software del servidor \textit{HPC}, documentando el montaje, la instalación del sistema operativo y la configuración de los controladores y librerías necesarias, lo que sentó las bases para un sistema resiliente y seguro, tal como se aborda en el Capítulo 4. Luego, el OG 2: Desplegar y evaluar comparativamente modelos de lenguaje (\textit{LLM}), se ha cumplido también al 90\%. Se logró la aplicación práctica de la infraestructura al desplegar y evaluar comparativamente modelos de lenguaje (\textit{LLM}), incluyendo la implementación de un modelo de gran escala y otro de menor tamaño. Además de un estudio de su rendimiento con varios \textit{benchmarking}. Si bien inicialmente se había valorado el despliegue simultáneo de múltiples modelos, esta aproximacion no funcionó y se optó por desplegar uno solo. Sin embargo, los resultados obtenidos de esta evaluación fueron de gran interés y,  demostrando la eficiencia de los modelos en el servidor, se presentan en los Capítulos 5 y 6. Finalmente, el OG 3: Desplegar y configurar la plataformas de contenerización y orquestación, se ha cumplido al 80\%. Se logró la instalación de \textit{OpenShift Local} en el servidor, sin embargo, no fue posible realizar port forwarding para interactuar externamente con la plataforma debido a la virtualización que gestiona, por lo que se optó por usar la máquina virtual con \textit{OpenShift} que trae el curso. Además, inicialmente se contempló el despliegue de \textit{LLM} con \textit{OpenShift}, pero la misma virtualización hizo imposible que \textit{OpenShift} reconociera la \textit{GPU}. A pesar de estas limitaciones, se demostraron capacidades fundamentales de \textit{Site Reliability Engineering} (\textit{SRE}) como el autoescalado de recursos y el auto-healing. Los principios esenciales de la plataforma y sus funcionalidades clave fueron validados con una demostración compacta, tal como se detalla en el Capítulo 7.
+
+A continuación, se da respuesta a las preguntas de investigación planteadas al inicio del estudio:
+
+\begin{enumerate}
+    \item \textbf{¿Qué ventajas y limitaciones presentan las dos estrategias de despliegue de \textit{LLMs} en \textit{HPC}: un único modelo grande frente a uno pequeño?}
+    
+    El estudio reveló un claro trade-off entre el tamaño del modelo y su eficiencia (TPS y latencia) en el servidor. La estrategia de un modelo pequeño ofrece alta eficiencia y baja latencia, ideal para cargas concurrentes. La de un modelo grande cuantizado permite su ejecución en una sola \textit{GPU} de 48~\textit{VRAM}, pero a cambio de un rendimiento significativamente comprometido y una mayor demanda de recursos.
+
+    \item \textbf{¿Cómo afecta la cuantización avanzada al rendimiento, consumo de memoria y calidad de inferencia de modelos \textit{LLM} de gran tamaño en hardware limitado?}
+    
+    La cuantización es esencial para que modelos grandes quepan en hardware limitado (ej. \textit{GPU} de 48~\textit{VRAM}), reduciendo su huella de memoria. No obstante, una cuantización agresiva (4Q) afecta negativamente el rendimiento en comparación con versiones no cuantizadas, reflejado en los resultados obtenidos en el \textit{benchmarking}.
+
+    \item \textbf{¿Cuáles son las métricas y metodologías más adecuadas para evaluar el rendimiento real de \textit{LLMs} en escenarios de uso concurrente y bajo diferentes cargas de trabajo?}
+    
+    La latencia y el throughput son métricas clave. En cuanto al consumo de recursos, se observó que la memoria de la \textit{GPU} se utilizaba en su totalidad de manera constante, esto se atribuyó a la gestión de memoria de \textit{vLLM}. Por esta razón, el uso de \textit{VRAM} no resultó ser una métrica representativa. Se presentaron varios escenarios para el \textit{benchmarking} para analizar mejor los resultados.
+
+    \item \textbf{¿Qué impacto tienen las prácticas de \textit{Site Reliability Engineering} (\textit{SRE}) y la automatización (\textit{OpenShift}, \textit{CI/CD}, autoescalado) en la robustez y operatividad de un servidor?}
+    
+    Estas prácticas son fundamentales para la robustez y operatividad del servidor, demostrando resiliencia (autoescalado, auto-healing) y simplificación operativa. Además, resultan muy útiles y fundamentales de cara a largo plazo.
+    
+    \newpage
+    \item \textbf{¿Cuáles son los retos y mejores prácticas en la puesta a punto de un servidor \textit{HPC} con \textit{GPU} para el despliegue eficiente de \textit{LLM}?}
+    
+    Los retos incluyen la complejidad de la configuración de hardware y software para el uso eficiente de la \textit{GPU} y la conectividad remota. Las mejores prácticas abarcan la documentación, instalación de drivers y librerías, y la aplicación temprana de principios de \textit{SRE}.
+\end{enumerate}
+
+La formación universitaria en sistemas operativos, redes, virtualización y programación fue una base sólida, el curso de \textit{OpenShift} fue clave para ampliar conocimientos en orquestación, automatización y \textit{SRE} y las prácticas Erasmus como \textit{IT Infrastructure} en Alemania permitieron aplicar estas lecciones en entornos reales y suponen el primer contacto profesional en el sector.
+
+Las prácticas de \textit{SRE} y la automatización despertaron un gran interés, mejorando la capacidad de análisis y fomentando una atención al detalle esencial en ingeniería informática. Esta experiencia ha reforzado el valor de una gestión fiable desde las primeras fases del desarrollo, mostrando cómo las buenas prácticas facilitan el trabajo de los desarrolladores y mejoran la operación a largo plazo.
+
+El montaje y puesta a punto del servidor \textit{HPC} ofreció una visión completa del ciclo de vida de un sistema, desde su instalación hasta su adaptación a tareas específicas. Esta experiencia consolidó el interés por especializarse en \textit{SRE} y la importancia de diseñar servicios fiables desde el principio.
+
+En cuanto a aspectos éticos y sostenibles, se priorizó el uso de software libre y recursos institucionales como O’Reilly que ofrece la universidad y que lo menciona en el Capitulo 2, minimizando el impacto ambiental y económico. Además, se puso especial atención en la seguridad y privacidad de los datos en la medida de lo posible. 
+
+El proyecto, abordado de forma integral desde el montaje físico hasta su validación operativa, se considera completado con éxito. Ha permitido un buen aprendizaje, fortaleciendo tanto las competencias técnicas como la organización, la resolución de problemas y la comunicación. A pesar de las dificultades en la gestión del tiempo, se aprendió a priorizar tareas y adaptarse a imprevistos, un aspecto clave para el desarrollo profesional futuro.
+
+\section{Trabajos Futuros}
+A partir del trabajo realizado, se identifican varias líneas claras para continuar y ampliar el proyecto. En primer lugar se propone la instalación de \textit{OpenShift} en bare metal sobre un servidor \textit{HPC}, lo que permitiría desplegar la plataforma en un entorno real con soporte para \textit{GPU}. Esto facilita el despliegue de modelos \textit{LLM}, la gestión eficiente de recursos y la exploración de herramientas más avanzadas de \textit{OpenShift}, incluyendo estudiar pipelines más complejos e intentar desplegar aplicaciones más complejas.
+
+También otro aspecto a destacar es en el despliegue simultáneo de varios modelos mediante \textit{NVIDIA Triton Inference Server}, lo que permitiría comparar su rendimiento en el servidor y estudiar otro caso relevante. No obstante, es importante considerar que compartir una misma \textit{GPU} entre múltiples modelos puede generar problemas de contención de memoria y reducir el rendimiento, en base a las experiencias personales, ya que durante el desarrollo del TFG se intento desplegar varios modelos pero no funcionó.
+
+Una tercera idea se basa en la integración de \textit{OpenShift} en entornos empresariales o institucionales, como la universidad, donde por ejemplo se desplegarán \textit{LLM} para los maestros, incluyendo una interfaz web que permita interactuar con estos y así tener chatbots locales y personalizados.
+
+Si bien estas tareas no pudieron abordarse en el marco del presente trabajo debido a limitaciones de tiempo y recursos, representan claras oportunidades para futuros TFG, TFM o proyectos de investigación. La experiencia adquirida y la documentación generada proporcionan una base sólida para la continuidad de este trabajo.
+

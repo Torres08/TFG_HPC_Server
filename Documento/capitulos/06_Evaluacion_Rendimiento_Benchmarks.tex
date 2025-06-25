@@ -1,0 +1,854 @@
+\chapter{Evaluación de Rendimiento y \textit{Benchmarking}}
+
+\section{Introducción}
+Como se mencionó anteriormente, el objetivo de este estudio fue explorar la implementación de un chatbot en un entorno universitario. Para ello, resultó importante evaluar el desempeño de los modelos de lenguaje bajo carga, con el fin de determinar su capacidad para ofrecer un servicio local que garantizara la privacidad y el uso profesional por parte del personal docente.
+
+El proceso consistió en simular múltiples solicitudes concurrentes y medir métricas clave como el rendimiento (\textit{throughput}) y la latencia. Para la realización de estas pruebas de carga se empleó Apache \textit{Apache JMeter} \cite{ref58}, una herramienta de código abierto diseñada específicamente para este propósito. Aunque existían otras alternativas en el mercado, como Gatling \cite{ref60} o k6 \cite{ref59}, se seleccionó \textit{Apache JMeter} por su uso previo en la asignatura de Ingeniería de Servidores, lo que facilitó su implementación.
+
+El objetivo principal de las pruebas fue medir el rendimiento del servidor bajo carga, evaluando específicamente el \textit{throughput}, latencias, la tasa de error y el comportamiento del sistema bajo estrés moderado y alto. Los benchmarks simularon escenarios realistas en los que varios clientes (usuarios o servicios) realizaron peticiones de chat de manera simultánea.
+
+\section{Configuración del Entorno de Prueba y Herramientas}
+Se verificó la disponibilidad de \textit{Java} (versión 11 o superior, preferentemente \textit{Java 21}) en el sistema local. Posteriormente, se procedió a la descarga y configuración de \textit{Apache JMeter} (versión 5.6.3) mediante los siguientes comandos:
+\newpage
+\begin{verbatim}
+# Java >= 11 (si no está ya instalado)
+sudo apt update && sudo apt install -y openjdk-21-jdk
+
+# JMeter 5.6.3
+wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz
+tar -xzf apache-jmeter-5.6.3.tgz
+sudo mv apache-jmeter-5.6.3 /opt/jmeter
+echo 'export PATH=$PATH:/opt/jmeter/bin' >> ~/.bashrc && source ~/.bashrc
+jmeter -v # Verifica la versión de JMeter
+\end{verbatim}
+
+Fue importante destacar que todas las pruebas de rendimiento se ejecutaron desde el ordenador local. Esto se logró gracias al túnel \textit{SSH} previamente configurado, que permitió a \textit{JMeter} comunicarse de forma segura con el endpoint del modelo desplegado en la máquina remota. Realizar el \textit{benchmarking} desde un equipo externo a la máquina de prueba fue fundamental para evitar que la propia herramienta de \textit{benchmarking} afectara el rendimiento del modelo bajo evaluación. Si \textit{JMeter} se ejecutara en la misma máquina donde está desplegado el modelo, su consumo de CPU, memoria o red podría alterar los resultados, impidiendo obtener una imagen fiel del rendimiento real del \textit{LLM}. Por lo tanto, mantener el túnel \textit{SSH} activo fue imperativo durante todas las fases de la prueba.
+
+\section{Metodología de Cálculo de Métricas}
+Para una evaluación exhaustiva, se consideraron varias métricas clave, siendo el \textit{Throughput} de Tokens por Segundo (\textit{TPS}) una de las más relevantes para los \textit{LLMs}.
+
+El \textit{Throughput} de \textit{TPS} representa la cantidad total de tokens que el modelo puede generar por segundo bajo una carga específica, incluyendo tanto los tokens del \textit{prompt} (entrada) como los tokens de la respuesta (salida). Su cálculo se basa en el principio de que el \textit{throughput} total de tokens es el producto del número de solicitudes procesadas por segundo y la cantidad de tokens generados por cada solicitud~\cite{ref29,ref30}. Esta métrica se utiliza para evaluar la eficiencia del hardware en la inferencia de \textit{LLMs}~\cite{ref31}.
+
+Sean:
+\begin{itemize}
+    \item $TS$: \textit{Throughput} de Solicitudes en \textit{JMeter} (solicitudes/segundo)
+    \item $TP$: Tokens del \textit{Prompt} (entrada) por solicitud
+    \item $TC$: Tokens de Completación (salida) por solicitud (equivalente a \textit{max\_tokens})
+\end{itemize}
+Entonces, los Tokens Totales por Solicitud ($T_{Total}$) se define como:
+\begin{equation*}
+T_{Total} = TP + TC
+\end{equation*}
+
+Y el \textit{Throughput} de \textit{TPS} se calcula como:
+\begin{equation*}
+TPS = TS \times T_{Total}
+\end{equation*}
+
+Este método permitió convertir el \textit{throughput} de solicitudes en una métrica directamente comparable al rendimiento de generación de tokens, ofreciendo una visión clara de la capacidad del sistema para manejar las interacciones del chatbot. Es una práctica estándar en el \textit{benchmarking} de \textit{LLMs}.
+
+Además del \textit{TPS}, se monitorearon las siguientes métricas:
+\begin{itemize}
+    \item \textit{Average Latency} (Latencia Promedio): Tiempo promedio que tardó una solicitud en completarse.
+    \item \textit{Min/Max Latency} (Latencia Mínima/Máxima): Rango de tiempos de respuesta para identificar picos.
+    \item \textit{Standard Deviation} (Desviación Estándar de Latencia): Midió la consistencia de los tiempos de respuesta (un valor alto indicó inconsistencia).
+    \item \textit{Throughput} (Solicitudes/seg): Número de solicitudes que el sistema procesó por unidad de tiempo.
+    \item \textit{Error \%}: Porcentaje de solicitudes fallidas.
+\end{itemize}
+
+\section{Metodología de \textit{Benchmarking}}
+Se diseñó un plan de prueba en \textit{JMeter} para simular solicitudes \textit{POST} concurrentes al endpoint \texttt{/v1/chat/completions} de la \textit{API} del modelo, buscando emular la interacción de múltiples usuarios chateando simultáneamente con el modelo.
+
+Los pasos para configurar un plan de prueba en \textit{JMeter} fueron:
+\begin{itemize}
+    \item Crear un Nuevo Plan de Prueba: Se inició \textit{JMeter} y se creó un plan de prueba en blanco.
+    \item Configurar un \textit{Thread Group} (Grupo de Hilos): Este elemento simuló usuarios concurrentes. Se ajustaron los parámetros:
+    \begin{itemize}
+        \item \textit{Number of Threads} (Usuarios): Se varió para simular diferentes cargas (ej., 5, 10, 15 hilos).
+        \item \textit{Ramp-up Period} (segundos): Se fijó en 5 segundos para una introducción gradual de la carga.
+        \item \textit{Loop Count} (Iteraciones) o \textit{Duration} (segundos): Se configuró para asegurar una duración adecuada de la prueba.
+    \end{itemize}
+    \item Añadir un \textit{HTTP Header Manager}: Para configurar las cabeceras HTTP necesarias:
+    \begin{itemize}
+        \item Name: Accept, Value: application/json
+        \item Name: Content-Type, Value: application/json
+    \end{itemize}
+    \item Añadir una Solicitud HTTP (\textit{HTTP Request}): Este elemento envió la solicitud real a la \textit{API}.
+    \begin{itemize}
+        \item Name: Nombre descriptivo (ej., "DeepSeek Chat Completion").
+        \item Protocol: http
+        \item Server name or IP: localhost (debido al túnel \textit{SSH})
+        \item Port Number: 8000
+        \item Method: POST
+        \item Path: /v1/chat/completions
+        \item Body Data: Se configuró el \textit{JSON} para la conversación de chat, incluyendo el modelo a usar, los mensajes y \textit{max\_tokens} (longitud máxima de la respuesta esperada). Esto se detallaría más adelante.
+    \end{itemize}
+    \item Añadir \textit{Listeners} (Elementos para Ver los Resultados): Para visualizar y analizar métricas:
+    \begin{itemize}
+        \item \textit{View Results Tree}: Para inspeccionar solicitudes y respuestas individuales.
+        \item \textit{Summary Report}: Ofreció un resumen consolidado de métricas clave (\textit{throughput}, latencia promedio).
+    \end{itemize}
+\end{itemize}
+Durante la ejecución de las pruebas, se realizó un monitoreo continuo de la utilización de la \textit{GPU} en tiempo real mediante el comando:
+\begin{verbatim}
+watch -n 1 nvidia-smi
+\end{verbatim}
+Esta monitorización fue importante para relacionar el rendimiento medido por \textit{JMeter} con el uso de los recursos de hardware subyacentes, especialmente la \textit{VRAM} y la capacidad de procesamiento de la \textit{NVIDIA L40S}.
+
+% [Interfaz de jmeter con el benchmark]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{imagenes/image50.png}
+    \caption{Interfaz de JMeter con el benchmark}
+    \label{fig:jmeter_benchmark}
+\end{figure}
+
+\section{Escenarios de Prueba}
+Las pruebas de rendimiento se estructuraron en torno a diversos escenarios, variando principalmente el número de hilos concurrentes y la longitud máxima de la respuesta (referida como \textit{max tokens}). El objetivo fue comprender cómo estas variables impactaron la latencia y el \textit{throughput} de los modelos en el contexto de un chatbot.
+
+\subsection{Detalles de Tokenización de los \textit{Prompts}} 
+Para cada tipo de solicitud HTTP (\textit{POST}), se determinó el número de tokens en el \textit{prompt} ($TP$) y el total de tokens ($T_{Total}$), que incluyó los tokens del \textit{prompt} más el \textit{max tokens} ($TC$) de la respuesta esperada. Estos valores fueron fundamentales para el cálculo del \textit{Throughput} de \textit{TPS}.
+
+El proceso de tokenización de los \textit{prompts} se llevó a cabo utilizando la librería \textit{transformers} de \textit{Hugging Face}. Se cargó el tokenizador (\textit{AutoTokenizer}) específico para cada modelo (\texttt{deepseek-ai/deepseek-llm-7b-chat} y \texttt{deepseek-ai/deepseek-llm-67b-chat}) y se empleó para codificar el contenido de cada \textit{prompt}, obteniendo así el número exacto de tokens que cada modelo interpretaría. Esto aseguró la precisión en la determinación de $TP$ para los cálculos posteriores. El código usado se puede encontrar en el repositorio de GitHub \cite{ref17} (\texttt{contar\_tokens\_comparativa.py}).
+
+A continuación, se detallan los tokens asociados a cada configuración de \textit{prompt} y \textit{max tokens}:
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccc}
+\hline
+\textbf{Solicitud POST} & \textbf{max\_tokens ($TC$)} & \textbf{Tokens en el prompt ($TP$)} & \textbf{Tokens totales por solicitud ($T_{Total}$)} \\
+\hline
+POST 1 & 32  & 16  & 48  \\
+POST 2 & 64  & 58  & 122 \\
+POST 2 & 128 & 58  & 186 \\
+POST 2 & 256 & 58  & 314 \\
+POST 3 & 256 & 103 & 359 \\
+\hline
+\end{tabular}
+}
+\caption{Tokens asociados a cada configuración de \textit{prompt} y \textit{max tokens}.}
+\label{tab:tokens_por_solicitud}
+\end{table}
+
+Fue importante destacar que las métricas de \textit{Throughput} de \textit{TPS} presentadas en este estudio se calcularon a partir del \textit{Throughput} de solicitudes reportado por \textit{Apache JMeter}. Este \textit{TPS} representó el volumen total de tokens (suma de tokens de \textit{prompt} y tokens de completación) procesados por el sistema por unidad de tiempo desde la perspectiva del cliente. Si bien los logs internos del motor de inferencia (como \textit{vLLM}) pudieron reportar métricas de \textit{throughput} de \textit{prompt} y de generación por separado, que reflejan procesos internos de forma desagregada, para fines de \textit{benchmarking} de sistema completo y comparabilidad directa entre las pruebas bajo diferentes cargas, el \textit{TPS} calculado a partir de los datos de \textit{JMeter} se consideró la métrica más apropiada y representativa de la capacidad de procesamiento de tokens del sistema en su conjunto.
+
+\subsection{Escenario 1: Latencia y Consistencia en Respuestas Cortas}
+El propósito de este escenario fue evaluar la eficiencia de cada modelo al generar respuestas breves y rápidas, donde la baja latencia y la alta consistencia fueron cruciales para una experiencia de usuario fluida en el chatbot. Un ejemplo de uso real sería un usuario del chatbot realizando consultas rápidas, como ``¿Cuál es la capital de España?'' o ``¿Qué día es el día del padre?''. La expectativa en estos casos fue una respuesta casi instantánea.
+
+El \textit{prompt} utilizado para ambos modelos fue el siguiente:
+\begin{verbatim}
+{
+  "model": "deepseek-ai/deepseek-llm-67b-chat", # o el de 7b
+  "messages": [
+    {
+      "role": "user",
+      "content": "¿Cuál es la capital de España y su moneda actual?"
+    }
+  ],
+  "max_tokens": 32,
+  "temperature": 0.1,
+  "top_p": 0.9
+}
+\end{verbatim}
+
+\subsubsection*{Subescenario 1.1: A1 - Latencia Corta - 10 Hilos}
+Este subescenario se configuró con una carga moderada para evaluar el comportamiento inicial bajo un nivel de concurrencia controlado.
+
+\noindent\textbf{Propiedades}
+\begin{itemize}
+    \item Number of Threads (usuarios): 10
+    \item Ramp-up period (segundos): 5
+    \item Duration (segundos): 180 (3 minutos)
+    \item Startup delay (segundos): 0
+    \item max tokens: 32
+\end{itemize}
+
+\noindent\textbf{Modelo Pequeño (deepseek-llm-7b-chat):}
+
+% [Resultado A1 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image16.png}
+    \caption{Resultado A1 7B}
+    \label{fig:resultado_a1_7b}
+\end{figure}
+
+% [Ejemplo output A1 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image20.png}
+    \caption{Ejemplo output A1 7B}
+    \label{fig:ejemplo_output_a1_7b}
+\end{figure}
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 21.7272 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 16+32=48 tokens
+    \item Throughput de \textit{TPS}: 21.7272$\times$48=1042.91 TPS
+    \item Latencia Promedio: 459.70 ms
+\end{itemize}
+
+\newpage
+\noindent\textbf{Modelo Grande (deepseek-llm-67b-chat):}
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 0.68286 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 16+32=48 tokens
+    \item Throughput de \textit{TPS}: 0.68286$\times$48=32.78 TPS
+    \item Latencia Promedio: 14192 ms
+\end{itemize}
+
+% [Resultado A1 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image54.png}
+    \caption{Resultado A1 67B}
+    \label{fig:resultado_a1_67b}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image9.png}
+    \caption{Ejemplo output A1 67B}
+    \label{fig:ejemplo_output_a1_67b}
+\end{figure}
+
+\subsubsection*{Subescenario 1.2: A2 - Latencia Corta - 20 Hilos}
+Este subescenario incrementó la carga de usuarios para evaluar el rendimiento bajo mayor concurrencia manteniendo la respuesta corta.
+
+\noindent\textbf{Propiedades}
+\begin{itemize}
+    \item Number of Threads (usuarios): 20
+    \item Ramp-up period (segundos): 5
+    \item Duration (segundos): 180 (3 minutos)
+    \item Startup delay (segundos): 0
+    \item max tokens: 32
+\end{itemize}
+\newpage
+\noindent\textbf{Modelo Pequeño (deepseek-llm-7b-chat):}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image55.png}
+    \caption{Resultado A2 7B}
+    \label{fig:resultado_a2_7b}
+\end{figure}
+
+% [Ejemplo output A2 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image14.png}
+    \caption{Ejemplo output A2 7B}
+    \label{fig:ejemplo_output_a2_7b}
+\end{figure}
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 21.71443 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 16+32=48 tokens
+    \item Throughput de \textit{TPS}: 21.71443$\times$48=1042.29 TPS
+    \item Latencia Promedio: 454 ms
+\end{itemize}
+
+\noindent\textbf{Modelo Grande (deepseek-llm-67b-chat):}
+
+% [Resultado A2 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image21.png}
+    \caption{Resultado A2 67B}
+    \label{fig:resultado_a2_67b}
+\end{figure}
+
+% [Ejemplo output A2 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image9.png}
+    \caption{Ejemplo output A2 67B}
+    \label{fig:ejemplo_output_a2_67b}
+\end{figure}
+
+\newpage
+\noindent Resultados:
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 1.34937 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 16+32=48 tokens
+    \item Throughput de \textit{TPS}: 1.34937$\times$48=64.77 TPS
+    \item Latencia Promedio: 14359 ms
+\end{itemize}
+
+\subsection{Escenario 2: Impacto de la Longitud de la Respuesta y Complejidad}
+El propósito de este escenario fue evaluar cómo se comportaron los modelos al generar respuestas de longitud media a alta y con un nivel de complejidad que un modelo más pequeño podría empezar a gestionar con dificultad. Esto fue clave para determinar la calidad de la interacción en situaciones que requieren más detalle. Un ejemplo de uso real sería un usuario del chatbot pidiendo un resumen de un tema complejo (``Explica los principios de la física cuántica'') o solicitando ideas para un proyecto. En estos casos, la calidad y la longitud de la respuesta fueron más importantes que la latencia ultrabaja.
+
+El \textit{prompt} utilizado para ambos modelos fue el siguiente:
+\begin{verbatim}
+{
+  "model": "deepseek-ai/deepseek-llm-67b-chat",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Explica el proceso de fotosíntesis en detalle, 
+      mencionando las etapas clave (fase luminosa y fase oscura), 
+      los componentes necesarios, y la ecuación química general. 
+      ¿Por qué es fundamental para la vida en la Tierra?"
+    }
+  ],
+  "max_tokens": 64,
+  "temperature": 0.7,
+  "top_p": 0.9
+}
+\end{verbatim}
+
+\newpage
+\subsubsection*{Subescenario 2.1: B1 - Longitud 64 - 15 Hilos}
+Este subescenario exploró el rendimiento con respuestas de longitud media bajo una carga moderada.
+
+\noindent\textbf{Propiedades}
+\begin{itemize}
+    \item Number of Threads (usuarios): 15
+    \item Ramp-up period (segundos): 5
+    \item Duration (segundos): 240 (4 minutos)
+    \item Startup delay (segundos): 0
+    \item max tokens: 64
+\end{itemize}
+
+\noindent\textbf{Modelo Pequeño (deepseek-llm-7b-chat):}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image57.png}
+    \caption{Resultado B1 7B}
+    \label{fig:resultado_b1_7b}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image27.png}
+    \caption{Ejemplo output B1 7B}
+    \label{fig:ejemplo_output_b1_7b}
+\end{figure}
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 10.61942 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 58+64=122 tokens
+    \item Throughput de \textit{TPS}: 10.61942$\times$122=1295.58 TPS
+    \item Latencia Promedio: 1397 ms
+\end{itemize}
+
+\noindent\textbf{Modelo Grande (deepseek-llm-67b-chat):}
+
+% [Resultado B1 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image59.png}
+    \caption{Resultado B1 67B}
+    \label{fig:resultado_b1_67b}
+\end{figure}
+
+% [Ejemplo output B1 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image26.png}
+    \caption{Ejemplo output B1 67B}
+    \label{fig:ejemplo_output_b1_67b}
+\end{figure}
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 0.50908 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 58+64=122 tokens
+    \item Throughput de \textit{TPS}: 0.50908$\times$122=62.11 TPS
+    \item Latencia Promedio: 28895 ms
+\end{itemize}
+
+\subsubsection*{Subescenario 2.2: B2 - Longitud 128 - 15 Hilos}
+Se aumentó la longitud esperada de la respuesta para observar su impacto en el rendimiento.
+
+\noindent\textbf{Propiedades}
+\begin{itemize}
+    \item Number of Threads (usuarios): 15
+    \item Ramp-up period (segundos): 5
+    \item Duration (segundos): 240 (4 minutos)
+    \item Startup delay (segundos): 0
+    \item max tokens: 128 (con el prompt complejo)
+\end{itemize}
+
+\noindent\textbf{Modelo Pequeño (deepseek-llm-7b-chat):}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image32.png}
+    \caption{Resultado B2 7B}
+    \label{fig:resultado_b2_7b}
+\end{figure}
+
+% [Output B2 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image11.png}
+    \caption{Output B2 7B}
+    \label{fig:output_b2_7b}
+\end{figure}
+
+% [Output B2 7B pero con error]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image18.png}
+    \caption{Output B2 7B pero con error}
+    \label{fig:output_b2_7b_error}
+\end{figure}
+
+% [Ejemplo output B2 7B]
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 5.35672 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 58+128=186 tokens
+    \item Throughput de \textit{TPS}: 5.35672$\times$186=996.35 TPS
+    \item Latencia Promedio: 2758 ms
+\end{itemize}
+Es importante señalar que este resultado específico presentó un error al incluir caracteres chinos en el contenido de la respuesta, lo que afectó la integridad de la salida.
+
+\newpage
+\noindent\textbf{Modelo Grande (deepseek-llm-67b-chat):}
+
+% [Resultado B2 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image62.png}
+    \caption{Resultado B2 67B}
+    \label{fig:resultado_b2_67b}
+\end{figure}
+
+% [Ejemplo output B2 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image28.png}
+    \caption{Ejemplo output B2 67B}
+    \label{fig:ejemplo_output_b2_67b}
+\end{figure}
+
+
+\noindent Resultados:
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 0.25706 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 58+128=186 tokens
+    \item Throughput de \textit{TPS}: 0.25706$\times$186=47.81 TPS
+    \item Latencia Promedio: 57420 ms
+\end{itemize}
+
+\subsubsection*{Subescenario 2.3: B3 - Longitud 256 - 15 Hilos}
+Se estableció la longitud máxima de respuesta para evaluar el límite de la capacidad de generación de tokens.
+
+\noindent\textbf{Propiedades}
+\begin{itemize}
+    \item Number of Threads (usuarios): 15
+    \item Ramp-up period (segundos): 5
+    \item Duration (segundos): 240 (4 minutos)
+    \item Startup delay (segundos): 0
+    \item max tokens: 256 (con el prompt complejo)
+\end{itemize}
+
+\noindent\textbf{Modelo Pequeño (deepseek-llm-7b-chat):}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image35.png}
+    \caption{Resultado B3 7B}
+    \label{fig:resultado_b3_7b}
+\end{figure}
+
+% [Ejemplo output B3 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image19.png}
+    \caption{Ejemplo output B3 7B}
+    \label{fig:ejemplo_output_b3_7b}
+\end{figure}
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 2.61623 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 58+256=314 tokens
+    \item Throughput de \textit{TPS}: 2.61623$\times$314=821.50 TPS
+    \item Latencia Promedio: 5620 ms
+\end{itemize}
+
+\newpage
+\noindent\textbf{Modelo Grande (deepseek-llm-67b-chat):}
+
+% [Resultado B3 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image5.png}
+    \caption{Resultado B3 67B}
+    \label{fig:resultado_b3_67b}
+\end{figure}
+
+% [Ejemplo output B3 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image10.png}
+    \caption{Ejemplo output B3 67B}
+    \label{fig:ejemplo_output_b3_67b}
+\end{figure}
+
+\noindent Resultados:
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 0.12917 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 58+256=314 tokens
+    \item Throughput de \textit{TPS}: 0.12917$\times$314=40.54 TPS
+    \item Latencia Promedio: 114578 ms
+\end{itemize}
+
+\subsection{Escenario 3: Búsqueda del \textit{Throughput} Máximo de \textit{TPS}}
+El propósito de este escenario fue llevar el sistema al límite de su capacidad de \textit{throughput} de tokens con respuestas largas y complejas, con el fin de determinar la capacidad máxima de procesamiento de cada modelo. Esta evaluación resultó fundamental para entender cuántos usuarios pueden interactuar con el chatbot simultáneamente en tareas computacionalmente intensivas sin que el rendimiento experimente una degradación severa. Ejemplos de uso real incluyeron la generación de materiales didácticos extensos, la creación de descripciones detalladas de cursos o la obtención de análisis complejos de datos para investigación. En este escenario, el enfoque principal radicó en el máximo volumen de trabajo procesado por unidad de tiempo.
+
+El \textit{prompt} utilizado para ambos modelos fue el siguiente:
+\newpage
+\begin{verbatim}
+{
+  "model": "deepseek-ai/deepseek-llm-67b-chat",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Detalla los desafíos éticos y de seguridad asociados con 
+      el desarrollo y la implementación de la inteligencia artificial
+       generativa a gran escala. Considera aspectos como el sesgo en los
+        datos de entrenamiento, la privacidad de la información, el uso
+         indebido (deepfakes, desinformación), la propiedad intelectual 
+         y la responsabilidad legal. Proporciona soluciones o mitigaciones
+          para cada uno de estos desafíos."
+    }
+  ],
+  "max_tokens": 256,
+  "temperature": 0.7,
+  "top_p": 0.9
+}
+\end{verbatim}
+
+El número de tokens del \textit{prompt} ($TP$) para esta solicitud fue de 103 tokens. La duración de la prueba se aumentó a 300 segundos (5 minutos) para permitir una estabilización de las métricas bajo alta carga.
+
+\subsubsection*{Subescenario 3.1: C1 - Longitud 256 - 25 Hilos}
+Se aumentó el número de hilos para empujar el sistema con un \textit{prompt} y una respuesta de alta complejidad.
+
+\noindent\textbf{Propiedades}
+\begin{itemize}
+    \item Number of Threads (usuarios): 25
+    \item Ramp-up period (segundos): 5
+    \item Duration (segundos): 300 (5 minutos)
+    \item Startup delay (segundos): 0
+    \item max tokens: 256 (con el prompt complejo).
+\end{itemize}
+
+
+\newpage
+\noindent\textbf{Modelo Pequeño (deepseek-llm-7b-chat)}
+
+
+% [Resultado C1 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image64.png}
+    \caption{Resultado C1 7B}
+    \label{fig:resultado_c1_7b}
+\end{figure}
+
+% [Ejemplo output C1 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image48.png}
+    \caption{Ejemplo output C1 7B}
+    \label{fig:ejemplo_output_c1_7b}
+\end{figure}
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 3.95235 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 103+256=359 tokens
+    \item Throughput de \textit{TPS}: 3.95235$\times$359=1418.69 TPS
+    \item Latencia Promedio: 6218 ms
+\end{itemize}
+
+\newpage
+\noindent\textbf{Modelo Grande (deepseek-llm-67b-chat):}
+
+% [Resultado C1 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image41.png}
+    \caption{Resultado C1 67B}
+    \label{fig:resultado_c1_67b}
+\end{figure}
+
+% [Ejemplo output C1 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image48.png}
+    \caption{Ejemplo output C1 67B}
+    \label{fig:ejemplo_output_c1_67b}
+\end{figure}
+
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 0.20973 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 103+256=359 tokens
+    \item Throughput de \textit{TPS}: 0.20973$\times$359=75.30 TPS
+    \item Latencia Promedio: 117722 ms
+\end{itemize}
+
+\subsubsection*{Subescenario 3.2: C2 - Longitud 256 - 50 Hilos}
+Este subescenario representó la máxima carga de usuarios simulada con el \textit{prompt} más complejo y la respuesta más larga, buscando el límite superior del \textit{throughput}.
+
+\noindent\textbf{Propiedades}
+\begin{itemize}
+    \item Number of Threads (usuarios): 50
+    \item Ramp-up period (segundos): 5
+    \item Duration (segundos): 300 (5 minutos)
+    \item Startup delay (segundos): 0
+    \item max tokens: 256 (con el prompt complejo)
+\end{itemize}
+
+\noindent\textbf{Modelo Pequeño (deepseek-llm-7b-chat):}
+
+% [Resultado C2 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image39.png}
+    \caption{Resultado C2 7B}
+    \label{fig:resultado_c2_7b}
+\end{figure}
+
+% [Ejemplo output C2 7B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image49.png}
+    \caption{Ejemplo output C2 7B}
+    \label{fig:ejemplo_output_c2_7b}
+\end{figure}
+
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 6.8611 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 103+256=359 tokens
+    \item Throughput de \textit{TPS}: 6.8611$\times$359=2463.40 TPS
+    \item Latencia Promedio: 7174 ms
+\end{itemize}
+
+\noindent\textbf{Modelo Grande (deepseek-llm-67b-chat):}
+
+% [Resultado C2 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image0.png}
+    \caption{Resultado C2 67B}
+    \label{fig:resultado_c2_67b}
+\end{figure}
+
+% [Ejemplo output C2 67B]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image60.png}
+    \caption{Ejemplo output C2 67B}
+    \label{fig:ejemplo_output_c2_67b}
+\end{figure}
+
+\noindent Resultados
+\begin{itemize}
+    \item Throughput de Solicitudes (TS): 0.33929 solicitudes/segundo
+    \item Tokens Totales por Solicitud ($T_{Total}$=TP+TC): 103+256=359 tokens
+    \item Throughput de \textit{TPS}: 0.33929$\times$359=121.79 TPS
+    \item Latencia Promedio: 127785 ms
+\end{itemize}
+
+Todas las tablas que se han recogido para evaluar los modelos se guardan en el repositorio de GitHub.
+
+\section{Gráficas}
+Para la evaluación del rendimiento de los modelos de lenguaje con los datos obtenidos, se centró el análisis en dos métricas clave: el \textit{Throughput} de \textit{TPS} y la Latencia Promedio. Estas métricas fueron fundamentales para comprender la capacidad operativa y la experiencia de usuario que cada modelo pudo ofrecer.
+
+\subsection*{Métricas de Rendimiento Clave}
+\textbf{Throughput de \textit{TPS}:} Cuantifica la capacidad efectiva de cada modelo para procesar tokens (de entrada y salida) por segundo bajo carga. Este valor fue un indicador directo de la eficiencia del modelo.
+
+\textbf{Latencia Promedio:} Representa el tiempo promedio de respuesta de una solicitud. Este dato fue importante para evaluar la fluidez y la interactividad del chatbot.
+
+\subsection*{Representación Gráfica de los Resultados}
+La comparación del rendimiento entre el modelo grande y el modelo pequeño se representó mediante dos gráficas principales, que ilustraron la evolución de las métricas clave a través de los escenarios de prueba definidos.
+
+\textbf{Gráfica 1: Comparación del Throughput de \textit{TPS}}
+Esta gráfica presenta la capacidad de generación de texto de cada modelo.
+\begin{itemize}
+    \item Eje X (Horizontal): Escenarios de Prueba (Carga de Hilos / Longitud de Respuesta Máx.).
+    \item Eje Y (Vertical): \textit{TPS}.
+    \item Series: Se distinguen las líneas de datos correspondientes al ``Modelo Pequeño'' y al ``Modelo Grande''.
+    \item Análisis: Permite observar la variación en la capacidad de procesamiento de texto de cada modelo ante distintas cargas y complejidades de respuesta.
+\end{itemize}
+
+\textbf{Gráfica 2: Comparación de la Latencia Promedio}
+Esta gráfica ilustra la rapidez de respuesta de cada modelo en función de las condiciones de prueba.
+\begin{itemize}
+    \item Eje X (Horizontal): Escenarios de Prueba (Carga de Hilos / Longitud de Respuesta Máx.).
+    \item Eje Y (Vertical): Latencia Promedio (milisegundos).
+    \item Series: Se incluyen las líneas de datos para el ``Modelo Pequeño'' y el ``Modelo Grande''.
+    \item Análisis: Muestra cómo el tiempo de respuesta de los modelos se vio afectado por la concurrencia y la longitud de las respuestas generadas.
+\end{itemize}
+
+\subsection*{Datos para las Gráficas}
+%A continuación, se presentan las tablas con los datos de Latencia y TPS para cada modelo en los distintos escenarios:
+A continuación, se presentan las tablas con los datos de Latencia y \textit{TPS} para cada modelo en los distintos escenarios. 
+
+Los valores resaltados en negrita corresponden a los resultados que más me han llamado la atención. En concreto, se ha resaltado el valor mínimo de latencia para el modelo pequeño (\textbf{454 ms} en el escenario A1) y el valor máximo de \textit{TPS} para cada modelo (\textbf{2463,4} para el modelo pequeño y \textbf{121,79} para el modelo grande, ambos en el escenario C2). Estos valores representan los mejores desempeños en eficiencia y capacidad de procesamiento bajo las condiciones evaluadas.
+
+% filepath: /home/torres/Documents/Github/TFG/Documento/capitulos/06_Evaluacion_Rendimiento_Benchmarks.tex
+% filepath: /home/torres/Documents/Github/TFG/Documento/capitulos/06_Evaluacion_Rendimiento_Benchmarks.tex
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{4pt}
+\begin{center}
+\resizebox{0.95\textwidth}{!}{
+\begin{tabular}{lcccc}
+\hline
+\textbf{Escenario} & \textbf{Latencia Pequeño (ms)} & \textbf{Latencia Grande (ms)} & \textbf{TPS Pequeño} & \textbf{TPS Grande} \\
+\hline
+A1 & \textbf{454} & 14192 & 1042,91 & 32,78 \\
+A2 & 454 & 14359 & 1042,29 & 64,77 \\
+B1 & 1397 & 28895 & 1295,58 & 62,11 \\
+B2 & 2758 & 57420 & 996,35 & 47,81 \\
+B3 & 5620 & 114578 & 821,5 & 40,54 \\
+C1 & 6218 & 117722 & 1418,69 & 75,3 \\
+C2 & 7174 & 127785 & \textbf{2463,4} & \textbf{121,79} \\
+\hline
+\end{tabular}
+}
+\end{center}
+\caption{Comparativa conjunta de Latencia Promedio y Throughput de \textit{TPS} para ambos modelos en cada escenario.}
+\label{tab:latencia_tps_combinada}
+\end{table}
+
+% Mayor TPS y menor latencia para el modelo pequeño
+%Mayor TPS para el modelo grande
+%Puedes ajustar los criterios según tu análisis.
+
+% He puesto en negrita el menor valor de latencia (A1, modelo pequeño) y el mayor TPS de cada modelo (C2).
+
+% \begin{table}[H]
+% \centering
+% \renewcommand{\arraystretch}{1.2}
+% \setlength{\tabcolsep}{4pt}
+% \begin{tabular}{lcc}
+% \hline
+% \textbf{Escenario} & \textbf{Modelo Pequeño Latencia (ms)} & \textbf{Modelo Grande Latencia (ms)} \\
+% \hline
+% A1 & 459,7 & 14192 \\
+% A2 & 454 & 14359 \\
+% B1 & 1397 & 28895 \\
+% B2 & 2758 & 57420 \\
+% B3 & 5620 & 114578 \\
+% C1 & 6218 & 117722 \\
+% C2 & 7174 & 127785 \\
+% \hline
+% \end{tabular}
+% \caption{Comparación de la Latencia Promedio por Escenario y Modelo.}
+% \label{tab:latencia_por_escenario}
+% \end{table}
+
+% \begin{table}[H]
+% \centering
+% \renewcommand{\arraystretch}{1.2}
+% \setlength{\tabcolsep}{4pt}
+% \begin{tabular}{lcc}
+% \hline
+% \textbf{Escenario} & \textbf{Modelo Pequeño TPS} & \textbf{Modelo Grande TPS} \\
+% \hline
+% A1 & 1042,91 & 32,78 \\
+% A2 & 1042,29 & 64,77 \\
+% B1 & 1295,58 & 62,11 \\
+% B2 & 996,35 & 47,81 \\
+% B3 & 821,5 & 40,54 \\
+% C1 & 1418,69 & 75,3 \\
+% C2 & 2463,4 & 121,79 \\
+% \hline
+% \end{tabular}
+% \caption{Comparación del Throughput de Tokens por Segundo (TPS) por Escenario y Modelo.}
+% \label{tab:tps_por_escenario}
+% \end{table}
+
+
+
+
+% [Tabla Comparación Latencia por Escenario y Modelo]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image61.png}
+    \caption{Tabla Comparación Latencia por Escenario y Modelo (\textit{lower is better})}
+    \label{fig:tabla_latencia_escenario_modelo}
+\end{figure}
+
+% [Tabla Latencia Deepseek 7B]
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=1\textwidth]{imagenes/image58.png}
+%    \caption{Tabla Latencia Deepseek 7B}
+%    \label{fig:tabla_latencia_deepseek_7b}
+%\end{figure}
+
+
+% [Tabla Comparación TPS por Escenario y Modelo]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image3.png}
+    \caption{Tabla Comparación TPS por Escenario y Modelo (\textit{higher is better})}
+    \label{fig:tabla_tps_escenario_modelo}
+\end{figure}
+
+% [Tabla TPSDeepseek 67B]
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=1\textwidth]{imagenes/image43.png}
+%    \caption{Tabla TPS Deepseek 67B}
+%    \label{fig:tabla_tps_deepseek_67b}
+%\end{figure}
+
+
+
+\section{Observaciones y Análisis de Resultados}
+Tras la ejecución de los planes de prueba definidos, se obtuvieron un conjunto de métricas de rendimiento que permitieron un análisis comparativo detallado entre el modelo pequeño (\texttt{deepseek-llm-7b-chat}) y el modelo grande cuantificado \newline (\texttt{deepseek-llm-67b-chat} en 4 bits) en la \textit{GPU NVIDIA L40S}.
+
+\subsection*{Comportamiento de la GPU y Utilización de Recursos}
+%A lo largo de todas las pruebas realizadas, se observó consistentemente que la \textit{GPU NVIDIA L40S} alcanzó el 100\% de utilización y aproximadamente el 96\% de ocupación de su memoria (\textit{VRAM}). Esta saturación del recurso de cómputo y memoria fue una constante, independientemente del número de hilos concurrentes o del valor de \textit{max tokens} configurado (desde 32 hasta 256 tokens).
+
+%Esta alta utilización es una característica intrínseca del comportamiento de \textit{vLLM}, el motor de inferencia utilizado. \textit{vLLM} está diseñado para maximizar la ocupación de la \textit{GPU} mediante técnicas avanzadas de \textit{batching} continuo y optimización de \textit{KV-cache}, buscando mantener el hardware lo más ocupado posible para lograr el máximo \textit{throughput}. Aunque este enfoque es altamente beneficioso para el rendimiento general al minimizar los tiempos de inactividad de la \textit{GPU}, también implica que el sistema opera de forma continua cerca de su límite de capacidad. Esta operación al límite puede tener implicaciones en la latencia bajo alta concurrencia, ya que la \textit{GPU} no dispone de margen para absorber picos de demanda adicionales de manera instantánea.
+
+%Fue relevante destacar que, durante las pruebas, la utilización de la \textit{VRAM} de la \textit{GPU NVIDIA L40S} alcanzó consistentemente su límite de 48~GB en todos los escenarios, independientemente del modelo evaluado, según lo monitoreado con \textit{nvidia-smi}. Esta observación subrayó la naturaleza del cuello de botella en la inferencia de \textit{LLMs}, donde la memoria de la \textit{GPU} es un recurso crítico.
+
+%Para el modelo grande (\texttt{deepseek-llm-67b-chat} cuantificado), la saturación de la \textit{VRAM} se atribuyó principalmente al gran tamaño de los parámetros del modelo en sí. A pesar de la cuantización a 4 bits, un modelo de 67 mil millones de parámetros (casi 10 veces más grande que el modelo pequeño) requirió una cantidad significativa de memoria para su carga y operación, lo que inherentemente restringió la capacidad de la \textit{GPU} para manejar un alto volumen de solicitudes concurrentes y, por consiguiente, limitó drásticamente el \textit{Throughput} de Tokens por Segundo (TPS).
+
+%Por otro lado, para el modelo pequeño (\texttt{deepseek-llm-7b-chat}), la utilización completa de la \textit{VRAM} se logró al maximizar el \textit{batching} continuo y el almacenamiento de \textit{KV-Cache} de un elevado número de solicitudes concurrentes. Esto demostró la eficiencia del modelo pequeño y la efectividad de \textit{vLLM} en la explotación del hardware disponible para alcanzar un TPS significativamente superior en escenarios de alta concurrencia.
+
+A lo largo de todas las pruebas, la \textit{GPU NVIDIA L40S} alcanzó el 100\% de utilización y cerca del 96\% de ocupación de su memoria (\textit{VRAM}), independientemente del número de hilos concurrentes o del valor de \textit{max tokens} configurado. Esta saturación es consecuencia directa del diseño de \textit{vLLM}, que maximiza la ocupación de la \textit{GPU} mediante técnicas avanzadas de \textit{batching} continuo y optimización de \textit{KV-cache}, buscando mantener el hardware lo más ocupado posible para lograr el máximo \textit{throughput}. Si bien este enfoque minimiza los tiempos de inactividad y mejora el rendimiento general, también implica que el sistema opera de forma continua cerca de su límite de capacidad, lo que puede aumentar la latencia bajo alta concurrencia al no disponer de margen para absorber picos de demanda adicionales.
+
+El monitoreo con \textit{nvidia-smi} confirmó que la \textit{VRAM} de la \textit{L40S} se mantuvo en su límite de 48~GB en todos los escenarios, lo que evidencia que la memoria de la \textit{GPU} es un recurso crítico en la inferencia de \textit{LLMs}. Para el modelo grande (\texttt{deepseek-llm-67b-chat} cuantificado), esta saturación se debió principalmente al gran tamaño de sus parámetros, que restringió la capacidad de la \textit{GPU} para manejar muchas solicitudes concurrentes y limitó drásticamente el \textit{Throughput} de \textit{TPS}. En cambio, para el modelo pequeño (\texttt{deepseek-llm-7b-chat}), la utilización completa de la \textit{VRAM} se logró gracias al \textit{batching} continuo y al almacenamiento eficiente del \textit{KV-Cache}, permitiendo alcanzar \textit{TPS} significativamente superior en escenarios de alta concurrencia.
+
+% [L40S Saturada en todos los escenarios]
+
+\subsection*{Análisis del Throughput de \textit{TPS}}
+La Figura 1 (``Comparación del Throughput de \textit{TPS} por Escenario y Modelo'') ilustra una diferencia drástica en el \textit{TPS} entre el Modelo Pequeño y el Modelo Grande en todos los escenarios. Por ejemplo, en el subescenario A1, el Modelo Pequeño alcanzó 1042.91 \textit{TPS}, mientras que el Modelo Grande solo logró 32.78 \textit{TPS}. Esta superioridad del modelo pequeño se mantuvo en todos los escenarios, desde respuestas cortas (Escenario A) hasta cargas pesadas con respuestas largas (Escenario C), donde el modelo pequeño alcanzó un máximo de 2463.40 \textit{TPS} en C2. Este rendimiento del modelo pequeño fue el esperado para un modelo ligero que aprovecha la eficiencia del \textit{KV cache} y el \textit{batching} continuo. Por el contrario, el Modelo Grande mostró una escalabilidad limitada, especialmente en escenarios con \textit{prompts} complejos y respuestas largas, donde su rendimiento se vio afectado por la saturación de la \textit{VRAM} y el \textit{KV cache}.
+
+\subsection*{Análisis de la Latencia Promedio}
+La Figura 2 (``Comparación de la Latencia Promedio por Escenario y Modelo'') muestra que la latencia del Modelo Grande fue significativamente superior a la del Modelo Pequeño en todas las pruebas. En el subescenario A1, el Modelo Pequeño registró una latencia de 459.70~ms, mientras que el Modelo Grande alcanzó 14192~ms. A medida que la complejidad del \textit{prompt} y la longitud de la respuesta aumentaron, la latencia para ambos modelos se incrementó, pero de manera mucho más pronunciada para el Modelo Grande. En el escenario más exigente (C2), el Modelo Pequeño mantuvo una latencia aceptable de 7174~ms (aproximadamente 7 segundos), mientras que el Modelo Grande experimentó una latencia de 127785~ms (más de 2 minutos). Esta marcada diferencia subraya que el modelo pequeño es más adecuado para aplicaciones que demandan baja latencia y alta reactividad.
+
+\subsection*{¿Son plausibles los resultados?}
+Los resultados obtenidos son plenamente plausibles y coherentes con la teoría y la literatura sobre despliegue de \textit{LLMs}. La diferencia de órdenes de magnitud en \textit{throughput} y latencia a favor del modelo pequeño era esperable, dado que los modelos grandes requieren muchos más recursos computacionales y de memoria por token procesado, incluso tras aplicar cuantización. Cabe destacar que la saturación de la GPU y la VRAM se produjo tanto con el modelo grande como con el pequeño, debido a la forma en que \textit{vLLM} organiza y maximiza el uso de los recursos disponibles: en el modelo grande, la memoria se ocupó principalmente por el tamaño de los parámetros, mientras que en el modelo pequeño se llenó al gestionar un mayor número de solicitudes concurrentes y almacenar más \textit{KV-cache}. Esto valida la metodología y la interpretación de los datos, reflejando fielmente las limitaciones y ventajas de cada modelo en el entorno evaluado.
+
+\subsection*{Conclusiones Generales}
+El estudio reveló un claro \textit{trade-off} entre el tamaño del modelo y su eficiencia operativa (\textit{TPS} y latencia) en un entorno de hardware específico. El Modelo Pequeño (\texttt{deepseek-llm-7b-chat}) demostró ser significativamente más eficiente, con un \textit{TPS} superior y una latencia considerablemente menor, lo que lo hace ideal para servir a numerosos usuarios simultáneamente con buena reactividad. Por el contrario, el Modelo Grande (\texttt{deepseek-llm-67b-chat}) presentó un rendimiento limitado en escenarios de alta concurrencia, especialmente con \textit{prompts} largos, debido a la saturación de la \textit{GPU} y la \textit{VRAM}. Esto indicó que para el despliegue del modelo grande se requeriría un hardware mucho más potente o estrategias de \textit{batching} más optimizadas para alcanzar un rendimiento comparable bajo carga.
+

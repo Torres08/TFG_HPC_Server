@@ -1,0 +1,228 @@
+% ...existing code...
+
+\chapter{Ejecución de \textit{LLM} en Contenedores}
+
+\section{Introducción}
+Los \textit{LLM} son redes neuronales entrenadas con enormes cantidades de texto, diseñadas para comprender y generar lenguaje natural. Estos modelos aprenden a predecir la siguiente palabra o secuencia de texto a partir de contextos extensos, lo que les permite realizar tareas complejas como redacción, traducción, resumen, extracción de información o generación de código.
+
+Internamente, estos modelos están compuestos por miles de millones de parámetros entrenables. Cada parámetro es un valor numérico, llamado peso, que el modelo ajusta durante el entrenamiento para aprender patrones del lenguaje. Por ejemplo, un modelo con 67.000 millones de parámetros (67B) puede capturar patrones semánticos más complejos que uno de 7B, y en consecuencia, ofrecer respuestas más precisas o coherentes en tareas exigentes~\cite{ref26}.
+
+En este estudio se plantea una comparación entre dos modelos de la familia \textit{DeepSeek Chat 1}: uno de gran escala (67B) y otro más pequeño (7B). Ambos, entrenados para chatear, se van a desplegar en un servidor que dispone de una \textit{GPU NVIDIA L40S} con 48~GB de \textit{VRAM}, una tarjeta profesional de alta gama orientada a cargas de trabajo de \textit{IA}.
+
+Aunque la \textit{L40S} ofrece una capacidad de cómputo más que considerable, los requisitos de memoria de un modelo como \textit{DeepSeek 67B} suponen un desafío operativo: si se carga en formato estándar de 16 bits (\textit{float16}), sus pesos ocupan aproximadamente 124~GB de \textit{VRAM}, una cifra que excede ampliamente la capacidad de esta \textit{GPU}~\cite{ref27}. Este escenario lleva a la pregunta: ¿cómo es posible ejecutar un modelo tan grande en una sola tarjeta? La respuesta se encuentra en una técnica crucial para el despliegue eficiente de \textit{LLM} en entornos realistas: la cuantización.
+
+\section{Importancia de la Cuantización}
+La cuantización consiste en representar los pesos del modelo utilizando menos bits (por ejemplo, 8 o 4 bits en lugar de 16 o 32), lo que reduce significativamente el tamaño en memoria sin alterar la estructura del modelo. Entre los enfoques más avanzados se encuentra \textit{QLoRA}~\cite{ref28} que permite ejecutar y afinar modelos de hasta 65B en una sola \textit{GPU} de 48~GB, como la \textit{L40S}, sin pérdida sustancial de precisión.
+
+\textit{QLoRA} introduce innovaciones técnicas significativas, incluyendo el formato \textit{NormalFloat} de 4 bits (\textit{NF4}), un formato numérico diseñado para preservar la distribución estadística de los pesos tras la compresión, reduciendo el impacto sobre la inferencia. Además, emplea la doble cuantización, que no solo comprime los pesos del modelo, sino también las matrices utilizadas para revertir esa compresión. Estas características se traducen en una reducción sustancial del consumo de memoria sin afectar de manera perceptible la precisión de los resultados.
+
+En este caso, cuantizar \textit{DeepSeek Chat 67B} a 4 bits reduce su huella de memoria a unos 31~GB, lo que permite cargarlo en la \textit{L40S} sin recurrir a particionado de modelo ni a técnicas de inferencia distribuida. Además, esta reducción libera alrededor de 17~GB adicionales de \textit{VRAM}, espacio esencial para alojar otros componentes críticos del proceso de inferencia, como la caché de atención (\textit{KV cache}) o los buffers temporales gestionados por el motor de inferencia \textit{vLLM} mediante su algoritmo \textit{PagedAttention}.
+
+Así, la cuantización no es simplemente una optimización; se convierte en una herramienta esencial para adaptar modelos punteros a entornos reales, maximizando el uso de los recursos disponibles y garantizando una ejecución eficiente sin comprometer la calidad.
+
+\section{Inferencia Eficiente con \textit{vLLM} y \textit{PagedAttention}}
+Tal como se explica en el Capítulo 2, el motor de inferencia \textit{vLLM} se emplea en ambos despliegues. Su innovación principal es el algoritmo \textit{PagedAttention}, que organiza la memoria de atención del modelo en páginas virtuales no contiguas, inspirándose en técnicas clásicas de los sistemas operativos. Esta estrategia permite compartir eficientemente la memoria entre solicitudes concurrentes y reducir la fragmentación, mejorando el rendimiento en tareas multicliente o en la generación de secuencias largas.
+
+Gracias a esta arquitectura, \textit{vLLM} permite un uso óptimo de los recursos de la \textit{L40S} tanto con el modelo pequeño (7B) como con el modelo cuantizado (67B en 4 bits), facilitando una comparación justa en términos de eficiencia, latencia y uso de recursos.
+
+\section{Aplicación Práctica}
+El propósito de este capítulo fue explorar qué enfoque resultó más eficaz al implementar en un caso hipotético un chatbot para el uso universitario para el profesorado. Estaría localmente desplegado garantizando así mayor privacidad.
+
+\noindent En este contexto, se buscaron tres criterios clave en diferentes escenarios:
+\begin{itemize}
+    \item Tiempos de inferencia bajos (latencia por solicitud).
+    \item Respuestas coherentes y contextuales (calidad de generación).
+    \item Un \textit{throughput} elevado (tokens por segundo), que reflejó la capacidad total de procesamiento y la velocidad de generación continua del modelo.
+\end{itemize}
+Ambos modelos fueron desplegados en contenedores aislados mediante \textit{Podman} \cite{ref75} y descritos con ficheros \textit{podman-compose}, facilitando su gestión, monitorización y replicabilidad. El objetivo fue determinar si un modelo compacto o uno cuantizado de gran escala era la mejor opción para las necesidades técnicas y funcionales de un chatbot para uso universitario.
+
+\noindent Las siguientes secciones detallarán:
+\begin{itemize}
+    \item La construcción de imágenes optimizadas con soporte para cuantización y \textit{vLLM}.
+    \item El diseño de los \textit{YAML} de despliegue.
+    \item Una comparación empírica del rendimiento de ambos modelos: tokens por segundo y tiempo de respuesta.
+\end{itemize}
+
+\section{Tunneling}
+Se estudió que, al desplegarse, ambos modelos implementan una \textit{API REST (FastAPI)} para facilitar la interacción y permitir la realización de solicitudes para su prueba. Sin embargo, surgió la cuestión de cómo acceder a esta interfaz \textit{FastAPI} desde un equipo local, dado que estaría disponible en el servidor remoto.
+
+Para ello, se implementó un túnel \textit{SSH} simple, mediante el cual se estableció un canal cifrado que redirigió el puerto en el que se expuso la interfaz \textit{FastAPI} al equipo local.
+
+En este despliegue, se esperaba que el modelo \textit{DeepSeek-LLM} expusiera la interfaz \textit{FastAPI} en el puerto \texttt{localhost:8000}. El comando utilizado para establecer el túnel fue:
+
+\newpage
+\begin{verbatim}
+ssh -L 8000:localhost:8000 iacepruduser@minixatc.ugr.es -t \
+    ssh -L 8000:localhost:8000 -p XXXXX iacepruduser@iaceprud.ugr.es
+\end{verbatim}
+
+Los flags utilizados fueron:
+\begin{itemize}
+    \item \texttt{-L <puerto\_local>:<destino>:<puerto\_destino>}: Creó un túnel de un puerto en el equipo local al destino remoto.
+    \item \texttt{-t}: Forzó la asignación de una pseudo-terminal, necesaria para encadenar el segundo \textit{SSH}.
+    \item \texttt{-p XXXXX}: Indicó que el segundo servidor \textit{SSH} estaba configurado para escuchar en un puerto no estándar (cuyo valor se omitió por motivos de privacidad) en lugar del puerto estándar 22.
+\end{itemize}
+Una vez que el túnel estuvo activo, al acceder a \url{http://localhost:8000}, se pudo interactuar directamente con la interfaz \textit{FastAPI} del servidor remoto, siempre que el modelo se encontrara desplegado. Esto permitió realizar pruebas con herramientas como \textit{curl} o \textit{JMeter} como si la interfaz estuviera ejecutándose localmente.
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{imagenes/tunneling.png}
+  \caption{Esquema del túnel SSH para acceder a la API FastAPI del modelo desplegado}
+  \label{fig:tunneling-ssh}
+\end{figure}
+
+\section{Despliegue de Modelos de Lenguaje}
+El despliegue de \textit{LLM} implicó la creación de entornos contenerizados y la orquestación de servicios. Esta sección detalla el procedimiento para dos casos de estudio: un modelo de gran tamaño que exigía cuantización y un modelo más pequeño. El entorno utilizado en esta práctica contó con un controlador \textit{NVIDIA} igual o superior a 570.133 y \textit{nvidia-container-toolkit} instalado. Para la contenerización, se empleó \textit{Podman} versión 5.4 o superior en modo \textit{rootless}.
+
+\subsection{Despliegue del Modelo Grande}
+El modelo \textit{DeepSeek-LLM 67B} requirió cuantización a 4 bits (4Q) para su despliegue en la \textit{GPU L40S}, optimizando el uso de la \textit{VRAM}.
+
+\subsubsection{Construcción de la Imagen del Contenedor}
+La imagen base utilizada fue la oficial de \textit{vLLM} (\texttt{vllm/vllm-openai:latest}). A esta se le añadió la librería \textit{bitsandbytes}, que implementa la cuantización \textit{NF4} (descrita en \textit{QLoRA}). Esto permitió reducir el tamaño del modelo en memoria, un paso esencial para el despliegue del \textit{DeepSeek-LLM 67B}.
+El \textit{Containerfile} para esta construcción fue:
+\begin{verbatim}
+FROM vllm/vllm-openai:latest
+RUN pip install --no-cache-dir bitsandbytes>=0.45.3
+\end{verbatim}
+
+Para compilar la imagen, se utilizó el siguiente comando, asignándole una etiqueta:
+\begin{verbatim}
+podman build -t vllm-deepseek-67b:latest .
+\end{verbatim}
+
+La imagen resultante incluyó \textit{vLLM}, \textit{Bits and Bytes}, y todas las dependencias \textit{CUDA} necesarias para la ejecución del modelo.
+
+\subsubsection{Definición del Servicio}
+La configuración del servicio se definió mediante un archivo \textit{docker-compose.yml} (compatible con \textit{Podman Compose}). Fue fundamental que el campo \texttt{image} apuntara a la imagen personalizada que se acababa de construir.
+\begin{verbatim}
+version: '3.8'
+services:
+  big67:
+    image: vllm/vllm-openai:latest
+    container_name: vllm-deepseek-67b
+    command:
+      - --model
+      - deepseek-ai/deepseek-llm-67b-chat
+      - --quantization
+      - bitsandbytes
+      - --load-format
+      - bitsandbytes
+    devices:
+      - "nvidia.com/gpu=all"
+    volumes:
+      - ./shared/huggingface:/root/.cache/huggingface
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HF_TOKEN}  # si son opensource no hace falta
+    ipc: host
+    ports:
+      - "8000:8000"
+\end{verbatim}
+
+Las opciones \texttt{--quantization bitsandbytes} y \texttt{--load-format bitsandbytes} fueron cruciales para activar la cuantización de 4 bits. La API de \textit{vLLM} se expuso en el puerto 8000 del host. Para una gestión organizada de las dependencias, se incluyó una carpeta adyacente llamada \texttt{./shared}, que facilitó la portabilidad del entorno, ya que el conjunto completo (el archivo \textit{podman-compose.yml} y la carpeta \texttt{shared}) asi puede ser transferido a otra máquina, asegurando la replicabilidad del entorno. Esta estructura se aprendió durante prácticas extracurriculares.
+
+\subsubsection{Inicio y Monitoreo del Despliegue}
+Para iniciar el despliegue y la carga del modelo, se utilizaron los siguientes comandos:
+\begin{verbatim}
+podman-compose up -d
+podman logs -f vllm-deepseek-67b
+\end{verbatim}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image42.png}
+    \caption{logs del despliegue del modelo de 67B}
+    \label{fig:logs-deepseek-67b}
+\end{figure}
+
+La primera ejecución implicó la descarga y descompresión de aproximadamente 30~GB de datos, por lo que se recomiendan al menos 50~GB de espacio libre en disco. El proceso inicial tardó unos 20 minutos. Una vez cargado, \textit{nvidia-smi} mostró una ocupación de aproximadamente 44~GB en la \textit{GPU}.
+
+\subsubsection{Interacción y Optimización (Opcional)}
+Una vez que el modelo estuvo desplegado y cargado, se pudo interactuar con él a través de la interfaz \textit{FastAPI} expuesta en \url{http://localhost:8000}. Para realizar una prueba sencilla, se accedió a la ruta \texttt{/v1/chat/completions} y se envió una solicitud \texttt{POST} con el siguiente cuerpo \textit{JSON}:
+
+\begin{verbatim}
+{
+  "model": "deepseek-ai/deepseek-llm-67b-chat",
+  "messages": [
+    {
+      "role": "user",
+      "content": "¿Cuál es la capital de Francia?"
+    }
+  ]
+}
+\end{verbatim}
+
+Este \textit{request} simple permitió verificar que el modelo respondiera correctamente a las peticiones.
+
+Para optimizar el consumo de memoria en caso de errores de \textit{CUDA out of memory}, se pudo ajustar el parámetro \texttt{--gpu-memory-utilization} a un valor como 0.8, o activar las opciones \texttt{--swap-space} y \texttt{--cpu-offload-gb}. 
+
+% [interfaz FastAPI del modelo desplegado]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image36.png}
+    \caption{monitoreo con nvidia-smi}
+    \label{fig:monitoreo-nvidia-smi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{imagenes/image63.png}
+    \caption{interfaz FastAPI del modelo desplegado}
+    \label{fig:fastapi-interfaz-modelo}
+\end{figure}
+
+
+
+%Para optimizar el consumo de memoria en caso de errores de \textit{CUDA out of memory}, se pudo ajustar el parámetro \texttt{--gpu-memory-utilization} a un valor como 0.8, o activar las opciones \texttt{--swap-space} y \texttt{--cpu-offload-gb}. 
+%Para monitorizar en tiempo real la temperatura, el consumo de potencia y la utilización de memoria y cómputo de la \textit{GPU}, se empleó el comando:
+%\begin{verbatim}
+%watch -n 2 nvidia-smi
+%\end{verbatim}
+
+% [monitoreo con nvidia-smi]
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=1\textwidth]{imagenes/image36.png}
+%    \caption{monitoreo con nvidia-smi}
+%    \label{fig:monitoreo-nvidia-smi}
+%\end{figure}
+
+\subsection{Despliegue del Modelo Pequeño}
+El despliegue de un modelo más pequeño, como el \textit{DeepSeek-LLM 7B}, sigue una metodología similar y más simple ya que no se aplicó cuantización en este escenario. Se utilizó directamente la imagen oficial de \textit{vLLM}, sin necesidad de una construcción de imagen personalizada que incluyera \textit{bitsandbytes}.
+
+\subsubsection{Construcción de la Imagen del Contenedor}
+Dado que el modelo pequeño no utilizó cuantización y la imagen oficial de \textit{vLLM} ya proporcionó todas las dependencias necesarias para su ejecución, no fue necesario construir una imagen de contenedor personalizada con \textit{bitsandbytes} para este despliegue. Se utilizó directamente la imagen base de \textit{vLLM}.
+
+\subsubsection{Definición del Servicio}
+La configuración del servicio se definió en un \textit{docker-compose.yml}, donde se especificó el modelo más pequeño y se omitió el uso de la imagen personalizada y las opciones de cuantización. En su lugar, se apuntó directamente a la imagen oficial de \textit{vLLM}.
+\begin{verbatim}
+version: '3.8'
+services:
+  small7b:
+    build: . #contruye el containerfile con vllm
+    container_name: vllm-deepseek-7b
+    command:
+      - --model
+      - deepseek-ai/deepseek-llm-7b-chat
+    devices:
+      - "nvidia.com/gpu=all"
+    volumes:
+      - ./shared/huggingface:/root/.cache/huggingface
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HF_TOKEN}
+    ipc: host
+    ports:
+      - "8000:8000"
+\end{verbatim}
+
+\subsubsection{Inicio y Monitoreo del Despliegue}
+El inicio del servicio se realizó con el mismo comando de \textit{Podman Compose}:
+\begin{verbatim}
+podman compose up -d
+\end{verbatim}
+
+Este comando inició el contenedor, que procedió a descargar el modelo \textit{DeepSeek-LLM 7B} (si no estaba en caché) y a activar el servidor de inferencia de \textit{vLLM}.
+
+Una vez que el modelo estuvo desplegado y cargado, se pudo interactuar con él a través de la interfaz \textit{FastAPI} expuesta en \url{http://localhost:8000}. Se pudieron realizar pruebas de inferencia enviando solicitudes \texttt{POST} a la ruta \texttt{/v1/chat/completions}, de manera análoga al modelo grande, pero especificando el modelo \textit{deepseek-ai/deepseek-llm-7b-chat}.
+

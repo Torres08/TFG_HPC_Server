@@ -1,8 +1,14 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Comparativa de herramientas de orquestación\relax }}{14}{table.caption.12}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Comparativa de motores de inferencia para LLM: vLLM, TensorRT-LLM y TGI\relax }}{18}{table.caption.15}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Tabla para hacer el diagrama de Gantt\relax }}{29}{table.caption.22}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Tokens asociados a cada configuración de \textit {prompt} y \textit {max tokens}.\relax }}{64}{table.caption.55}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Comparativa conjunta de Latencia Promedio y Throughput de \textit {TPS} para ambos modelos en cada escenario.\relax }}{80}{table.caption.95}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

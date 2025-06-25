@@ -1,71 +1,140 @@
+\chapter{Propuesta del Proyecto}
 
-
-\begin{multicols*}{2}
-
-\chapter{Propuesta}
-
-\section{Propuesta de Trabajo Final de Grado}
-
-Este Trabajo Final de Grado tiene como objetivo la implementación y evaluación de un entorno de computación de alto rendimiento (HPC) para la ejecución de modelos de lenguaje de gran escala (LLM), combinando el uso de contenedores con Podman para el despliegue real sobre GPU y OpenShift Local como entorno de demostración de principios de Site Reliability Engineering (SRE).
-
-Debido a las limitaciones inherentes a OpenShift Local, principalmente la imposibilidad de acceder directamente a la GPU desde su entorno virtualizado, se ha planteado una estrategia dual:
-\begin{itemize}
-    \item \textbf{Podman (GPU nativa):} Utilizar Podman para el despliegue de modelos LLM en un entorno nativo con GPU y realizar pruebas de rendimiento.
-    \item \textbf{OpenShift Local (SRE):} Usar OpenShift Local para simular un entorno de producción y evaluar capacidades avanzadas de SRE como escalado automático, auto-healing y despliegue continuo a partir de repositorios.
-\end{itemize}
+Este capítulo presenta la propuesta del Trabajo Fin de Grado. Aquí se define el marco operativo del trabajo, justificando las decisiones técnicas y metodológicas clave para abordar los desafíos identificados en el despliegue de \textit{LLM} en entornos de \textit{HPC} bajo principios de \textit{SRE}.
 
 \section{Fases del Proyecto}
-
-\textbf{Fase de Hardware:}
+\noindent\textbf{Fase de Hardware:}
 \begin{itemize}
     \item Montaje físico del servidor, instalación del sistema operativo.
-    \item Instalación de controladores y librerías necesarias: NVIDIA Driver, CUDA Toolkit y soporte para contenedores con GPU.
+    \item Instalación de controladores y librerías necesarias: \textit{NVIDIA Driver}, \textit{CUDA Toolkit} y soporte para contenedores con \textit{GPU}.
 \end{itemize}
-
 \textbf{Fase de Despliegue con Podman (GPU):}
 \begin{itemize}
-    \item Creación de contenedores con Podman para desplegar un modelo LLM de gran tamaño (ej. DeepSeek) y varios modelos más pequeños.
-    \item Configuración del entorno para aprovechar la aceleración por GPU.
-    \item Ejecución de pruebas de rendimiento (benchmarks): inferencia, consumo de VRAM, latencias y rendimiento con carga concurrente.
+    \item Creación de contenedores con \textit{Podman} para desplegar un modelo \textit{LLM} de gran tamaño (ej. \textit{DeepSeek}) y un modelo más pequeño.
+    \item Configuración del entorno para aprovechar la aceleración por \textit{GPU}.
+    \item Ejecución de pruebas de rendimiento (\textit{benchmarks}): inferencia, consumo de \textit{VRAM}, latencias, y rendimiento con carga concurrente.
 \end{itemize}
-
-\textbf{Fase de Evaluación con OpenShift Local (SRE):}
+\noindent\textbf{Fase de Evaluación con OpenShift Local (SRE)}
 \begin{itemize}
-    \item Instalación y configuración de OpenShift Local.
-    \item Despliegue de servicios ligeros desde URLs de GitHub, simulando pipelines DevOps.
-    \item Pruebas de capacidades SRE: auto-scaling basado en carga simulada, auto-healing tras fallos intencionados, observabilidad y monitorización de recursos, gestión de actualizaciones y reinicios controlados.
+    \item Instalación y configuración de \textit{OpenShift Local}.
+    \item Despliegue de servicios ligeros desde URLs de \textit{GitHub}, simulando pipelines \textit{DevOps}.
+    \item Pruebas de capacidades \textit{SRE}.
+    %\begin{itemize}
+    %    \item Auto-scaling basado en carga simulada.
+    %    \item Auto-healing tras fallos intencionados.
+    %    \item Observabilidad y monitorización de recursos.
+    %    \item Gestión de actualizaciones y reinicios controlados.
+    %\end{itemize}
 \end{itemize}
 
-\section{Planificación Temporal}
+\section{Herramientas de Gestión y Planificación Temporal}
+Para asegurar una ejecución eficiente y organizada del proyecto, se emplearon varias herramientas de gestión, documentación y planificación temporal. La organización general del \textit{TFG} se basó en las recomendaciones del libro \textit{Cómo Escribir Tu TFG o TFM de Ingeniería Informática y No Morir en el Intento} ~\cite{ref34}. Se utilizaron \textit{Notion} para la gestión de documentación y notas, \textit{Clockify}~\cite{ref35} para el seguimiento del tiempo. Además, todo el código y los \textit{scripts} desarrollados se versionaron y alojaron en un repositorio de \textit{GitHub} \cite{ref17} , garantizando la trazabilidad y accesibilidad del trabajo técnico.
 
+El periodo de trabajo abarcó del 7 de octubre de 2024 al 6 de abril de 2025~\cite{ref31}, registrándose aproximadamente 300 horas para el \textit{TFG}, esta cifra se aproximó al recomendado en el libro mencionado~\cite{ref34}. Se debe añadir que las horas registradas son solo indicativas y no incluyeron las sesiones de tutoría semanales. Asimismo, la realización de prácticas extracurriculares (del 1 de febrero al 31 de mayo, 35 horas semanales) podría considerarse como tiempo trabajado al no ser convalidadas.
+
+Se incluyó un diagrama de \textit{Gantt}, una herramienta fundamental para la planificación temporal. \textit{Notion} demostró ser una herramienta muy potente para la organización y la planificación de ideas, ofreciendo, por ejemplo, la visualización de diagramas de \textit{Gantt}. Este diagrama, luego generado con \textit{Plotly} a partir de la información recopilada en \textit{Notion}, visualizó la organización y secuencia de tareas, desde el desarrollo hasta la redacción de la memoria, y reflejó la metodología de trabajo. Su presencia fue importante para cumplir los requisitos de la memoria y facilitar la evaluación.
+
+\noindent El trabajo abordó los siguientes tipos de tareas:
 \begin{itemize}
-    \item \textbf{Fase Inicial (Semana 1-2):} Montaje del hardware y configuración básica del sistema. Instalación de drivers, CUDA y herramientas necesarias para ejecución con GPU.
-    \item \textbf{Fase de Despliegue LLM con Podman (Semanas 3–4):} Despliegue de modelos en contenedores. Ejecución de benchmarks de rendimiento.
-    \item \textbf{Fase SRE con OpenShift Local (Semanas 5–6):} Configuración de OpenShift Local. Despliegue de servicios ligeros desde GitHub. Pruebas de escalabilidad y resiliencia.
-    \item \textbf{Fase Final (Semana 7-8):} Análisis de resultados. Preparación de la demo y documentación final.
+    \item T1: La preparación e implementación de un servidor \textit{GPU}.
+    \item T2: El despliegue y la configuración de \textit{OpenShift} (software de virtualización).
+    \item T3: El desarrollo y la experimentación con Modelos de Lenguaje (\textit{ML}) para una demostración.
+    \item T4: La integración de principios de \textit{Site Reliability Engineering} (\textit{SRE}).
+     \item T5: Redacción de la memoria del \textit{TFG} (incluyendo introducción y estado del arte).
 \end{itemize}
 
-\section{Resultados Esperados}
+\newpage
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|p{6cm}|c|c|c|}
+            \hline
+            \textbf{Nombre} & \textbf{Tarea} & \textbf{Fecha de comienzo} & \textbf{Tiempo} \\
+            \hline
+            Revisión y corrección final de todo el TFG pasarlo a latex & T5 & 30/05/2024 & 17:11:47 \\
+            Hacer benchmarks y su Redacción & T3 & 29/05/2024 & 9:16:14 \\
+            Terminar Demo openshift y primer borrador & T3 & 27/05/2024 & 3:09:15 \\
+            Reorganizar + terminar benchmark + openshift & T5 & 27/05/2024 & 8:00:17 \\
+            Redacción de la sección de Openshift Cap 6 y redacción Benchmark & T5 & 24/05/2024 & 8:00:41 \\
+            Empezar los benchmarks para LLMs & T3 & 23/05/2024 & 10:05:00 \\
+            Demo para openshift II & T2 & 19/04/2024 & 8:05:23 \\
+            Demo para openshift & T2 & 18/04/2024 & 7:57:56 \\
+            Desplegar modelo pequeño y uno grande cap 5 II & T3 & 18/04/2024 & 8:58:00 \\
+            Desplegar modelo pequeño y uno grande cap 5 & T3 & 18/04/2024 & 10:08:00 \\
+            Corregir la redacción de todo lo llevo & T5 & 11/04/2024 & 4:00:40 \\
+            Redacción Estado del Arte III & T5 & 04/04/2024 & 7:17:32 \\
+            Redacción de Montar el servidor cap 4 & T5 & 30/03/2024 & 8:09:26 \\
+            Redacción Propuesta & T5 & 29/02/2024 & 7:07:45 \\
+            Corrección introducción & T5 & 03/03/2024 & 3:28:30 \\
+            Redacción Estado del Arte II & T5 & 15/02/2024 & 9:21:00 \\
+            Redacción Estado del Arte & T5 & 08/02/2024 & 10:10:47 \\
+            Inicio Curso Openshift IV & T2 & 05/02/2024 & 8:04:53 \\
+            Inicio Curso Openshift III & T2 & 25/01/2024 & 7:08:10 \\
+            Curso Openshift I & T2 & 18/01/2024 & 9:04:00 \\
+            Curso Openshift II & T2 & 12/01/2024 & 8:30:22 \\
+            Ver el Servidor en persona & T1 & 11/01/2024 & 11:02:14 \\
+            Redacción Introducción & T5 & 19/12/2024 & 22:03:00 \\
+            Notas Building Secure \& Reliable Systems O'Reilly & T4 & 10/12/2024 & 19:10:00 \\
+            Redefinir Objetivos & T5 & 08/12/2024 & 20:26:46 \\
+            Lecturas libro SRE & T4 & 01/12/2024 & 1:10:04 \\
+            Estudiar Software de Virtualización: OpenShift & T2 & 25/11/2024 & 4:04:36 \\
+            Definición inicial de objetivos & T5 & 10/10/2024 & 22:23:36 \\
+            Estudio libro ``cómo hacer un TFG sin morir en el intento'' & T5 & 15/10/2024 & 20:33:50 \\
+            Configuración entornos (Github, Notion) & T2 & 10/10/2024 & 7:00:00 \\
+            Decisión tema TFG & T5 & 08/10/2024 & 1:06:09 \\
+            \hline
+        \end{tabular}
+        \caption{Tabla para hacer el diagrama de Gantt}
+        \label{tab:registro-tareas}
+    \end{table}
 
-\textbf{Despliegue con GPU (Podman):}
-\begin{itemize}
-    \item Inferencia funcional de modelos LLM.
-    \item Métricas cuantitativas: velocidad de inferencia, uso de recursos, tiempos de respuesta.
-\end{itemize}
 
-\textbf{Simulación SRE (OpenShift Local):}
-\begin{itemize}
-    \item Demostración práctica de escalado automático y auto-healing.
-    \item Despliegue automatizado desde repositorios remotos.
-    \item Registro de eventos y capacidad de observación del sistema.
-\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image69.png}
+    \caption{Diagrama de Gantt generado con \textit{Plotly}}
+    \label{fig:diagrama-gantt-plotly}
+\end{figure}
 
-\section{Objetivo Final}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{imagenes/image70.png}
+    \caption{Resumen de \textit{Clockify} \cite{ref35}}
+    \label{fig:resumen-clockify}
+\end{figure}
 
-El objetivo de este proyecto es evaluar la viabilidad y eficiencia del despliegue de modelos de lenguaje de gran escala (LLM) sobre servidores HPC mediante contenedores compatibles con GPU, así como demostrar capacidades clave de Site Reliability Engineering (SRE) mediante OpenShift Local.
+\newpage
+\section{Presupuesto y Gestión de Costes}
+El desarrollo del \textit{TFG} se ha ejecutado con una gestión de costes optimizada, lo que se traduce en una inversión económica mínima. Fue posible gracias al acceso gratuito a recursos proporcionados por la universidad.
 
-Este enfoque dual permite trabajar con modelos reales en el hardware disponible y familiarizarse con tecnologías de orquestación y fiabilidad operativa en entornos simulados. El trabajo se desarrollará con una perspectiva crítica, enfatizando la automatización, resiliencia y optimización del rendimiento, ofreciendo una visión práctica de los retos y soluciones en el despliegue de IA.
+Un punto importante en la reducción de costes fue la formación en \textit{OpenShift}, facilitada sin coste por \textit{Red Hat} a los estudiantes, como se dijo anteriormente. Esta formación no solo dio las bases para el uso de \textit{OpenShift}, sino que también eliminó la necesidad de licencias de software de pago gracias a que proveyó de un entorno virtual privado con \textit{OpenShift} para usar.
 
-Asimismo, este TFG refleja como un roadmap de la experiencia adquirida en el manejo de servidores. Se busca mostrar y consolidar los conocimientos obtenidos durante las prácticas extracurriculares realizadas en Alemania, especialmente en los primeros pasos en la gestión y uso de servidores. Se documentarán tanto los aciertos como los desafíos y los fallos encontrados, detallando el proceso de aprendizaje y las soluciones implementadas a lo largo del desarrollo del proyecto. La intención es ofrecer una referencia formativa útil para futuros estudiantes interesados en el ámbito de la computación de alto rendimiento y la fiabilidad operativa.
+Además, la universidad puso a disposición del proyecto un servidor \textit{Dell PowerEdge R7615} equipado con una \textit{GPU L40S}. Este acceso a hardware de alto rendimiento, indispensable para la viabilidad del proyecto, eliminó así la necesidad de incurrir en gastos de adquisición o alquiler de equipos especializados.
 
-\end{multicols*}
+Sin embargo, al analizar el proyecto desde la perspectiva de una empresa que deseara replicar una iniciativa similar, resulta imprescindible considerar el coste real del hardware y del trabajo técnico. El servidor \textit{Dell PowerEdge R7615}, según el catálogo oficial de Dell España, tiene un precio base de 7.686,56€ \cite{ref45}. La \textit{GPU NVIDIA L40S 48GB GDDR6}, esencial para tareas de inferencia y entrenamiento con modelos de \textit{IA}, ronda entre 7.000€ y 8.000€ \cite{ref46}, según distribuidores españoles como Ibertrónica. El coste conjunto estimado para el hardware oscila, por tanto, entre 14.686,56€ y 15.686,56€.
+
+En cuanto al coste del trabajo técnico, el desarrollo implicó una dedicación de unas 300 horas, como se indicó previamente con \textit{Clockify} \cite{ref35}. Tomando como referencia las tarifas de mercado para un ingeniero informático titulado en España, que oscilan entre 15€ y 18€ por hora según fuentes como \textit{indeed.com} o \textit{Talent.com} \cite{ref47,ref48} (son portales de empleo que también ofrecen datos salariales, en base a sus usuarios) se ha calculado un coste estimado de 5.586€ (300 horas * 17,13€/hora). Esta cifra es coherente con los valores del sector.
+
+A pesar de que el proyecto se ejecutó con un coste directo prácticamente nulo gracias al apoyo de la universidad, su valor real estimado en el mercado supera los 20.000€. Esta cifra resalta tanto la dificultad de este trabajo como la importancia del uso de los recursos disponibles, ofreciendo una base sólida para evaluar la viabilidad económica de iniciativas similares en entornos empresariales.
+%\section{Contribución del Proyecto}
+%Este proyecto se enfoca en evaluar la viabilidad y eficiencia del despliegue de \textit{LLM} en servidores \textit{HPC} mediante contenedores compatibles con \textit{GPU}, además de demostrar capacidades clave de \textit{SRE} utilizando \textit{OpenShift Local}. Este enfoque dual permite tanto el trabajo con modelos reales en el hardware disponible como la familiarización con tecnologías de \textit{orquestación} y fiabilidad operativa en entornos simulados. El trabajo se ha desarrollado con una perspectiva crítica, priorizando la automatización, resiliencia y optimización del rendimiento para ofrecer una visión práctica sobre los desafíos y soluciones en el despliegue de \textit{IA}.
+
+%El TFG también consolida la experiencia práctica en el manejo de servidores adquirida durante las prácticas extracurriculares realizadas en Alemania, complementando y profundizando los conocimientos obtenidos. Se documentará el proceso de aprendizaje, incluyendo los aciertos, desafíos y soluciones implementadas.
+
+%Desde una perspectiva profesional, este trabajo permite afianzar habilidades en la configuración y optimización de infraestructuras \textit{HPC}, el despliegue de \textit{LLM} y la aplicación de principios \textit{SRE}, competencias altamente demandadas en el ámbito de la \textit{IA} y la computación en la nube. Personalmente, este proyecto ha representado un reto significativo que ha permitido integrar conocimientos teóricos y prácticos, fomentando la resolución de problemas complejos y la autonomía. En última instancia, la intención es ofrecer una referencia formativa útil para futuros estudiantes interesados en el campo de la computación de alto rendimiento y la fiabilidad operativa.
+
+\newpage
+\section{Legislación y Normativa Aplicable}
+
+Durante la planificación del \textit{TFG} se ha considerado el marco legal vigente sobre \textit{interoperabilidad}, \textit{accesibilidad} y digitalización de servicios. Este apartado se incluye para mostrar que el proyecto tiene en cuenta las leyes y normas actuales sobre \textit{accesibilidad}, \textit{interoperabilidad} y digitalización. Aunque el proyecto no forma parte de un servicio público ni está dirigido a la ciudadanía, sigue muchas de las buenas prácticas recomendadas en Europa y España para diseñar sistemas digitales de forma ordenada, reutilizable y clara.
+
+A nivel europeo, el \textit{European Interoperability Framework} (\textit{EIF})~\cite{ref76} define la \textit{interoperabilidad} como la capacidad de que distintas organizaciones intercambien datos entre sus sistemas para colaborar eficazmente. Este enfoque establece cuatro niveles: técnico, semántico, organizativo y legal. En este \textit{TFG}, la \textit{interoperabilidad} se aplica sobre todo en el plano técnico: el uso de \textit{contenedores}, servicios desacoplados y configuración declarativa en \textit{OpenShift} permite una infraestructura modular y reutilizable. Aunque no hay intercambio real de datos entre organismos ni coordinación institucional, se adoptan buenas prácticas como el uso de estándares abiertos y despliegues reproducibles.
+
+En España, el \textit{Esquema Nacional de Interoperabilidad} (\textit{ENI})~\cite{ref77} adapta los principios del \textit{EIF} a los sistemas de información de las Administraciones Públicas. Este \textit{TFG} no está sujeto a esa normativa, pero sí adopta algunos de sus principios técnicos, como la documentación clara, trazabilidad del sistema y uso de herramientas estándar (\textit{YAML}, contenedores \textit{OCI}, etc.).
+
+Respecto a la \textit{accesibilidad}, el proyecto no incluye una interfaz pensada para usuarios finales, por lo que la normativa vigente (\textit{Directiva 2016/2102})~\cite{ref77} no aplica directamente. Aun así, se han seguido buenas prácticas en la documentación técnica: estructura clara, legibilidad del código y consistencia en los términos.
+
+Por último, el \textit{Interoperable Europe Act} (Reglamento UE 2024/0903)~\cite{ref78} establece que el 100\,\% de los servicios públicos clave deberán estar disponibles en línea antes de 2030. Aunque este reglamento aún no tiene efecto sobre proyectos individuales como este, el \textit{TFG} demuestra que es posible diseñar sistemas técnicos robustos y reutilizables, alineados con ese objetivo y con el principio de ``\textit{interoperabilidad por diseño}'' promovido por la UE~\cite{ref49}.
+
+En conclusión, aunque este trabajo no está legalmente obligado a cumplir estas normativas, adopta muchas de sus ideas y prácticas técnicas, lo que contribuye a un enfoque sólido, replicable y alineado con las políticas europeas en materia digital.
+
+

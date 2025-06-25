@@ -1,75 +1,558 @@
-@misc{mordorintelligence2023,
+% Para compilar el documento:
+% pdflatex proyecto.tex
+% bibtex proyecto
+% pdflatex proyecto.tex
+% pdflatex proyecto.tex
+
+@online{ref1,
+  title = {¿Qué es la computación de alto rendimiento (HPC)?},
+  author = {{IBM}},
+  year = {2024},
+  url = {https://www.ibm.com/es-es/topics/hpc}
+}
+
+@online{ref2,
+  title = {High-Performance Computing Market - Growth, Trends, and Forecasts (2024 - 2029)},
   author = {{Mordor Intelligence}},
-  title = {{High Performance Computing Market}},
+  year = {2024},
+  url = {https://www.mordorintelligence.com/industry-reports/high-performance-computing-market}
+}
+
+@online{ref3,
+  title = {AlphaFold reveals the structure of the protein universe},
+  author = {{DeepMind}},
+  year = {2022},
+  url = {https://deepmind.google/discover/blog/alphafold-reveals-the-structure-of-the-protein-universe/}
+}
+
+@online{ref4,
+  title = {Human Brain Project},
+  author = {{Human Brain Project}},
+  year = {2024},
+  url = {https://www.humanbrainproject.eu/en/}
+}
+
+@online{ref5,
+  title = {A Stanford Study Ranks the Worlds Most Important AI Models},
+  author = {{Will Knight}},
+  year = {2024},
+  url = {https://www.wired.com/story/stanford-study-global-artificial-intelligence-index}
+}
+
+@book{ref6,
+  author = {Heather Adkins and Betsy Beyer and Paul Blankinship and Piotr Lewandowski and Ana Oprea and Adam Stubblefield},
+  title = {Building Secure \& Reliable Systems: Best Practices for Designing, Implementing and Maintaining Systems},
+  year = {2020},
+  publisher = {O'Reilly Media},
+  address = {Sebastopol, CA}
+}
+
+@article{ref7,
+  author = {Shamim, S. I. and Gibson, J. A. and Morrison, P. and Rahman, A.},
+  title = {Benefits, Challenges, and Research Topics: A Multi-vocal Literature Review of Kubernetes},
+  journal = {arXiv preprint arXiv:2211.07032},
+  year = {n.d.},
+  url = {https://arxiv.org/pdf/2211.07032}
+}
+
+@online{ref8,
+  title = {Kubernetes Concepts Overview},
+  author = {{Kubernetes Documentation}},
+  year = {2024},
+  url = {https://kubernetes.io/docs/concepts/overview/}
+}
+
+@inproceedings{ref9,
+  author = {Malviya, A. and Dwivedi, R.K.},
+  title = {A Comparative Analysis of Container Orchestration Tools in Cloud Computing},
+  booktitle = {2022 9th International Conference on Computing for Sustainable Global Development (INDIACom)},
+  year = {2022},
+  address = {New Delhi, India},
+  pages = {698-703},
+  url = {https://ieeexplore.ieee.org/document/9763171}
+}
+
+@article{ref10,
+  author = {Truyen, E. and Van Landuyt, D. and Preuveneers, D. and Lagaisse, B. and Joosen, W.},
+  title = {A comprehensive feature comparison study of open-source container orchestration frameworks (versión 2)},
+  journal = {arXiv},
+  year = {2021},
+  url = {https://doi.org/10.48550/arxiv.2002.02806}
+}
+
+@online{ref11,
+  title = {OpenShift Features},
+  author = {{Red Hat}},
+  year = {2024},
+  url = {https://www.redhat.com/en/technologies/cloud-computing/openshift/features}
+}
+
+@online{ref12,
+  title = {TensorRT-LLM},
+  author = {{NVIDIA}},
+  year = {2024},
+  url = {https://developer.nvidia.com/tensorrt}
+}
+
+@online{ref13,
+  title = {H100 vs A100: Performance Comparison},
+  author = {{NVIDIA}},
+  year = {2024},
+  url = {https://nvidia.github.io/TensorRT-LLM/blogs/H100vsA100.html}
+}
+
+@online{ref14,
+  title = {Text Generation Inference Documentation},
+  author = {{Hugging Face}},
+  year = {2024},
+  url = {https://huggingface.co/docs/text-generation-inference/en/index}
+}
+
+@online{ref15,
+  title = {Chunking Text Generation Inference},
+  author = {{Hugging Face}},
+  year = {2024},
+  url = {https://huggingface.co/docs/text-generation-inference/en/conceptual/chunking},
+  note = {Disponible en línea. Consultado en 2024}
+}
+
+@article{ref16,
+  title = {Comparative Analysis Based on DeepSeek, ChatGPT, and Google Gemini: Features, Techniques, Performance, Future Prospects},
+  author = {Zhang, Y. and Wang, X. and Li, H. and otros},
+  journal = {arXiv preprint arXiv:2503.04783},
+  year = {2024},
+  url = {https://arxiv.org/abs/2503.04783}
+}
+
+@online{ref17,
+  title = {TFG\_HPC\_Server},
+  author = {Torres08},
+  year = {2024},
+  url = {https://github.com/Torres08/TFG_HPC_Server},
+  note = {Repositorio GitHub del proyecto}
+}
+
+@book{ref20,
+  author = {Dongarra, J. and Sterling, T. and Simon, H. D. and Strohmaier, E.},
+  title = {High-Performance Computing: Clusters, Constellations, MPPs, and Future Directions},
+  url = {https://ieeexplore.ieee.org/document/1401802/},
+  year = {2005}
+}
+
+@online{ref22,
+  author = {Dhar, A. and Aruga, J. and Sinha, A.},
+  title = {How to Set NVIDIA as Primary GPU on Optimus-based Laptops},
+  year = {2024},
+  month = {Junio 26},
+  url = {https://docs.fedoraproject.org/en-US/quick-docs/set-nvidia-as-primary-gpu-on-optimus-based-laptops/}
+}
+
+@online{ref23,
+  author = {Abbott, M.},
+  title = {Enabling the RPM Fusion repositories},
+  year = {2024},
+  month = {Diciembre 19},
+  url = {https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/}
+}
+
+@online{ref24,
+  author = {NVIDIA Developer},
+  title = {CUDA Toolkit 12.x Downloads (Fedora 41, x86\_64, RPM Network)},
+  year = {2025},
+  url = {https://developer.nvidia.com/cuda-downloads}
+}
+
+@online{ref25,
+  author = {DenshiVideo},
+  title = {NVIDIA Optimus: A \textit{Comfy} Guide},
+  year = {2022},
+  month = {Febrero 5},
+  url = {https://www.youtube.com/watch?v=sS67P06h5Yg}
+}
+
+@article{ref26,
+  author = {Bi, X. and otros},
+  title = {DeepSeek LLM: Scaling Open-Source Language Models with Longtermism},
+  journal = {arXiv},
+  year = {2024},
+  month = {Enero 5},
+  url = {https://arxiv.org/abs/2401.02954}
+}
+
+@online{ref27,
+  author = {model sizer bot},
+  title = {Model Memory Requirements},
   year = {2023},
-  url = {https://www.mordorintelligence.com/es/industry-reports/high-performance-computing-market},
-  note = {Accessed: 2025-05-22}
+  month = {Noviembre 30},
+  url = {https://huggingface.co/deepseek-ai/deepseek-llm-67b-base/discussions/1}
 }
 
-@article{simon2023comparative,
-  title={{A Comparative Analysis of High Availability for Linux Container Infrastructures}},
-  author={Simon, M. and Huraj, L. and Búčik, N.},
-  journal={{Future Internet}},
-  volume={15},
-  number={8},
-  pages={253},
-  year={2023},
-  publisher={MDPI},
-  doi={10.3390/fi15080253}
+@article{ref28,
+  author = {Dettmers, T. and Pagnoni, A. and Holtzman, A. and Zettlemoyer, L.},
+  title = {QLoRA: Efficient Finetuning of Quantized LLMs},
+  journal = {arXiv},
+  year = {2023},
+  url = {https://arxiv.org/abs/2305.14314}
 }
 
-@inproceedings{malviya2022comparative,
-  title={{A Comparative Analysis of Container Orchestration Tools in Cloud Computing}},
-  author={Malviya, A. and Dwivedi, R.K.},
-  booktitle={{2022 9th International Conference on Computing for Sustainable Global Development (INDIACom)}},
-  pages={698--703},
-  year={2022},
-  organization={IEEE},
-  address={New Delhi, India},
-  url={https://ieeexplore.ieee.org/document/9763171},
-  doi={10.1109/INDIACom54597.2022.9763171}
+@online{ref29,
+  author = {NVIDIA},
+  title = {LLM Benchmarking: Fundamental Concepts},
+  year = {s.f.},
+  url = {https://developer.nvidia.com/blog/llm-benchmarking-fundamental-concepts/}
 }
 
-@inproceedings{aly2018kubernetes,
-  title={{Kubernetes or OpenShift? Which Technology Best Suits Eclipse HONO IT Deployments}},
-  author={Aly, F. and Khomh, S. and Yacout, M.},
-  booktitle={{2018 IEEE International Conference on Service-Oriented Computing and Applications (SOCA)}},
-  pages={113--120},
-  year={2018},
-  month={Nov},
-  organization={IEEE},
-  doi={10.1109/SOCA.2018.00024}
+@online{ref30,
+  author = {Baseten},
+  title = {LLM Transformer Inference Guide},
+  year = {s.f.},
+  url = {https://www.baseten.co/blog/llm-transformer-inference-guide/#optimizing-llm-model-inference-with-transformer-math}
 }
 
-@misc{arxiv_2211_07032,
-  author={Bose, Ritwik and Chhablani, Akshit and Roy, Subhajit},
-  title={{A Survey on HPC System Deployment and Management Strategies}},
-  howpublished={arXiv:2211.07032 [cs.AR]},
-  year={2022},
-  eprint={2211.07032},
-  archiveprefix={arXiv},
-  primaryclass={cs.AR},
-  url={https://arxiv.org/pdf/2211.07032}
+@online{ref31,
+  author = {NVIDIA},
+  title = {LLM Benchmarking Metrics},
+  year = {s.f.},
+  url = {https://docs.nvidia.com/nim/benchmarking/llm/latest/metrics.html}
 }
 
-@misc{arxiv_2002_02806,
-  author={Shinde, Ganesh Tukaram},
-  title={{A Comprehensive Survey on Container Orchestration Technologies}},
-  howpublished={arXiv:2002.02806 [cs.DC]},
-  year={2020},
-  eprint={2002.02806},
-  archiveprefix={arXiv},
-  primaryclass={cs.DC},
-  url={https://arxiv.org/abs/2002.02806}
+
+
+@online{ref33,
+  author = {{Red Hat}},
+  title = {Red Hat OpenShift Administration I (DO180)},
+  year = {s.f.},
+  url = {https://www.redhat.com/en/services/training/red-hat-openshift-administration-i-operating-a-production-cluster}
 }
 
-@misc{arxiv_2411_03344,
-  author={Li, Jun and Wang, Wei and Chen, Yong},
-  title={{Exploring the Performance of LLMs in HPC Environments}},
-  howpublished={arXiv:2411.03344 [cs.AI]},
-  year={2024},
-  eprint={2411.03344},
-  archiveprefix={arXiv},
-  primaryclass={cs.AI},
-  url={https://arxiv.org/pdf/2411.03344}
+@online{ref34,
+  author = {Guillén, A.},
+  title = {CÓMO ESCRIBIR TU TFG O TFM DE INGENIERÍA INFORMÁTICA Y NO MORIR EN EL INTENTO},
+  year = {s.f.},
+  url = {https://github.com/aguillenATC/LibroTFGyTFMInform-tica-PIBD-22-29-UGR}
+}
+
+@online{ref35,
+  author = {Torres Ramos, Juan Luis},
+  title = {Registro de horas TFG en Clockify},
+  year = {2024},
+  url = {https://app.clockify.me/shared/68414f7712fd89289030ea52},
+  note = {Registro compartido de horas}
+}
+
+@online{ref36,
+  author = {{Cloud Native Computing Foundation}},
+  title = {As Kubernetes Hits 1.0, Google Donates Technology To Newly Formed Cloud Native Computing Foundation},
+  year = {2015},
+  month = {Julio 21},
+  url = {https://www.cncf.io/news/2015/07/21/techcrunch-as-kubernetes-hits-1-0-google-donates-technology-to-newly-formed-cloud-native-computing-foundation/}
+}
+
+@online{ref37,
+  author = {Cloud Native Computing Foundation},
+  title = {As Kubernetes Hits 1.0, Google Donates Technology To Newly Formed Cloud Native Computing Foundation},
+  year = {2015},
+  month = {Julio 21},
+  url = {https://www.cncf.io/news/2015/07/21/techcrunch-as-kubernetes-hits-1-0-google-donates-technology-to-newly-formed-cloud-native-computing-foundation/}
+}
+
+@online{ref38,
+  author = {{Desion}},
+  title = {Desion: AI-powered Document Search},
+  year = {2024},
+  url = {https://desion.de/en/start/}
+}
+
+@article{ref39,
+  author = {Woosuk Kwon and Zhuohan Li and Siyuan Zhuang and Ying Sheng and Lianmin Zheng and Cody Hao Yu and Joseph E. Gonzalez and Hao Zhang and Ion Stoica},
+  title = {Efficient Memory Management for Large Language Model Serving with PagedAttention},
+  journal = {arXiv},
+  year = {2023},
+  url = {https://arxiv.org/abs/2309.06180}
+}
+
+@online{ref40,
+  author = {{Red Hat}},
+  title = {Red Hat Unlocks Generative AI for Any Model and Any Accelerator Across the Hybrid Cloud with Red Hat AI Inference Server},
+  year = {2025},
+  month = {Mayo 20},
+  url = {https://www.businesswire.com/news/home/20250520450429/en/Red-Hat-Unlocks-Generative-AI-for-Any-Model-and-Any-Accelerator-Across-the-Hybrid-Cloud-with-Red-Hat-AI-Inference-Server}
+}
+
+@article{ref41,
+  author = {Zhang, Y. and Wang, X. and Li, H. and otros},
+  title = {Zero-Shot End-to-End Relation Extraction in Chinese: A Comparative Study of Gemini, LLaMA, and ChatGPT},
+  journal = {arXiv preprint arXiv:2502.05694},
+  year = {2024},
+  url = {https://arxiv.org/pdf/2502.05694}
+}
+
+@online{ref42,
+  author = {{Hugging Face}},
+  title = {Chatbot Arena Leaderboard},
+  year = {2024},
+  url = {https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard}
+}
+
+@online{ref43,
+  author = {Sayed Ali Alkamel},
+  title = {DeepSeek and the Power of Mixture of Experts (MoE)},
+  year = {2024},
+  url = {https://dev.to/sayed_ali_alkamel/deepseek-and-the-power-of-mixture-of-experts-moe-ham}
+}
+
+@online{ref44,
+  author = {{OpenLM}},
+  title = {OpenLM Chatbot Arena},
+  year = {2024},
+  url = {https://openlm.ai/chatbot-arena/}
+}
+
+@online{ref45,
+  author = {{Dell Technologies}},
+  title = {Servidor Dell PowerEdge R7615},
+  year = {2024},
+  url = {https://www.dell.com/es-es/shop/ipovw/poweredge-r7615}
+}
+
+@online{ref46,
+  author = {{Ibertrónica}},
+  title = {NVIDIA L40S 48GB GDDR6},
+  year = {2024},
+  url = {https://ibertronica.es/en/nvidia-l40s-48gb-gddr6}
+}
+
+@online{ref47,
+  author = {{Indeed}},
+  title = {¿Cuánto gana un informático en España?},
+  year = {2024},
+  url = {https://es.indeed.com/career/informatico/salaries}
+}
+
+@online{ref48,
+  author = {{Talent.com}},
+  title = {Salario de ingeniero informático en España},
+  year = {2024},
+  url = {https://es.talent.com/salary?job=ingeniero+inform%C3%A1tico}
+}
+
+@online{ref49,
+  author = {{iVentoy}},
+  title = {iVentoy PXE Network Boot Server},
+  year = {2024},
+  url = {https://www.iventoy.com/}
+}
+
+@online{ref50,
+  author = {{Nagios}},
+  title = {Nagios: The Industry Standard in IT Infrastructure Monitoring},
+  year = {2024},
+  url = {https://www.nagios.org/}
+}
+
+@online{ref51,
+  author = {{Grafana Labs}},
+  title = {Grafana: The Open Observability Platform},
+  year = {2024},
+  url = {https://grafana.com/}
+}
+
+@online{ref52,
+  author = {{Traefik Labs}},
+  title = {Traefik: The Cloud-Native Application Proxy},
+  year = {2024},
+  url = {https://traefik.io/traefik/}
+}
+
+
+@online{ref53,
+  author = {{CVAT}},
+  title = {CVAT: Computer Vision Annotation Tool},
+  year = {2024},
+  url = {https://www.cvat.ai/}
+}
+
+@online{ref54,
+  author = {{Docker}},
+  title = {Docker: Empowering App Development for Developers},
+  year = {2024},
+  url = {https://www.docker.com/}
+}
+
+@online{ref55,
+  author = {{PyTorch}},
+  title = {PyTorch: An open source machine learning framework},
+  year = {2024},
+  url = {https://pytorch.org/}
+}
+
+@online{ref56,
+  author = {{Wikipedia contributors}},
+  title = {EdDSA --- Wikipedia, The Free Encyclopedia},
+  year = {2024},
+  url = {https://en.wikipedia.org/wiki/EdDSA#Ed25519}
+}
+
+@online{ref57,
+  author = {{Yarn}},
+  title = {neowofetch},
+  year = {2024},
+  url = {https://yarnpkg.com/package?name=neowofetch}
+}
+
+@online{ref58,
+  author = {{Apache JMeter}},
+  title = {Apache JMeter},
+  year = {2024},
+  url = {https://jmeter.apache.org/}
+}
+
+@online{ref59,
+  author = {{k6}},
+  title = {k6 Open source Load Testing Tool for Engineering Teams},
+  year = {2024},
+  url = {https://k6.io/}
+}
+
+@online{ref60,
+  author = {{Gatling}},
+  title = {Gatling Load Testing for DevOps CICD},
+  year = {2024},
+  url = {https://gatling.io/}
+}
+
+@online{ref61,
+  author = {{Red Hat}},
+  title = {Red Hat Academy},
+  year = {2024},
+  url = {https://www.redhat.com/es/services/training/red-hat-academy}
+}
+
+@online{ref62,
+  author = {{SCLorg}},
+  title = {nodejs-ex: Node.js Example Application},
+  year = {2024},
+  url = {https://github.com/sclorg/nodejs-ex},
+  note = {Repositorio de ejemplo de Node.js para OpenShift}
+}
+
+@online{ref63,
+  author = {{Prometheus}},
+  title = {Prometheus: Monitoring system \& time series database},
+  year = {2024},
+  url = {https://prometheus.io/}
+}
+
+@online{ref64,
+  author = {{Jenkins}},
+  title = {Jenkins: Build great things at any scale},
+  year = {2024},
+  url = {https://www.jenkins.io/}
+}
+
+@online{ref65,
+  author = {{Tekton}},
+  title = {Tekton: Powerful and Flexible Open Source CI/CD System},
+  year = {2024},
+  url = {https://tekton.dev/}
+}
+
+
+@online{ref66,
+  author = {{Elicit}},
+  title = {Elicit: The AI Research Assistant},
+  year = {2024},
+  url = {https://elicit.com/}
+}
+
+@online{ref67,
+  author = {{Google}},
+  title = {NotebookLM},
+  year = {2024},
+  url = {https://notebooklm.google.com/}
+}
+
+@online{ref68,
+  author = {{Google}},
+  title = {Gemini},
+  year = {2024},
+  url = {https://gemini.google.com/}
+}
+
+@online{ref69,
+  author = {{Neural Magic}},
+  title = {Neural Magic: AI Inference at Scale},
+  year = {2024},
+  url = {https://neuralmagic.com/}
+}
+
+@online{ref70,
+  author = {{NVIDIA}},
+  title = {FasterTransformer},
+  year = {2024},
+  url = {https://github.com/NVIDIA/FasterTransformer}
+}
+
+@online{ref71,
+  author = {Yu, Cody Hao and Li, Zhuohan and Zhuang, Siyuan and Zheng, Lianmin and Zhang, Hao and Gonzalez, Joseph E. and Stoica, Ion},
+  title = {Orca: A Distributed Serving System for Transformer-Based Generative Models},
+  year = {2022},
+  url = {https://www.usenix.org/conference/osdi22/presentation/yu}
+}
+
+@online{ref72,
+  author = {{DeepMind}},
+  title = {DeepMind},
+  year = {2024},
+  url = {https://deepmind.google/}
+}
+
+@online{ref73,
+  author = {{Canonical}},
+  title = {Introduction to autoinstall},
+  year = {2024},
+  url = {https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html}
+}
+
+@online{ref74,
+  author = {{RPM Fusion}},
+  title = {Howto/Optimus},
+  year = {2024},
+  url = {https://rpmfusion.org/Howto/Optimus}
+}
+
+@online{ref75,
+  author = {{Podman}},
+  title = {Podman: A tool for managing OCI containers and pods},
+  year = {2024},
+  url = {https://podman.io/}
+}
+
+
+@online{ref76,
+  author = {{European Commission: Directorate-General for Digital Services}},
+  title = {New European interoperability framework – Promoting seamless services and data flows for European public administrations},
+  year = {2017},
+  url = {https://data.europa.eu/doi/10.2799/78681}
+}
+
+@online{ref77,
+  author = {{Gobierno de España}},
+  title = {Ley 11/2007, de 22 de junio, de acceso electrónico de los ciudadanos a los Servicios Públicos},
+  year = {2010},
+  url = {https://www.boe.es/buscar/doc.php?id=BOE-A-2010-1331}
+}
+
+@online{ref78,
+  author = {{European Union}},
+  title = {Regulation (EU) 2024/903 of the European Parliament and of the Council of 13 March 2024 on harmonised rules on fair access to and use of data and amending Regulation (EU) 2017/2394 and Directive (EU) 2020/1828 (Data Act)},
+  year = {2024},
+  url = {https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX:32024R0903}
+}
+
+@online{ref79,
+  author = {{ASUS}},
+  title = {ESC4000A-E12 GPU Server},
+  year = {2024},
+  url = {https://servers.asus.com/products/servers/gpu-servers/ESC4000A-E12}
 }
